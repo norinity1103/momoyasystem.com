@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/Section.astro";
+import PageHero from "../../components/PageHero.astro";
 
 const all = (await getCollection("news", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
@@ -14,15 +15,11 @@ const fmt = (d: Date) =>
   description="株式会社モモヤシステムからのお知らせ・リリース・メディア掲載情報。"
   breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "ニュース", href: "/news" }]}
 >
-  <section class="bg-brand-900 text-white py-24 md:py-32">
-    <div class="container-x">
-      <p class="text-xs tracking-[0.3em] text-brand-300">NEWS</p>
-      <h1 class="mt-4 font-serif text-4xl md:text-6xl font-black leading-tight">ニュース</h1>
-      <p class="mt-8 max-w-3xl text-ink-100 leading-relaxed">
-        モモヤシステムからのお知らせ・リリース・メディア掲載情報を掲載しています。
-      </p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="NEWS"
+    title="ニュース"
+    lead="モモヤシステムからのお知らせ・リリース・メディア掲載情報を掲載しています。"
+  />
 
   <Section eyebrow="LATEST" title="最新のお知らせ">
     {all.length === 0 ? (

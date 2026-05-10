@@ -2,24 +2,18 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
 import LossSavingsInfographic from "../components/LossSavingsInfographic.astro";
+import PageHero from "../components/PageHero.astro";
 ---
 <BaseLayout
   title="介在価値"
   description="管理不在の現場で失われる利益と、モモヤシステム介在による利益保全のロジックを、1億円規模の電気工事案件モデルで図解。商談で1時間説明する内容を、3分で。"
   breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "介在価値", href: "/value" }]}
 >
-  <section class="bg-brand-900 text-white py-24 md:py-32">
-    <div class="container-x">
-      <p class="text-xs tracking-[0.3em] text-brand-300">VALUE</p>
-      <h1 class="mt-4 font-serif text-4xl md:text-6xl font-black leading-tight">
-        数字で見る、<br />介在価値。
-      </h1>
-      <p class="mt-8 max-w-3xl text-base md:text-lg text-ink-100 leading-relaxed">
-        「翻訳料」と聞くと中抜きに見えるかもしれません。<br />
-        しかし、管理不在で失われる損失と、介在による費用を比較すれば、答えは明らかです。
-      </p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="VALUE"
+    title="数字で見る、<br />介在価値。"
+    lead={`「翻訳料」と聞くと中抜きに見えるかもしれません。<br />しかし、管理不在で失われる損失と、介在による費用を比較すれば、答えは明らかです。`}
+  />
 
   <Section eyebrow="COMPARISON" title="管理不在 ／ モモヤ介在 の比較">
     <LossSavingsInfographic />

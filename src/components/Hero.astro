@@ -4,32 +4,42 @@ import { site } from "../data/site";
 <section class="relative isolate overflow-hidden bg-brand-900 text-white">
   <!--
     動画ヒーロー（指定動画 = 東京の街並み）の差し込みポイント。
-    public/hero.mp4（H.264, ~3MB以下推奨, ループ前提の3〜5秒尺）と
-    public/hero-poster.jpg（先出し用ポスター画像 1920×1080）を配置すれば
-    自動で <video> がアクティブになり、グラデ背景は隠れる。
+    public/hero.mp4 を配置すると自動で <video> がアクティブになる。
+    現在は仮の静止画（既存サイトの足場写真）を使用。
   -->
   <video
     id="hero-video"
     class="absolute inset-0 -z-10 w-full h-full object-cover"
-    poster="/hero-poster.jpg"
+    poster="/img/scaffold-1920.jpg"
     autoplay muted loop playsinline preload="metadata"
     aria-hidden="true"
     hidden
   >
     <source src="/hero.mp4" type="video/mp4" />
   </video>
-  <!-- 動画上のオーバーレイ（動画ありの場合は黒被せ）／なしの場合のグラデ装飾 -->
+
+  <!-- 静止画ヒーロー（仮）：足場写真 + ブランドカラーグラデーションの多層オーバーレイ -->
   <div id="hero-bg" class="absolute inset-0 -z-10">
-    <div class="absolute inset-0 bg-gradient-to-br from-brand-900 via-brand-700 to-ink-900"></div>
-    <div class="absolute inset-0 opacity-30 mix-blend-screen"
-         style="background-image: radial-gradient(1200px 600px at 70% 30%, #6c97cc 0%, transparent 60%), radial-gradient(800px 400px at 20% 80%, #d97706 0%, transparent 60%);"></div>
-    <div class="absolute inset-0 opacity-40"
-         style="background-image: linear-gradient(transparent 0, rgba(255,255,255,.06) 1px, transparent 2px), linear-gradient(90deg, transparent 0, rgba(255,255,255,.05) 1px, transparent 2px); background-size: 36px 36px;"></div>
+    <img
+      src="/img/scaffold-1920.jpg"
+      srcset="/img/scaffold-960.jpg 960w, /img/scaffold-1920.jpg 1920w"
+      sizes="100vw"
+      alt=""
+      class="w-full h-full object-cover"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-900/95 via-brand-900/85 to-ink-900/95"></div>
+    <div class="absolute inset-0 mix-blend-overlay opacity-30"
+         style="background-image: radial-gradient(900px 450px at 75% 25%, #6c97cc 0%, transparent 65%), radial-gradient(700px 350px at 15% 85%, #d97706 0%, transparent 70%);"></div>
+    <div class="absolute inset-0 opacity-15"
+         style="background-image: linear-gradient(transparent 0, rgba(255,255,255,.10) 1px, transparent 2px), linear-gradient(90deg, transparent 0, rgba(255,255,255,.08) 1px, transparent 2px); background-size: 48px 48px;"></div>
+    <!-- 下端を暗くして次セクションとの境界を作る -->
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-brand-900"></div>
   </div>
   <div id="hero-overlay" class="absolute inset-0 -z-10 bg-black/55" hidden></div>
 
   <script is:inline>
-    // public/hero.mp4 が存在する場合のみ動画を有効化（404をHEADで判定）
     fetch("/hero.mp4", { method: "HEAD" }).then((r) => {
       if (!r.ok) return;
       const v = document.getElementById("hero-video");
@@ -41,14 +51,23 @@ import { site } from "../data/site";
     }).catch(() => {});
   </script>
 
-  <div class="container-x py-28 md:py-40 reveal">
-    <p class="text-xs md:text-sm tracking-[0.3em] text-brand-300">MOMOYA SYSTEM ／ 20<span class="num">th</span> SEASON</p>
-    <h1 class="mt-6 font-serif font-black text-4xl md:text-6xl leading-tight">
-      電気工事の、<br class="md:hidden" />打ち合わせ屋。
+  <!-- 装飾用：左端の縦バー（ブランドカラーアクセント） -->
+  <div class="absolute left-0 top-1/4 bottom-1/4 w-[2px] bg-gradient-to-b from-transparent via-accent-500/60 to-transparent" aria-hidden="true"></div>
+
+  <div class="container-x py-28 md:py-40 reveal relative">
+    <div class="flex items-center gap-3">
+      <span class="block w-10 h-[1px] bg-brand-300"></span>
+      <p class="text-xs md:text-sm tracking-[0.3em] text-brand-300">MOMOYA SYSTEM ／ 20<span class="num">th</span> SEASON</p>
+    </div>
+    <h1 class="mt-8 font-serif font-black text-[2.5rem] sm:text-5xl md:text-7xl leading-[1.1] tracking-tight">
+      電気工事の、<br class="md:hidden" /><span class="relative inline-block">
+        打ち合わせ屋<span class="text-accent-500">。</span>
+        <span class="absolute -bottom-2 left-0 right-0 h-[3px] bg-accent-500/80 hidden md:block"></span>
+      </span>
     </h1>
-    <p class="mt-6 text-base md:text-xl text-ink-100 max-w-2xl leading-relaxed">
+    <p class="mt-8 text-base md:text-xl text-ink-100 max-w-2xl leading-relaxed">
       現場の言葉で、プロジェクトを最適化する実務番頭。<br />
-      ゼネコン・設計・メーカーと、施工現場の<strong class="text-white">「あいだ」</strong>に立ち、<br class="hidden md:inline" />
+      ゼネコン・設計・メーカーと、施工現場の<strong class="text-white border-b border-accent-500/60 pb-0.5">「あいだ」</strong>に立ち、<br class="hidden md:inline" />
       図面・打ち合わせ・工程・コストを翻訳します。
     </p>
 

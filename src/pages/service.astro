@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
+import PageHero from "../components/PageHero.astro";
 import { site } from "../data/site";
 
 const services = [
@@ -63,32 +64,31 @@ const services = [
     areaServed: "JP",
   }))}
 >
-  <section class="bg-brand-900 text-white py-24 md:py-32">
-    <div class="container-x">
-      <p class="text-xs tracking-[0.3em] text-brand-300">SERVICE</p>
-      <h1 class="mt-4 font-serif text-4xl md:text-6xl font-black leading-tight">サービス</h1>
-      <p class="mt-8 max-w-3xl text-ink-100 leading-relaxed">
-        モモヤシステムが提供するのは、「電気工事の現場を熟知した実務者だからこそできる、4つの管理」です。
-      </p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="SERVICE"
+    title="サービス"
+    lead="モモヤシステムが提供するのは、「電気工事の現場を熟知した実務者だからこそできる、4つの管理」です。"
+  />
 
   <div class="bg-white">
     {services.map((s, i) => (
-      <section class:list={["py-20 md:py-28", i % 2 === 1 ? "bg-ink-50" : ""]}>
-        <div class="container-x grid lg:grid-cols-[200px_1fr] gap-10">
-          <div>
-            <p class="num text-6xl font-black text-brand-500">{s.n}</p>
-            <p class="mt-2 text-xs tracking-[0.3em] text-brand-700">SERVICE {s.n}</p>
+      <section class:list={["py-20 md:py-28 relative", i % 2 === 1 ? "bg-ink-50" : ""]}>
+        <div class="container-x grid lg:grid-cols-[220px_1fr] gap-10 lg:gap-16 observe">
+          <div class="relative">
+            <p class="num text-7xl md:text-8xl font-black text-brand-500/15 leading-none select-none" aria-hidden="true">{s.n}</p>
+            <div class="absolute top-0 left-0 flex flex-col">
+              <p class="text-[10px] tracking-[0.3em] text-brand-700 font-bold pt-3">SERVICE {s.n}</p>
+              <span class="block w-10 h-[2px] bg-accent-500 mt-3"></span>
+            </div>
           </div>
           <div>
-            <h2 class="font-serif text-3xl md:text-4xl font-black leading-tight">{s.title}</h2>
-            <p class="mt-4 text-base md:text-lg text-ink-700 leading-relaxed">{s.lead}</p>
-            <ul class="mt-8 space-y-3">
+            <h2 class="font-serif text-2xl md:text-4xl font-black leading-tight tracking-tight">{s.title}</h2>
+            <p class="mt-5 text-base md:text-lg text-ink-700 leading-relaxed max-w-3xl">{s.lead}</p>
+            <ul class="mt-8 grid md:grid-cols-2 gap-x-8 gap-y-3 max-w-3xl">
               {s.items.map((item) => (
-                <li class="flex gap-3 text-sm md:text-base text-ink-700">
-                  <span class="text-accent-500 mt-1">●</span>
-                  <span class="leading-relaxed">{item}</span>
+                <li class="flex gap-3 text-sm md:text-base text-ink-700 leading-relaxed">
+                  <span class="text-accent-500 mt-1.5 flex-shrink-0 w-2 h-2 rounded-full bg-accent-500 inline-block"></span>
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>

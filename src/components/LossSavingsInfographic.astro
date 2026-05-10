@@ -2,7 +2,11 @@
 // 中核インフォグラフィック：管理不在の損失 vs モモヤ介在の利益保全
 // 1億円案件モデル（社長口頭説明の数値ロジック）
 ---
-<div class="grid lg:grid-cols-2 gap-6">
+<div class="relative grid lg:grid-cols-2 gap-6 observe-stagger">
+  <!-- 中央のVS装飾（lg以上のみ） -->
+  <div class="hidden lg:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center w-16 h-16 rounded-full bg-white shadow-[0_8px_24px_-8px_rgba(0,0,0,.3)] border-2 border-brand-500" aria-hidden="true">
+    <span class="font-serif font-black text-brand-700 text-xl">VS</span>
+  </div>
   <!-- 管理不在の現場 -->
   <article class="relative bg-ink-50 border border-ink-100 p-8 md:p-10 rounded-sm">
     <p class="text-[10px] tracking-[0.3em] text-ink-500">CASE A</p>

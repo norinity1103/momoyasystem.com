@@ -5,18 +5,28 @@ interface Props {
   lead?: string;
   tone?: "light" | "dark" | "tint";
   id?: string;
+  /** 背景に細かいグリッドを敷く（lightトーン時のみ意味あり） */
+  grid?: boolean;
 }
-const { eyebrow, title, lead, tone = "light", id } = Astro.props;
+const { eyebrow, title, lead, tone = "light", id, grid = false } = Astro.props;
 const toneClass =
   tone === "dark" ? "bg-brand-900 text-white"
   : tone === "tint" ? "bg-ink-50 text-ink-900"
   : "bg-white text-ink-900";
+const eyebrowColor = tone === "dark" ? "text-brand-300" : "text-brand-500";
+const leadColor = tone === "dark" ? "text-ink-100" : "text-ink-700";
+const accentLine = tone === "dark" ? "bg-brand-300" : "bg-brand-500";
 ---
-<section id={id} class:list={["py-24 md:py-32", toneClass]}>
-  <div class="container-x">
-    {eyebrow && <p class={`text-[10px] md:text-xs tracking-[0.3em] ${tone === "dark" ? "text-brand-300" : "text-brand-500"}`}>{eyebrow}</p>}
-    <h2 class="mt-4 font-serif font-black text-3xl md:text-5xl leading-tight">{title}</h2>
-    {lead && <p class={`mt-6 max-w-3xl leading-relaxed ${tone === "dark" ? "text-ink-100" : "text-ink-700"}`}>{lead}</p>}
-    <div class="mt-12"><slot /></div>
+<section id={id} class:list={["relative py-24 md:py-32 overflow-hidden", toneClass, grid && tone !== "dark" && "bg-grid"]}>
+  <div class="container-x relative">
+    {eyebrow && (
+      <div class="flex items-center gap-3 observe">
+        <span class:list={["block w-8 h-[2px]", accentLine]}></span>
+        <p class:list={["text-[10px] md:text-xs tracking-[0.3em] font-bold", eyebrowColor]}>{eyebrow}</p>
+      </div>
+    )}
+    <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.15] tracking-tight observe max-w-4xl">{title}</h2>
+    {lead && <p class:list={["mt-6 max-w-3xl text-base md:text-lg leading-relaxed observe", leadColor]}>{lead}</p>}
+    <div class="mt-12 observe"><slot /></div>
   </div>
 </section>

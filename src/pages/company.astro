@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
+import PageHero from "../components/PageHero.astro";
 import { site } from "../data/site";
 
 const profile = [
@@ -21,17 +22,12 @@ const profile = [
   description="株式会社モモヤシステムの会社概要。代表・百々彰彦／2007年12月設立／大阪府大阪市生野区／電気工事のディレクション・管理・調整事業。"
   breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "会社概要", href: "/company" }]}
 >
-  <section class="bg-brand-900 text-white py-24 md:py-32">
-    <div class="container-x">
-      <p class="text-xs tracking-[0.3em] text-brand-300">COMPANY</p>
-      <h1 class="mt-4 font-serif text-4xl md:text-6xl font-black leading-tight">会社概要</h1>
-      <p class="mt-8 max-w-3xl text-ink-100 leading-relaxed">
-        2007年創業以来、電気工事の現場で20年の実績を積み上げました。<br />
-        20期目（2026年〜）に経営方針を「施工」から「管理・ディレクション」へと転換し、
-        建設電気工事業界の構造的課題を解く事業へ向かいます。
-      </p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="COMPANY"
+    title="会社概要"
+    lead={`2007年創業以来、電気工事の現場で20年の実績を積み上げました。<br />20期目（2026年〜）に経営方針を「施工」から「管理・ディレクション」へと転換し、建設電気工事業界の構造的課題を解く事業へ向かいます。`}
+    bg="/img/cityscape-1280.jpg"
+  />
 
   <Section eyebrow="PROFILE" title="基本情報">
     <dl class="divide-y divide-ink-100 border-y border-ink-100">

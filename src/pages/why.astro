@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
+import PageHero from "../components/PageHero.astro";
 ---
 <BaseLayout
   title="なぜ「あいだ」が必要か"
@@ -37,43 +38,46 @@ import Section from "../components/Section.astro";
     ],
   }}
 >
-  <section class="bg-brand-900 text-white py-24 md:py-32">
+  <PageHero
+    eyebrow="WHY"
+    title={`なぜ、いま「あいだ」に<br />立つ会社が必要なのか。`}
+    lead={`建設電気工事の現場では、上流（元請・設計・メーカー）と下流（施工会社）のあいだに、慢性的なコミュニケーション・ロスが発生しています。その損失は、原価・工期・品質・人材リスクのすべてに跳ね返り、案件の利益を蝕みます。`}
+  />
+
+  <section class="bg-white py-24 md:py-32">
     <div class="container-x">
-      <p class="text-xs tracking-[0.3em] text-brand-300">WHY</p>
-      <h1 class="mt-4 font-serif text-4xl md:text-6xl font-black leading-tight">
-        なぜ、いま「あいだ」に<br />立つ会社が必要なのか。
-      </h1>
-      <p class="mt-8 max-w-3xl text-base md:text-lg text-ink-100 leading-relaxed">
-        建設電気工事の現場では、上流（元請・設計・メーカー）と下流（施工会社）のあいだに、
-        慢性的なコミュニケーション・ロスが発生しています。
-        その損失は、原価・工期・品質・人材リスクのすべてに跳ね返り、案件の利益を蝕みます。
-      </p>
+      <div class="space-y-16 md:space-y-24">
+        {[
+          {
+            n: "01",
+            title: "上流担当者は、電気の専門知識が浅い。",
+            body: "ゼネコンや設計会社のプロジェクト担当者は、建築全体を見ているため、電気の細部までは追いきれません。電気メーカーの担当者ですら、現場の段取りや施工会社との折衝には不慣れなことが多くあります。結果、施工会社へ「曖昧な指示」が降り、現場で確認が止まります。",
+          },
+          {
+            n: "02",
+            title: "レスが遅いほど、原価は膨らむ。",
+            body: "確認待ちの一日は、施工会社にとって人件費の流出です。上流の担当者は他案件も抱えているため、メールの返信に2〜3日かかることが珍しくありません。この遅延が積み重なって、工期の押し出し、追加費用、関係悪化を生みます。",
+          },
+          {
+            n: "03",
+            title: "2024年問題と、現場の外国人化。",
+            body: "時間外労働の上限規制と週休2日工事の原則化は、限られた時間内での生産性向上を必須にしました。一方で施工現場の労働力は、確実に外国人比率が高まっていきます。技術通訳・施工通訳のポジション、つまり「あいだに立つ会社」のニーズは、今後さらに高まります。",
+          },
+        ].map((it) => (
+          <article class="grid md:grid-cols-[140px_1fr] gap-6 md:gap-12 items-start observe">
+            <div class="flex md:flex-col gap-3 md:gap-2 items-baseline md:items-start">
+              <p class="num text-5xl md:text-7xl font-black text-brand-500 leading-none">{it.n}</p>
+              <p class="text-[10px] tracking-[0.3em] text-brand-700 font-bold mt-3">ISSUE</p>
+            </div>
+            <div>
+              <h2 class="font-serif text-2xl md:text-4xl font-black leading-tight tracking-tight">{it.title}</h2>
+              <p class="mt-5 max-w-3xl text-ink-700 leading-relaxed">{it.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
-
-  <Section eyebrow="ISSUE 01" title="上流担当者は、電気の専門知識が浅い。">
-    <p class="max-w-3xl text-ink-700 leading-relaxed">
-      ゼネコンや設計会社のプロジェクト担当者は、建築全体を見ているため、電気の細部までは追いきれません。
-      電気メーカーの担当者ですら、現場の段取りや施工会社との折衝には不慣れなことが多くあります。
-      結果、施工会社へ「曖昧な指示」が降り、現場で確認が止まります。
-    </p>
-  </Section>
-
-  <Section tone="tint" eyebrow="ISSUE 02" title="レスが遅いほど、原価は膨らむ。">
-    <p class="max-w-3xl text-ink-700 leading-relaxed">
-      確認待ちの一日は、施工会社にとって人件費の流出です。
-      上流の担当者は他案件も抱えているため、メールの返信に2〜3日かかることが珍しくありません。
-      この遅延が積み重なって、工期の押し出し、追加費用、関係悪化を生みます。
-    </p>
-  </Section>
-
-  <Section eyebrow="ISSUE 03" title="2024年問題と、現場の外国人化。">
-    <p class="max-w-3xl text-ink-700 leading-relaxed">
-      時間外労働の上限規制と週休2日工事の原則化は、限られた時間内での生産性向上を必須にしました。
-      一方で施工現場の労働力は、確実に外国人比率が高まっていきます。
-      技術通訳・施工通訳のポジション、つまり「あいだに立つ会社」のニーズは、今後さらに高まります。
-    </p>
-  </Section>
 
   <Section tone="dark" eyebrow="ANSWER" title="モモヤシステムの答え。">
     <div class="grid md:grid-cols-2 gap-8 max-w-4xl">

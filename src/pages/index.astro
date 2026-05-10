@@ -20,23 +20,24 @@ const fmt = (d: Date) =>
     eyebrow="POSITIONING"
     title="施工会社ではなく、現場を熟知した「実務番頭」。"
     lead="モモヤシステムは20期目（2026年4月〜）に経営方針を転換しました。これまで20年磨いてきた電気工事の現場ノウハウを、自社で職人を抱えるリスクを切り離した「管理・調整・ディレクション」というかたちで提供します。"
+    grid={true}
   >
-    <div class="grid md:grid-cols-3 gap-6">
-      <article class="p-6 border border-ink-100 hover:border-brand-500 transition">
-        <p class="num text-xs text-ink-500">01</p>
-        <h3 class="mt-2 font-serif text-xl font-bold">打ち合わせ代行</h3>
-        <p class="mt-3 text-sm text-ink-700 leading-relaxed">電気の専門知識が薄い元請担当者の代わりに、施工現場との打ち合わせを巻き取り、レスを速く、図面を一発で決めます。</p>
-      </article>
-      <article class="p-6 border border-ink-100 hover:border-brand-500 transition">
-        <p class="num text-xs text-ink-500">02</p>
-        <h3 class="mt-2 font-serif text-xl font-bold">業者選定・パートナー網</h3>
-        <p class="mt-3 text-sm text-ink-700 leading-relaxed">全国50社+の電気工事パートナーから、案件の規模・地域・仕様に合わせて最適な施工会社を選定。元請の業者選定工数をゼロにします。</p>
-      </article>
-      <article class="p-6 border border-ink-100 hover:border-brand-500 transition">
-        <p class="num text-xs text-ink-500">03</p>
-        <h3 class="mt-2 font-serif text-xl font-bold">材料調達・コスト最適化</h3>
-        <p class="mt-3 text-sm text-ink-700 leading-relaxed">電気工事の原価の半分を占める材料を、メーカー直取引のスケールメリットで一括調達。工事費とは別の利益源を作ります。</p>
-      </article>
+    <div class="grid md:grid-cols-3 gap-5 observe-stagger">
+      {[
+        { n: "01", t: "打ち合わせ代行", d: "電気の専門知識が薄い元請担当者の代わりに、施工現場との打ち合わせを巻き取り、レスを速く、図面を一発で決めます。" },
+        { n: "02", t: "業者選定・パートナー網", d: "全国50社+の電気工事パートナーから、案件の規模・地域・仕様に合わせて最適な施工会社を選定。元請の業者選定工数をゼロにします。" },
+        { n: "03", t: "材料調達・コスト最適化", d: "電気工事の原価の半分を占める材料を、メーカー直取引のスケールメリットで一括調達。工事費とは別の利益源を作ります。" },
+      ].map((c) => (
+        <article class="group relative p-7 bg-white border border-ink-100 hover:border-brand-500 hover:-translate-y-1 hover:shadow-[0_12px_30px_-12px_rgba(30,90,159,.25)] transition-all duration-300 overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-brand-500 via-accent-500 to-brand-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+          <p class="num text-xs text-brand-500 font-bold tracking-[0.2em]">{c.n}</p>
+          <h3 class="mt-3 font-serif text-xl font-bold leading-snug">{c.t}</h3>
+          <p class="mt-3 text-sm text-ink-700 leading-relaxed">{c.d}</p>
+          <span class="mt-5 inline-flex items-center gap-2 text-xs text-brand-700 group-hover:text-brand-500 group-hover:translate-x-1 transition">
+            詳しく見る <span aria-hidden="true">→</span>
+          </span>
+        </article>
+      ))}
     </div>
   </Section>
 
@@ -57,7 +58,19 @@ const fmt = (d: Date) =>
     title="数字で見る、介在価値。"
     lead="商談で1時間説明している内容を、3分で。"
   >
-    <a href="/value" class="inline-flex items-center gap-2 px-7 py-4 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 transition">
+    <div class="grid md:grid-cols-3 gap-6 mt-4 mb-12 observe-stagger">
+      {[
+        { num: "5–15", unit: "%", label: "管理不在で失われる利益" },
+        { num: "2–5",  unit: "%", label: "モモヤ介在のディレクション費" },
+        { num: "3–10", unit: "%", label: "守られる純利益（差分）" },
+      ].map((m) => (
+        <div class="p-6 border border-white/15 bg-white/5 backdrop-blur-sm">
+          <p class="text-[10px] tracking-[0.2em] text-brand-300">{m.label}</p>
+          <p class="mt-3 num text-4xl md:text-5xl font-black">{m.num}<span class="text-xl ml-1 text-brand-300">{m.unit}</span></p>
+        </div>
+      ))}
+    </div>
+    <a href="/value" data-track="cta_click:home_value" class="inline-flex items-center gap-2 px-7 py-4 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 transition">
       介在価値の図解を見る <span aria-hidden="true">→</span>
     </a>
   </Section>
@@ -81,13 +94,32 @@ const fmt = (d: Date) =>
     </Section>
   )}
 
-  <Section
-    eyebrow="CONTACT"
-    title="まずは、ご相談ください。"
-    lead="案件の規模・段階を問わず、見積依頼の段階からお声がけいただけます。東京・大阪二拠点で全国対応。"
-  >
-    <a href="/contact" class="inline-flex items-center gap-2 px-7 py-4 bg-brand-700 text-white font-bold rounded-sm hover:bg-brand-500 transition">
-      お問い合わせフォームへ <span aria-hidden="true">→</span>
-    </a>
-  </Section>
+  <section class="relative isolate overflow-hidden text-white">
+    <img
+      src="/img/cityscape-1280.jpg"
+      alt=""
+      class="absolute inset-0 -z-10 w-full h-full object-cover"
+      loading="lazy" decoding="async"
+    />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-brand-900/95 via-brand-900/80 to-brand-900/40"></div>
+    <div class="container-x py-24 md:py-32 observe">
+      <div class="flex items-center gap-3">
+        <span class="block w-8 h-[2px] bg-brand-300"></span>
+        <p class="text-[10px] md:text-xs tracking-[0.3em] font-bold text-brand-300">CONTACT</p>
+      </div>
+      <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.15] tracking-tight">まずは、ご相談ください。</h2>
+      <p class="mt-6 max-w-3xl text-base md:text-lg leading-relaxed text-ink-100">
+        案件の規模・段階を問わず、見積依頼の段階からお声がけいただけます。<br class="hidden md:inline" />
+        東京・大阪二拠点で全国対応。最短で当日中にご返信します。
+      </p>
+      <div class="mt-12 flex flex-wrap gap-4">
+        <a href="/contact" data-track="cta_click:home_contact" class="inline-flex items-center gap-2 px-8 py-5 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 hover:-translate-y-0.5 transition shadow-[0_10px_30px_-10px_rgba(0,0,0,.5)]">
+          お問い合わせフォームへ <span aria-hidden="true">→</span>
+        </a>
+        <a href="tel:0643927136" data-track="cta_click:home_tel" class="inline-flex items-center gap-2 px-8 py-5 border border-white/40 text-white rounded-sm hover:bg-white/10 transition">
+          06-4392-7136
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

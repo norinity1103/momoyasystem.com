@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
 import { site } from "../data/site";
 
 // 既定: Cloudflare Pages Functions の自前バックエンド (/api/contact)
@@ -11,18 +12,11 @@ const formEndpoint = import.meta.env.PUBLIC_FORM_ENDPOINT || "/api/contact";
   description="モモヤシステムへのお問い合わせ。電気工事のディレクション・図面・打ち合わせ代行・パートナー選定など、案件の段階を問わずご相談を承ります。東京・大阪二拠点で全国対応。"
   breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "お問い合わせ", href: "/contact" }]}
 >
-  <section class="bg-brand-900 text-white py-24 md:py-32">
-    <div class="container-x">
-      <p class="text-xs tracking-[0.3em] text-brand-300">CONTACT</p>
-      <h1 class="mt-4 font-serif text-4xl md:text-6xl font-black leading-tight">
-        まずは、ご相談ください。
-      </h1>
-      <p class="mt-8 max-w-3xl text-ink-100 leading-relaxed">
-        見積依頼の段階からでも構いません。<br />
-        案件の規模・進捗・地域をお伝えください。最短で当日中にご返信します。
-      </p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="CONTACT"
+    title="まずは、ご相談ください。"
+    lead={`見積依頼の段階からでも構いません。<br />案件の規模・進捗・地域をお伝えください。最短で当日中にご返信します。`}
+  />
 
   <section class="py-24">
     <div class="container-x grid lg:grid-cols-5 gap-12">

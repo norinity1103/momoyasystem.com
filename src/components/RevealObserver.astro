@@ -1,0 +1,21 @@
+---
+// .observe / .observe-stagger 要素を IntersectionObserver で .in-view 付与する。
+// BaseLayout から1回だけ読み込まれる前提。
+---
+<script is:inline>
+(function () {
+  if (!("IntersectionObserver" in window)) {
+    document.querySelectorAll(".observe, .observe-stagger").forEach((el) => el.classList.add("in-view"));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add("in-view");
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: "0px 0px -10% 0px", threshold: 0.05 });
+  document.querySelectorAll(".observe, .observe-stagger").forEach((el) => io.observe(el));
+})();
+</script>
