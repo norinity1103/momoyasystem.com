@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import { site } from "../data/site";
+
+const profile = [
+  { k: "商号",       v: site.name },
+  { k: "代表者",     v: site.legal.representative },
+  { k: "設立",       v: site.legal.established },
+  { k: "法人番号",   v: site.legal.corporateNumber },
+  { k: "本社所在地", v: site.contact.address.hq },
+  { k: "東京営業所", v: site.contact.address.tokyo },
+  { k: "電話",       v: site.contact.phone },
+  { k: "事業内容",   v: site.business.join("／") },
+  { k: "建設業許可", v: site.legal.license },
+  { k: "産廃許可",   v: site.legal.industrialWasteLicense },
+];
+---
+<BaseLayout
+  title="会社概要"
+  description="株式会社モモヤシステムの会社概要。代表・百々彰彦／2007年12月設立／大阪府大阪市生野区／電気工事のディレクション・管理・調整事業。"
+>
+  <section class="bg-brand-900 text-white py-24 md:py-32">
+    <div class="container-x">
+      <p class="text-xs tracking-[0.3em] text-brand-300">COMPANY</p>
+      <h1 class="mt-4 font-serif text-4xl md:text-6xl font-black leading-tight">会社概要</h1>
+      <p class="mt-8 max-w-3xl text-ink-100 leading-relaxed">
+        2007年創業以来、電気工事の現場で20年の実績を積み上げました。<br />
+        20期目（2026年〜）に経営方針を「施工」から「管理・ディレクション」へと転換し、
+        建設電気工事業界の構造的課題を解く事業へ向かいます。
+      </p>
+    </div>
+  </section>
+
+  <Section eyebrow="PROFILE" title="基本情報">
+    <dl class="divide-y divide-ink-100 border-y border-ink-100">
+      {profile.map((row) => (
+        <div class="grid md:grid-cols-[200px_1fr] gap-2 py-5">
+          <dt class="text-sm tracking-[0.1em] text-brand-700 font-bold">{row.k}</dt>
+          <dd class="text-sm md:text-base text-ink-700 leading-relaxed">{row.v}</dd>
+        </div>
+      ))}
+    </dl>
+  </Section>
+
+  <Section tone="tint" eyebrow="MISSION" title="20期スローガン">
+    <blockquote class="border-l-4 border-accent-500 pl-6">
+      <p class="font-serif text-2xl md:text-3xl font-bold text-ink-900 leading-relaxed">
+        「仕事の喜びを見つける。<br />自信の持てる仕事をし、高評価を得る。」
+      </p>
+      <footer class="mt-4 text-sm text-ink-500">— 株式会社モモヤシステム 20期スローガン</footer>
+    </blockquote>
+  </Section>
+
+  <Section eyebrow="VISION" title="100年後を見据えた、段階的な成長像。">
+    <ol class="space-y-6">
+      {[
+        ["10年後", "顧客を全国に持ち、様々なシステムを提供している"],
+        ["30年後", "顧客を全世界に持ち、様々なシステムを提供している"],
+        ["50年後", "日本の枠をこえて主要国で自社の仕組みで社会に貢献している"],
+        ["100年後", "日本の枠をこえて世界中で自社の仕組みで社会に貢献している"],
+      ].map(([t, d]) => (
+        <li class="grid md:grid-cols-[140px_1fr] gap-4 items-baseline">
+          <span class="num text-2xl font-bold text-brand-500">{t}</span>
+          <p class="text-ink-700 leading-relaxed">{d}</p>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <Section tone="dark" eyebrow="GROUP" title="モモヤホールディングス（構想）">
+    <p class="max-w-3xl text-ink-100 leading-relaxed">
+      電気工事の管理・ディレクションを担うモモヤシステムを中核に、
+      電気以外の工事事業（イフス）、業界課題解決の支援事業（モモヤコネクト）、
+      防災支援（一般社団法人 日本防災支援機構）と連携し、
+      「業界課題解決型のトータルソリューション提供会社」を目指します。
+    </p>
+  </Section>
+</BaseLayout>

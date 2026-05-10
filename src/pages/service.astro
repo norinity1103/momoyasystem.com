@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+
+const services = [
+  {
+    n: "01",
+    title: "ディレクション・打ち合わせ代行",
+    lead: "上流の知識不足と、下流のレス遅延を、モモヤが翻訳して埋めます。",
+    items: [
+      "元請（ゼネコン・設計・メーカー）と施工現場の打合せに介在",
+      "電気の専門用語を、現場・経営の言葉に翻訳",
+      "図面確認・施工図チェック・修正指示",
+      "工程管理・週休2日・労働時間規制を踏まえた現実的な工程設計",
+    ],
+  },
+  {
+    n: "02",
+    title: "業者選定・パートナーマッチング",
+    lead: "全国50社+のパートナー網から、案件に最適な施工会社を選定します。",
+    items: [
+      "案件の規模・地域・仕様に応じた業者選定",
+      "見積依頼の段階から介在し、適正価格を担保",
+      "丸投げではなく、管理・調整まで担う「責任ある仲介」",
+      "上流からは「丸投げできる安心感」、下流からは「上に立つ管理者」として機能",
+    ],
+  },
+  {
+    n: "03",
+    title: "材料調達・コスト最適化",
+    lead: "電気工事の原価の半分を占める材料を、メーカー直取引で一括調達。",
+    items: [
+      "電気・照明・通信機材のメーカー直取引",
+      "スケールメリットで材料原価を圧縮",
+      "リードタイム短縮による工期遵守",
+      "施工費とは別の利益源として、ディレクション費の原資にも",
+    ],
+  },
+  {
+    n: "04",
+    title: "メンテナンス・小規模施工",
+    lead: "20年の現場ノウハウを活かした、利益率の高いリピート対応。",
+    items: [
+      "店舗・住宅の電気・空調・弱電工事",
+      "EV/PHV急速充電器の設計・施工・管理",
+      "建物および建物付属設備のメンテナンス",
+      "緊急対応・小規模リフォームにも対応",
+    ],
+  },
+];
+---
+<BaseLayout
+  title="サービス"
+  description="モモヤシステムの4つのサービス領域。ディレクション・業者選定・材料調達・メンテナンス。電気工事の上流と下流の「あいだ」を担う実務番頭。"
+>
+  <section class="bg-brand-900 text-white py-24 md:py-32">
+    <div class="container-x">
+      <p class="text-xs tracking-[0.3em] text-brand-300">SERVICE</p>
+      <h1 class="mt-4 font-serif text-4xl md:text-6xl font-black leading-tight">サービス</h1>
+      <p class="mt-8 max-w-3xl text-ink-100 leading-relaxed">
+        モモヤシステムが提供するのは、「電気工事の現場を熟知した実務者だからこそできる、4つの管理」です。
+      </p>
+    </div>
+  </section>
+
+  <div class="bg-white">
+    {services.map((s, i) => (
+      <section class:list={["py-20 md:py-28", i % 2 === 1 ? "bg-ink-50" : ""]}>
+        <div class="container-x grid lg:grid-cols-[200px_1fr] gap-10">
+          <div>
+            <p class="num text-6xl font-black text-brand-500">{s.n}</p>
+            <p class="mt-2 text-xs tracking-[0.3em] text-brand-700">SERVICE {s.n}</p>
+          </div>
+          <div>
+            <h2 class="font-serif text-3xl md:text-4xl font-black leading-tight">{s.title}</h2>
+            <p class="mt-4 text-base md:text-lg text-ink-700 leading-relaxed">{s.lead}</p>
+            <ul class="mt-8 space-y-3">
+              {s.items.map((item) => (
+                <li class="flex gap-3 text-sm md:text-base text-ink-700">
+                  <span class="text-accent-500 mt-1">●</span>
+                  <span class="leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <Section tone="dark" eyebrow="NEXT" title="どのサービスから話しますか？">
+    <p class="text-ink-100 max-w-2xl leading-relaxed">
+      4つすべてを一括でお任せいただくことも、特定の領域だけご相談いただくことも可能です。
+    </p>
+    <a href="/contact" class="mt-8 inline-flex items-center gap-2 px-7 py-4 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 transition">
+      ご相談・お問い合わせ <span aria-hidden="true">→</span>
+    </a>
+  </Section>
+</BaseLayout>

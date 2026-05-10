@@ -1,0 +1,22 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  tone?: "light" | "dark" | "tint";
+  id?: string;
+}
+const { eyebrow, title, lead, tone = "light", id } = Astro.props;
+const toneClass =
+  tone === "dark" ? "bg-brand-900 text-white"
+  : tone === "tint" ? "bg-ink-50 text-ink-900"
+  : "bg-white text-ink-900";
+---
+<section id={id} class:list={["py-24 md:py-32", toneClass]}>
+  <div class="container-x">
+    {eyebrow && <p class={`text-[10px] md:text-xs tracking-[0.3em] ${tone === "dark" ? "text-brand-300" : "text-brand-500"}`}>{eyebrow}</p>}
+    <h2 class="mt-4 font-serif font-black text-3xl md:text-5xl leading-tight">{title}</h2>
+    {lead && <p class={`mt-6 max-w-3xl leading-relaxed ${tone === "dark" ? "text-ink-100" : "text-ink-700"}`}>{lead}</p>}
+    <div class="mt-12"><slot /></div>
+  </div>
+</section>

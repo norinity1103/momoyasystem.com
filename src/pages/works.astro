@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+
+const cases = [
+  {
+    tag: "EV/PHV 急速充電器",
+    title: "急速充電器設置工事（複数案件）",
+    summary: "全国展開する急速充電インフラの設計・施工・管理に対応。設置場所の電源計画から、申請、施工パートナー選定、現場打合せまでを一括ディレクション。",
+    role: "設計補助／施工管理／パートナー選定／材料調達",
+  },
+  {
+    tag: "公共・行政視察",
+    title: "都知事による視察対象案件",
+    summary: "東京都内の電気・付帯工事案件において、行政関係者の視察対象となる規模・品質で施工。ゼネコン・設計会社との上流での折衝にモモヤが介在。",
+    role: "上流折衝／工程管理／品質管理",
+  },
+  {
+    tag: "メーカー直案件",
+    title: "電気メーカーからの直接受注",
+    summary: "電気機器メーカーとの長年の取引により、製造側の事情を理解した提案・施工が可能。図面作成・現場調整・パートナー手配を一貫で対応。",
+    role: "図面作成／施工管理／材料調達",
+  },
+];
+---
+<BaseLayout
+  title="実績"
+  description="モモヤシステムの実績紹介。EV/PHV急速充電器、都知事視察対象案件、電気メーカー直受注など、20年で積み上げた電気工事ディレクションの代表的なケース。"
+>
+  <section class="bg-brand-900 text-white py-24 md:py-32">
+    <div class="container-x">
+      <p class="text-xs tracking-[0.3em] text-brand-300">WORKS</p>
+      <h1 class="mt-4 font-serif text-4xl md:text-6xl font-black leading-tight">実績</h1>
+      <p class="mt-8 max-w-3xl text-ink-100 leading-relaxed">
+        20年で積み上げた電気工事の現場経験は、いまディレクション側に立つことの説得力に変わりました。
+        守秘義務の都合上、お客様名・所在地は抽象化して掲載しています。詳細はお問い合わせください。
+      </p>
+    </div>
+  </section>
+
+  <Section eyebrow="CASES" title="代表的な案件">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {cases.map((c) => (
+        <article class="p-6 bg-white border border-ink-100 hover:border-brand-500 transition flex flex-col">
+          <span class="self-start text-[10px] tracking-[0.2em] text-brand-500 border border-brand-500 px-2 py-1">{c.tag}</span>
+          <h3 class="mt-4 font-serif text-lg font-bold leading-snug">{c.title}</h3>
+          <p class="mt-3 text-sm text-ink-700 leading-relaxed flex-1">{c.summary}</p>
+          <p class="mt-4 pt-4 border-t border-ink-100 text-xs text-ink-500"><span class="text-brand-700 font-bold">担当領域：</span>{c.role}</p>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section tone="tint" eyebrow="WHY US" title="モモヤが選ばれる理由">
+    <ul class="grid md:grid-cols-2 gap-4 max-w-4xl">
+      {[
+        "20年で蓄積した、案件規模に応じた業者選定眼。",
+        "電気メーカーとの直取引で、材料原価とリードタイムを最適化。",
+        "1級電気施工管理技士保有。設計・管理側からの視点で品質を担保。",
+        "東京・大阪二拠点で、全国の案件に対応可能。",
+      ].map((s) => (
+        <li class="p-5 bg-white border-l-4 border-brand-500 text-sm leading-relaxed">{s}</li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section tone="dark" eyebrow="NEXT" title="案件のご相談はこちら">
+    <a href="/contact" class="inline-flex items-center gap-2 px-7 py-4 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 transition">
+      お問い合わせフォームへ <span aria-hidden="true">→</span>
+    </a>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+---
+<BaseLayout
+  title=""
+  description="20年の電気工事の現場経験を武器に、ゼネコン・設計・メーカーと施工現場の「あいだ」に立ち、図面・打ち合わせ・工程・コストを翻訳する電気工事ディレクション会社。大阪・東京の二拠点で全国対応。"
+>
+  <Hero />
+
+  <Section
+    eyebrow="POSITIONING"
+    title="施工会社ではなく、現場を熟知した「実務番頭」。"
+    lead="モモヤシステムは20期目（2026年4月〜）に経営方針を転換しました。これまで20年磨いてきた電気工事の現場ノウハウを、自社で職人を抱えるリスクを切り離した「管理・調整・ディレクション」というかたちで提供します。"
+  >
+    <div class="grid md:grid-cols-3 gap-6">
+      <article class="p-6 border border-ink-100 hover:border-brand-500 transition">
+        <p class="num text-xs text-ink-500">01</p>
+        <h3 class="mt-2 font-serif text-xl font-bold">打ち合わせ代行</h3>
+        <p class="mt-3 text-sm text-ink-700 leading-relaxed">電気の専門知識が薄い元請担当者の代わりに、施工現場との打ち合わせを巻き取り、レスを速く、図面を一発で決めます。</p>
+      </article>
+      <article class="p-6 border border-ink-100 hover:border-brand-500 transition">
+        <p class="num text-xs text-ink-500">02</p>
+        <h3 class="mt-2 font-serif text-xl font-bold">業者選定・パートナー網</h3>
+        <p class="mt-3 text-sm text-ink-700 leading-relaxed">全国50社+の電気工事パートナーから、案件の規模・地域・仕様に合わせて最適な施工会社を選定。元請の業者選定工数をゼロにします。</p>
+      </article>
+      <article class="p-6 border border-ink-100 hover:border-brand-500 transition">
+        <p class="num text-xs text-ink-500">03</p>
+        <h3 class="mt-2 font-serif text-xl font-bold">材料調達・コスト最適化</h3>
+        <p class="mt-3 text-sm text-ink-700 leading-relaxed">電気工事の原価の半分を占める材料を、メーカー直取引のスケールメリットで一括調達。工事費とは別の利益源を作ります。</p>
+      </article>
+    </div>
+  </Section>
+
+  <Section
+    tone="tint"
+    eyebrow="WHY"
+    title="なぜ、いま「あいだ」に立つ会社が必要なのか。"
+    lead="建設業法改正（2025年12月完全施行）、2024年問題、外国人労働者の急増、上流の電気知識不足。業界構造の変化が、翻訳者・調整役のポジションを必要としています。"
+  >
+    <a href="/why" class="inline-flex items-center gap-2 text-brand-700 font-bold hover:text-brand-500 transition">
+      業界課題と私たちの役割を読む <span aria-hidden="true">→</span>
+    </a>
+  </Section>
+
+  <Section
+    tone="dark"
+    eyebrow="VALUE"
+    title="数字で見る、介在価値。"
+    lead="商談で1時間説明している内容を、3分で。"
+  >
+    <a href="/value" class="inline-flex items-center gap-2 px-7 py-4 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 transition">
+      介在価値の図解を見る <span aria-hidden="true">→</span>
+    </a>
+  </Section>
+
+  <Section
+    eyebrow="CONTACT"
+    title="まずは、ご相談ください。"
+    lead="案件の規模・段階を問わず、見積依頼の段階からお声がけいただけます。東京・大阪二拠点で全国対応。"
+  >
+    <a href="/contact" class="inline-flex items-center gap-2 px-7 py-4 bg-brand-700 text-white font-bold rounded-sm hover:bg-brand-500 transition">
+      お問い合わせフォームへ <span aria-hidden="true">→</span>
+    </a>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import { site } from "../data/site";
+---
+<BaseLayout
+  title="特定商取引法に基づく表記"
+  description="特定商取引法に基づく表記"
+  noindex={true}
+>
+  <Section eyebrow="LEGAL" title="特定商取引法に基づく表記">
+    <dl class="divide-y divide-ink-100 border-y border-ink-100">
+      {[
+        ["販売事業者",   site.name],
+        ["代表者",       site.legal.representative],
+        ["所在地",       site.contact.address.hq],
+        ["電話番号",     site.contact.phone],
+        ["メール",       site.contact.email],
+        ["事業内容",     site.business.join("／")],
+        ["建設業許可",   site.legal.license],
+      ].map(([k, v]) => (
+        <div class="grid md:grid-cols-[200px_1fr] gap-2 py-5">
+          <dt class="text-sm tracking-[0.1em] text-brand-700 font-bold">{k}</dt>
+          <dd class="text-sm text-ink-700 leading-relaxed">{v}</dd>
+        </div>
+      ))}
+    </dl>
+  </Section>
+</BaseLayout>

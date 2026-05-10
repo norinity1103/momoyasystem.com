@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:momoyasystem.com)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" https://momoyasystem.com/ -o /tmp/momoya_home.html)",
+      "Read(//tmp/**)",
+      "Bash(grep -E 'meta name=\"generator\"|<meta ' /tmp/momoya_home.html | head -10)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://storage.googleapis.com/studio-publish/projects/Nxqg2YMEO1/NWYoDErbql/\" -o /tmp/momoya_publish.html)",
+      "Bash(/usr/bin/curl -sL -A Mozilla/5.0 https://momoyasystem.com/__TRACKED_VAR__)",
+      "Bash(/usr/bin/grep -oE '<title>[^<]+|og:description\" content=\"[^\"]+|description\" content=\"[^\"]+')",
+      "Bash(npm -v)",
+      "Bash(npm create *)",
+      "Bash(mv shaky-star/* shaky-star/.[!.]* . 2>&1; rmdir shaky-star && ls -la)",
+      "Bash(npx astro *)",
+      "Bash(npm run *)",
+      "Bash(/usr/bin/curl -sI http://localhost:4321/)",
+      "Bash(/usr/bin/head -5)",
+      "Bash(/usr/bin/curl -s http://localhost:4321/)",
+      "Bash(/usr/bin/grep -oE '<title>[^<]+|<h1[^>]*>[^<]+')",
+      "Bash(/usr/bin/curl -sI http://localhost:4321/__TRACKED_VAR__)",
+      "Bash(brew list *)",
+      "Bash(pdftotext -layout \"/Users/kawanishi-nori/Downloads/HPリニューアル資料/大阪府知事建設業許可証\\(1\\).pdf\" /tmp/kyoka.txt)",
+      "WebFetch(domain:www.houjin-bangou.nta.go.jp)",
+      "WebSearch",
+      "WebFetch(domain:info.gbiz.go.jp)",
+      "WebFetch(domain:tsukulink.net)",
+      "WebFetch(domain:alarmbox.jp)",
+      "WebFetch(domain:baseconnect.in)",
+      "WebFetch(domain:houjin.jp)",
+      "Bash(npm install *)",
+      "Bash(/usr/bin/curl -sI http://localhost:4321/service)",
+      "Bash(/usr/bin/head -1)",
+      "Bash(/usr/bin/curl -sI http://localhost:4321/works)",
+      "Bash(/usr/bin/curl -sI http://localhost:4321/company)",
+      "Bash(/usr/bin/curl -sI http://localhost:4321/legal)",
+      "Bash(gh auth *)",
+      "Bash(brew --version)",
+      "Bash(git config *)"
+    ]
+  }
+}

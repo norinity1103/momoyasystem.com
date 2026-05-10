@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=BIZ+UDPGothic:wght@400;700&family=Montserrat:wght@400;600;700;900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50:  #eaf2fb;
+  --color-brand-100: #cfdff3;
+  --color-brand-300: #6c97cc;
+  --color-brand-500: #1e5a9f;
+  --color-brand-700: #154371;
+  --color-brand-900: #0c2545;
+
+  --color-ink-900: #0d1218;
+  --color-ink-700: #2a3340;
+  --color-ink-500: #5a6473;
+  --color-ink-300: #aeb6c1;
+  --color-ink-100: #e8ecf1;
+  --color-ink-50:  #f5f7fa;
+
+  --color-accent-500: #d97706;
+  --color-accent-600: #b45309;
+
+  --font-serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-sans:  "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-mono:  "BIZ UDPGothic", monospace;
+  --font-num:   "Montserrat", "Noto Sans JP", sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink-900);
+  background: #fff;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-serif); letter-spacing: 0.02em; }
+
+.num { font-family: var(--font-num); font-feature-settings: "tnum"; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity: 0; transform: translateY(12px); animation: reveal .9s .1s ease-out forwards; }
+  @keyframes reveal { to { opacity: 1; transform: none; } }
+}

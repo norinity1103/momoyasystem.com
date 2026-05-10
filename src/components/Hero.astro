@@ -1,0 +1,46 @@
+---
+import { site } from "../data/site";
+---
+<section class="relative isolate overflow-hidden bg-brand-900 text-white">
+  <!-- 動画は後日差し替え。仮：CSSグラデで東京夜景の雰囲気を擬似 -->
+  <div class="absolute inset-0 -z-10">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-900 via-brand-700 to-ink-900"></div>
+    <div class="absolute inset-0 opacity-30 mix-blend-screen"
+         style="background-image: radial-gradient(1200px 600px at 70% 30%, #6c97cc 0%, transparent 60%), radial-gradient(800px 400px at 20% 80%, #d97706 0%, transparent 60%);"></div>
+    <div class="absolute inset-0 opacity-40"
+         style="background-image: linear-gradient(transparent 0, rgba(255,255,255,.06) 1px, transparent 2px), linear-gradient(90deg, transparent 0, rgba(255,255,255,.05) 1px, transparent 2px); background-size: 36px 36px;"></div>
+  </div>
+
+  <div class="container-x py-28 md:py-40 reveal">
+    <p class="text-xs md:text-sm tracking-[0.3em] text-brand-300">MOMOYA SYSTEM ／ 20<span class="num">th</span> SEASON</p>
+    <h1 class="mt-6 font-serif font-black text-4xl md:text-6xl leading-tight">
+      電気工事の、<br class="md:hidden" />打ち合わせ屋。
+    </h1>
+    <p class="mt-6 text-base md:text-xl text-ink-100 max-w-2xl leading-relaxed">
+      現場の言葉で、プロジェクトを最適化する実務番頭。<br />
+      ゼネコン・設計・メーカーと、施工現場の<strong class="text-white">「あいだ」</strong>に立ち、<br class="hidden md:inline" />
+      図面・打ち合わせ・工程・コストを翻訳します。
+    </p>
+
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="/why" class="inline-flex items-center gap-2 px-7 py-4 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 transition">
+        なぜ「あいだ」が必要か <span aria-hidden="true">→</span>
+      </a>
+      <a href="/contact" class="inline-flex items-center gap-2 px-7 py-4 border border-white/40 text-white rounded-sm hover:bg-white/10 transition">
+        お問い合わせ
+      </a>
+    </div>
+
+    <dl class="mt-16 grid grid-cols-3 gap-6 max-w-2xl border-t border-white/15 pt-8">
+      {site.metrics.map((m) => (
+        <div>
+          <dt class="text-[10px] md:text-xs tracking-[0.2em] text-brand-300">{m.label}</dt>
+          <dd class="mt-1 flex items-baseline gap-1">
+            <span class="num text-3xl md:text-5xl font-black text-white">{m.num}</span>
+            <span class="text-sm md:text-base text-ink-100">{m.unit}</span>
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
