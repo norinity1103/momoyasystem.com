@@ -63,7 +63,15 @@
       "Bash(npx --yes lighthouse http://127.0.0.1:4322/ --quiet --chrome-flags=\"--headless --no-sandbox\" --output json --output-path /tmp/lh-home2.json --only-categories=performance,accessibility,best-practices,seo --form-factor=desktop --screenEmulation.disabled --throttling-method=provided)",
       "Bash(/usr/bin/curl -sI http://127.0.0.1:4322/__TRACKED_VAR__)",
       "Bash(git -c user.name=\"Noriaki Kawanishi\" -c user.email=\"noriaki.kawanishi@gmail.com\" add -A)",
-      "Bash(git -c 'user.name=Noriaki Kawanishi' -c user.email=noriaki.kawanishi@gmail.com commit -m 'feat: logo, video hero template, Cloudflare Pages prep, news CMS, presentation mode *)"
+      "Bash(git -c 'user.name=Noriaki Kawanishi' -c user.email=noriaki.kawanishi@gmail.com commit -m 'feat: logo, video hero template, Cloudflare Pages prep, news CMS, presentation mode *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(/usr/bin/curl -s \"https://api.github.com/repos/norinity1103/momoyasystem.com/actions/runs?per_page=3\")",
+      "Bash(/usr/bin/curl -s \"https://api.github.com/repos/norinity1103/momoyasystem.com/actions/runs/25629946941/jobs\")",
+      "Bash(/usr/bin/curl -sL \"https://api.github.com/repos/norinity1103/momoyasystem.com/actions/runs/25629946941/logs\" -o /tmp/run-logs.zip)",
+      "Bash(unzip -o /tmp/run-logs.zip -d /tmp/run-logs)",
+      "Bash(npm ci *)",
+      "Bash(git -c 'user.name=Noriaki Kawanishi' -c user.email=noriaki.kawanishi@gmail.com commit -m 'ci: bump Node to 22, harden OGP route against font-fetch failures *)"
     ]
   }
 }
