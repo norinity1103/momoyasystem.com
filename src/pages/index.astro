@@ -2,6 +2,13 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import Section from "../components/Section.astro";
+import { getCollection } from "astro:content";
+
+const latest = (await getCollection("news", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+const fmt = (d: Date) =>
+  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
 ---
 <BaseLayout
   title=""
@@ -54,6 +61,25 @@ import Section from "../components/Section.astro";
       介在価値の図解を見る <span aria-hidden="true">→</span>
     </a>
   </Section>
+
+  {latest.length > 0 && (
+    <Section tone="tint" eyebrow="NEWS" title="最新のお知らせ">
+      <ul class="divide-y divide-ink-100 border-y border-ink-100 max-w-3xl">
+        {latest.map((entry) => (
+          <li>
+            <a href={`/news/${entry.id}`} class="grid md:grid-cols-[100px_120px_1fr] gap-4 py-5 group items-baseline">
+              <time class="num text-sm text-ink-500" datetime={entry.data.date.toISOString()}>{fmt(entry.data.date)}</time>
+              <span class="text-[10px] tracking-[0.2em] text-brand-700 border border-brand-700 px-2 py-1 inline-block w-fit">{entry.data.category}</span>
+              <span class="text-base leading-snug font-bold group-hover:text-brand-500 transition">{entry.data.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a href="/news" class="mt-8 inline-flex items-center gap-2 text-brand-700 font-bold hover:text-brand-500 transition">
+        ニュース一覧へ <span aria-hidden="true">→</span>
+      </a>
+    </Section>
+  )}
 
   <Section
     eyebrow="CONTACT"

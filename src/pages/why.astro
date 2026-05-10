@@ -5,6 +5,37 @@ import Section from "../components/Section.astro";
 <BaseLayout
   title="なぜ「あいだ」が必要か"
   description="建設業法改正・2024年問題・外国人労働者の急増・上流の電気知識不足。業界構造の変化が、電気工事の翻訳者・調整役を必要としています。モモヤシステムが「あいだ」に立つ理由。"
+  breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "なぜ「あいだ」か", href: "/why" }]}
+  jsonLd={{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "なぜモモヤシステムは「あいだ」に立つのか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "上流（ゼネコン・設計・メーカー）の電気の知識不足と、レス遅延が現場の手戻り・原価膨張を生むため。20年の現場経験を持つ実務者が翻訳・調整役として介在することで、利益と工期と品質を守ります。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "ディレクション費の目安は？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "案件規模や範囲により異なりますが、1億円規模の案件で工事費の2〜5%（200万〜500万円）が目安です。介在によって守られる利益（5〜15%相当）と比べれば、十分に費用対効果が成立します。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "対応エリアは？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "東京・大阪二拠点に加え、全国50社+のパートナーネットワークにより、全国の案件に対応可能です。",
+        },
+      },
+    ],
+  }}
 >
   <section class="bg-brand-900 text-white py-24 md:py-32">
     <div class="container-x">

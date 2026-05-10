@@ -1,0 +1,60 @@
+---
+// Score X / 営業メール からの流入を計測するための UTM 捕捉と GA4 イベント送信。
+// 任意の <a> に data-track="cta:why" などを付ければクリックイベントを送る。
+---
+<script is:inline>
+(function () {
+  // 1) UTM パラメータを sessionStorage に保存（フォーム送信時に hidden で添付）
+  const url = new URL(location.href);
+  const utm = {};
+  ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach((k) => {
+    const v = url.searchParams.get(k);
+    if (v) utm[k] = v;
+  });
+  if (Object.keys(utm).length) {
+    sessionStorage.setItem("utm", JSON.stringify(utm));
+  }
+
+  // 2) お問い合わせフォーム送信時に utm を hidden で添付
+  document.addEventListener("submit", (e) => {
+    const form = e.target;
+    if (!(form instanceof HTMLFormElement)) return;
+    if (form.name !== "contact") return;
+    const stored = sessionStorage.getItem("utm");
+    if (!stored) return;
+    try {
+      const data = JSON.parse(stored);
+      Object.entries(data).forEach(([k, v]) => {
+        if (form.querySelector(`input[name="${k}"]`)) return;
+        const input = document.createElement("input");
+        input.type = "hidden"; input.name = k; input.value = String(v);
+        form.appendChild(input);
+      });
+    } catch (_) {}
+  });
+
+  // 3) GA4 カスタムイベント — data-track="cta:label" でクリック計測
+  function gaEvent(name, params) {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", name, params || {});
+    }
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target instanceof Element ? e.target.closest("[data-track]") : null;
+    if (!a) return;
+    const v = a.getAttribute("data-track") || "";
+    const [evt, label] = v.split(":");
+    gaEvent(evt || "cta_click", { label: label || "", href: a.getAttribute("href") || "" });
+  });
+
+  // 4) 商談用プレゼンモードでのページ閲覧を別イベントに
+  if (new URLSearchParams(location.search).get("present") === "1") {
+    gaEvent("present_view", { path: location.pathname });
+  }
+
+  // 5) /value ページ到達は重要KPI
+  if (location.pathname.startsWith("/value")) {
+    gaEvent("view_value_page", { path: location.pathname });
+  }
+})();
+</script>

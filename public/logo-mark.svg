@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="モモヤシステム ロゴマーク">
+  <defs>
+    <linearGradient id="markGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e5a9f"/>
+      <stop offset="100%" stop-color="#0c2545"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="6" fill="url(#markGrad)"/>
+  <!-- 左の上流ブロック -->
+  <rect x="10" y="22" width="12" height="8" fill="#cfdff3"/>
+  <!-- 中央のモモヤ（「あいだ」に立つ柱） -->
+  <rect x="28" y="12" width="8"  height="40" fill="#ffffff"/>
+  <!-- アクセント（介在ポイント） -->
+  <rect x="30" y="28" width="4"  height="8"  fill="#d97706"/>
+  <!-- 右の下流ブロック -->
+  <rect x="42" y="34" width="12" height="8" fill="#cfdff3"/>
+  <!-- 矢印（左→中央 上流から翻訳） -->
+  <path d="M 22 26 L 27 26 L 27 24 L 30 26 L 27 28 L 27 26 Z" fill="#cfdff3"/>
+  <!-- 矢印（中央→右 下流へ翻訳） -->
+  <path d="M 36 38 L 41 38 L 41 36 L 44 38 L 41 40 L 41 38 Z" fill="#cfdff3"/>
+</svg>

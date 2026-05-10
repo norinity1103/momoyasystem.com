@@ -2,14 +2,44 @@
 import { site } from "../data/site";
 ---
 <section class="relative isolate overflow-hidden bg-brand-900 text-white">
-  <!-- 動画は後日差し替え。仮：CSSグラデで東京夜景の雰囲気を擬似 -->
-  <div class="absolute inset-0 -z-10">
+  <!--
+    動画ヒーロー（指定動画 = 東京の街並み）の差し込みポイント。
+    public/hero.mp4（H.264, ~3MB以下推奨, ループ前提の3〜5秒尺）と
+    public/hero-poster.jpg（先出し用ポスター画像 1920×1080）を配置すれば
+    自動で <video> がアクティブになり、グラデ背景は隠れる。
+  -->
+  <video
+    id="hero-video"
+    class="absolute inset-0 -z-10 w-full h-full object-cover"
+    poster="/hero-poster.jpg"
+    autoplay muted loop playsinline preload="metadata"
+    aria-hidden="true"
+    hidden
+  >
+    <source src="/hero.mp4" type="video/mp4" />
+  </video>
+  <!-- 動画上のオーバーレイ（動画ありの場合は黒被せ）／なしの場合のグラデ装飾 -->
+  <div id="hero-bg" class="absolute inset-0 -z-10">
     <div class="absolute inset-0 bg-gradient-to-br from-brand-900 via-brand-700 to-ink-900"></div>
     <div class="absolute inset-0 opacity-30 mix-blend-screen"
          style="background-image: radial-gradient(1200px 600px at 70% 30%, #6c97cc 0%, transparent 60%), radial-gradient(800px 400px at 20% 80%, #d97706 0%, transparent 60%);"></div>
     <div class="absolute inset-0 opacity-40"
          style="background-image: linear-gradient(transparent 0, rgba(255,255,255,.06) 1px, transparent 2px), linear-gradient(90deg, transparent 0, rgba(255,255,255,.05) 1px, transparent 2px); background-size: 36px 36px;"></div>
   </div>
+  <div id="hero-overlay" class="absolute inset-0 -z-10 bg-black/55" hidden></div>
+
+  <script is:inline>
+    // public/hero.mp4 が存在する場合のみ動画を有効化（404をHEADで判定）
+    fetch("/hero.mp4", { method: "HEAD" }).then((r) => {
+      if (!r.ok) return;
+      const v = document.getElementById("hero-video");
+      const bg = document.getElementById("hero-bg");
+      const ov = document.getElementById("hero-overlay");
+      if (v) v.hidden = false;
+      if (bg) bg.hidden = true;
+      if (ov) ov.hidden = false;
+    }).catch(() => {});
+  </script>
 
   <div class="container-x py-28 md:py-40 reveal">
     <p class="text-xs md:text-sm tracking-[0.3em] text-brand-300">MOMOYA SYSTEM ／ 20<span class="num">th</span> SEASON</p>
@@ -23,10 +53,10 @@ import { site } from "../data/site";
     </p>
 
     <div class="mt-10 flex flex-wrap gap-4">
-      <a href="/why" class="inline-flex items-center gap-2 px-7 py-4 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 transition">
+      <a href="/why" data-track="cta_click:hero_why" class="inline-flex items-center gap-2 px-7 py-4 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 transition">
         なぜ「あいだ」が必要か <span aria-hidden="true">→</span>
       </a>
-      <a href="/contact" class="inline-flex items-center gap-2 px-7 py-4 border border-white/40 text-white rounded-sm hover:bg-white/10 transition">
+      <a href="/contact" data-track="cta_click:hero_contact" class="inline-flex items-center gap-2 px-7 py-4 border border-white/40 text-white rounded-sm hover:bg-white/10 transition">
         お問い合わせ
       </a>
     </div>

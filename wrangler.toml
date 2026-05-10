@@ -1,0 +1,10 @@
+# Cloudflare Pages 設定
+# `npm run build` で dist/ を出力し、それをデプロイする。
+# functions/ 配下は自動的に Pages Functions として認識される。
+
+name = "momoyasystem-com"
+compatibility_date = "2026-04-15"
+pages_build_output_dir = "dist"
+
+# 環境変数は本番側ではダッシュボードで設定する想定（このファイルにシークレットは置かない）。
+# ローカル開発時のみ .dev.vars ファイル（.gitignore 済み）を参照する。

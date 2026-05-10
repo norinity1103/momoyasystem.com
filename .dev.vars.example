@@ -1,0 +1,8 @@
+# ローカルで `wrangler pages dev` するときの環境変数サンプル。
+# このファイルをコピーして .dev.vars を作成し、実際の値を入れる。
+# .dev.vars 自体は .gitignore 済み。
+
+RESEND_API_KEY="re_xxxxxxxxxxxxxxxxx"
+CONTACT_TO="info@momoyasystem.com"
+CONTACT_FROM="noreply@momoyasystem.com"
+# TURNSTILE_SECRET="0x4AAAAAAAxxxxxxxxxxxxxx"

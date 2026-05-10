@@ -34,6 +34,9 @@ export const site = {
     representative: "百々 彰彦",
     established: "2007年12月",
     corporateNumber: "1120001127993",
+    // TODO: 大阪府知事許可証（PDF）から正式番号を転記
+    //   形式：大阪府知事許可（般-XX）第XXXXXX号（電気工事業／管工事業 ほか）
+    //   反映後にこの TODO コメントを削除してください。
     license: "大阪府知事許可（電気工事業ほか）",
     industrialWasteLicense: "産業廃棄物収集運搬業 許可第02700196866号（大阪府）",
   },

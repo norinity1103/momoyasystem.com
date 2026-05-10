@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Section from "../../components/Section.astro";
+---
+<BaseLayout
+  title="お問い合わせ送信完了"
+  description="お問い合わせを受け付けました。担当者より追ってご連絡いたします。"
+  noindex={true}
+  breadcrumbs={[
+    { name: "ホーム", href: "/" },
+    { name: "お問い合わせ", href: "/contact" },
+    { name: "送信完了", href: "/contact/thanks" },
+  ]}
+>
+  <Section eyebrow="THANK YOU" title="お問い合わせを受け付けました。">
+    <p class="max-w-2xl text-ink-700 leading-relaxed">
+      ご入力いただいた内容を確認のうえ、担当者より追ってご連絡いたします。<br />
+      営業日の場合は最短で当日中、その他お急ぎの場合は <a class="underline text-brand-700" href="tel:0643927136">06-4392-7136</a> までお電話ください。
+    </p>
+    <a href="/" class="mt-12 inline-flex items-center gap-2 text-brand-700 font-bold hover:text-brand-500 transition">
+      ← ホームに戻る
+    </a>
+  </Section>
+
+  <script is:inline>
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "generate_lead", { method: "contact_form" });
+    }
+  </script>
+</BaseLayout>

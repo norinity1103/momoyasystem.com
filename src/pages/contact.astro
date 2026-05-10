@@ -1,10 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../data/site";
+
+// 既定: Cloudflare Pages Functions の自前バックエンド (/api/contact)
+// 環境変数 PUBLIC_FORM_ENDPOINT で Formspree など外部サービスにも切替可能。
+const formEndpoint = import.meta.env.PUBLIC_FORM_ENDPOINT || "/api/contact";
 ---
 <BaseLayout
   title="お問い合わせ"
   description="モモヤシステムへのお問い合わせ。電気工事のディレクション・図面・打ち合わせ代行・パートナー選定など、案件の段階を問わずご相談を承ります。東京・大阪二拠点で全国対応。"
+  breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "お問い合わせ", href: "/contact" }]}
 >
   <section class="bg-brand-900 text-white py-24 md:py-32">
     <div class="container-x">
@@ -26,12 +31,12 @@ import { site } from "../data/site";
         <form
           name="contact"
           method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
+          action={formEndpoint}
           class="mt-8 space-y-6"
         >
-          <input type="hidden" name="form-name" value="contact" />
-          <p class="hidden"><label>Bot field <input name="bot-field" /></label></p>
+          <p class="hidden" aria-hidden="true"><label>Leave this field empty <input name="_gotcha" tabindex="-1" autocomplete="off" /></label></p>
+          <input type="hidden" name="_subject" value="モモヤシステム HP からのお問い合わせ" />
+          <input type="hidden" name="_format" value="plain" />
 
           <div>
             <label class="text-xs tracking-[0.2em] text-ink-500" for="company">会社名 <span class="text-accent-500">*</span></label>

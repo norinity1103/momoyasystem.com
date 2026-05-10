@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
+import { site } from "../data/site";
 
 const services = [
   {
@@ -52,6 +53,15 @@ const services = [
 <BaseLayout
   title="サービス"
   description="モモヤシステムの4つのサービス領域。ディレクション・業者選定・材料調達・メンテナンス。電気工事の上流と下流の「あいだ」を担う実務番頭。"
+  breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "サービス", href: "/service" }]}
+  jsonLd={services.map((s) => ({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: s.title,
+    description: s.lead,
+    provider: { "@type": "Organization", name: site.name, url: site.url },
+    areaServed: "JP",
+  }))}
 >
   <section class="bg-brand-900 text-white py-24 md:py-32">
     <div class="container-x">

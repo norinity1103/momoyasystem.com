@@ -1,0 +1,108 @@
+---
+// 商談用プレゼンモード
+// URL に ?present=1 を付けると、ヘッダー・フッターを隠し、各 <section> を1画面ずつ
+// 矢印キー・スペース・スワイプで送れる「資料モード」になる。
+// タブレットでの商談中、モモヤ社長が紙の会社案内代わりに使う想定。
+---
+<style is:global>
+  body.present-mode { overflow: hidden; }
+  body.present-mode header,
+  body.present-mode footer { display: none !important; }
+  body.present-mode main {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+  body.present-mode main > section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  body.present-mode .present-hint {
+    position: fixed; inset: auto 1rem 1rem auto; z-index: 50;
+    background: rgba(13,18,24,.8); color: #fff;
+    font-size: 11px; letter-spacing: .15em;
+    padding: .5rem .75rem; border-radius: 2px;
+    backdrop-filter: blur(8px);
+  }
+  body.present-mode .present-progress {
+    position: fixed; inset: 0 0 auto 0; z-index: 50; height: 3px;
+    background: rgba(255,255,255,.1);
+  }
+  body.present-mode .present-progress::after {
+    content: ""; display: block; height: 100%;
+    background: var(--color-brand-500, #1e5a9f);
+    width: var(--present-progress, 0%);
+    transition: width .3s ease;
+  }
+</style>
+
+<div class="present-progress" hidden></div>
+<div class="present-hint" hidden>
+  ← →  ／  space  ／  swipe
+</div>
+
+<script is:inline>
+(function () {
+  const params = new URLSearchParams(location.search);
+  if (params.get("present") !== "1") return;
+
+  const body = document.body;
+  body.classList.add("present-mode");
+
+  const main = document.querySelector("main");
+  const hint = document.querySelector(".present-hint");
+  const progress = document.querySelector(".present-progress");
+  if (!main) return;
+  hint && hint.removeAttribute("hidden");
+  progress && progress.removeAttribute("hidden");
+
+  const sections = Array.from(main.querySelectorAll(":scope > section"));
+  let idx = 0;
+
+  function go(n) {
+    idx = Math.max(0, Math.min(sections.length - 1, n));
+    sections[idx].scrollIntoView({ behavior: "smooth", block: "start" });
+    if (progress) {
+      const pct = sections.length > 1 ? (idx / (sections.length - 1)) * 100 : 100;
+      progress.style.setProperty("--present-progress", pct + "%");
+    }
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (["ArrowRight", "ArrowDown", " ", "PageDown"].includes(e.key)) {
+      e.preventDefault(); go(idx + 1);
+    } else if (["ArrowLeft", "ArrowUp", "PageUp"].includes(e.key)) {
+      e.preventDefault(); go(idx - 1);
+    } else if (e.key === "Home") { e.preventDefault(); go(0);
+    } else if (e.key === "End")  { e.preventDefault(); go(sections.length - 1);
+    } else if (e.key === "Escape") {
+      const u = new URL(location.href); u.searchParams.delete("present"); location.href = u.toString();
+    }
+  });
+
+  // current section by scroll (manual scroll / swipe)
+  let raf = 0;
+  main.addEventListener("scroll", () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const top = main.scrollTop;
+      let cur = 0;
+      sections.forEach((s, i) => { if (s.offsetTop <= top + 50) cur = i; });
+      idx = cur;
+      if (progress) {
+        const pct = sections.length > 1 ? (idx / (sections.length - 1)) * 100 : 100;
+        progress.style.setProperty("--present-progress", pct + "%");
+      }
+    });
+  });
+
+  go(0);
+})();
+</script>
