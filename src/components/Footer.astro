@@ -1,35 +1,87 @@
 ---
 import { site } from "../data/site";
 const year = new Date().getFullYear();
+
+const serviceLinks = [
+  { href: "/why",     label: "なぜ「あいだ」か" },
+  { href: "/service", label: "サービス" },
+  { href: "/value",   label: "介在価値" },
+  { href: "/works",   label: "実績" },
+];
+const companyLinks = [
+  { href: "/company", label: "会社概要" },
+  { href: "/news",    label: "ニュース" },
+  { href: "/legal",   label: "特定商取引法に基づく表記" },
+];
+const partnerLinks = [
+  { href: "/partners",       label: "協力会社募集" },
+  { href: "/partners#form",  label: "エントリーフォーム" },
+];
+const contactLinks = [
+  { href: "/contact",         label: "お問い合わせフォーム" },
+  { href: "tel:0643927136",   label: "06-4392-7136" },
+  { href: `mailto:${site.contact.email}`, label: site.contact.email },
+];
 ---
 <footer class="mt-32 bg-brand-900 text-ink-100">
-  <div class="container-x py-16 grid md:grid-cols-3 gap-10">
-    <div>
-      <div class="flex items-center gap-3">
-        <img src="/logo-mark.svg" alt="" width="40" height="40" class="block opacity-90" />
-        <p class="font-serif text-xl font-bold">{site.name}</p>
+  <div class="container-x py-20">
+    <!-- ロゴと社名 -->
+    <div class="grid grid-cols-12 gap-x-6 gap-y-10 pb-12 border-b-2 border-white/15">
+      <div class="col-span-12 md:col-span-5">
+        <div class="flex items-center gap-3">
+          <img src="/logo-mark.svg" alt="" width="44" height="44" class="block opacity-95" />
+          <p class="font-serif text-xl font-black tracking-tight">{site.name}</p>
+        </div>
+        <p class="mt-5 text-sm leading-relaxed text-ink-300 max-w-md">{site.subTagline}</p>
+        <dl class="mt-6 space-y-2 text-xs text-ink-300">
+          <div class="flex gap-3"><dt class="w-20 text-brand-300">大阪本社</dt><dd>{site.contact.address.hq}</dd></div>
+          <div class="flex gap-3"><dt class="w-20 text-brand-300">東京営業所</dt><dd>{site.contact.address.tokyo}</dd></div>
+        </dl>
       </div>
-      <p class="mt-4 text-sm leading-relaxed text-ink-300">{site.subTagline}</p>
-      <p class="mt-6 text-xs text-ink-300">{site.legal.license}</p>
+
+      <div class="col-span-6 md:col-span-2">
+        <p class="swiss-eyebrow text-brand-300">Service</p>
+        <ul class="mt-5 space-y-3 text-sm">
+          {serviceLinks.map((l) => <li><a href={l.href} class="hover:text-warm-300 transition">{l.label}</a></li>)}
+        </ul>
+      </div>
+      <div class="col-span-6 md:col-span-2">
+        <p class="swiss-eyebrow text-brand-300">Company</p>
+        <ul class="mt-5 space-y-3 text-sm">
+          {companyLinks.map((l) => <li><a href={l.href} class="hover:text-warm-300 transition">{l.label}</a></li>)}
+        </ul>
+      </div>
+      <div class="col-span-12 md:col-span-3">
+        <p class="swiss-eyebrow text-warm-300">Partners / Contact</p>
+        <ul class="mt-5 space-y-3 text-sm">
+          {partnerLinks.map((l) => <li><a href={l.href} class="hover:text-warm-300 transition">{l.label}</a></li>)}
+        </ul>
+        <ul class="mt-6 space-y-3 text-sm border-t border-white/10 pt-5">
+          {contactLinks.map((l) => <li><a href={l.href} class="hover:text-warm-300 transition num">{l.label}</a></li>)}
+        </ul>
+      </div>
     </div>
-    <div>
-      <p class="text-xs tracking-[0.2em] text-brand-300">OFFICE</p>
-      <dl class="mt-3 space-y-3 text-sm">
-        <div><dt class="text-ink-300 text-xs">大阪本社</dt><dd>{site.contact.address.hq}</dd></div>
-        <div><dt class="text-ink-300 text-xs">東京営業所</dt><dd>{site.contact.address.tokyo}</dd></div>
-        <div><dt class="text-ink-300 text-xs">TEL / E-MAIL</dt><dd class="num">{site.contact.phone} / <a class="underline" href={`mailto:${site.contact.email}`}>{site.contact.email}</a></dd></div>
-      </dl>
-    </div>
-    <div>
-      <p class="text-xs tracking-[0.2em] text-brand-300">SITEMAP</p>
-      <ul class="mt-3 space-y-2 text-sm">
-        {site.nav.map((n) => <li><a href={n.href} class="hover:text-brand-300 transition">{n.label}</a></li>)}
-        <li><a href="/news" class="hover:text-brand-300 transition">ニュース</a></li>
-        <li><a href="/legal" class="hover:text-brand-300 transition">特定商取引法に基づく表記</a></li>
-      </ul>
-    </div>
+
+    <!-- 法的情報 -->
+    <dl class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-ink-300">
+      <div>
+        <dt class="text-brand-300 mb-1">設立</dt>
+        <dd class="num">{site.legal.established}</dd>
+      </div>
+      <div>
+        <dt class="text-brand-300 mb-1">法人番号</dt>
+        <dd class="num">{site.legal.corporateNumber}</dd>
+      </div>
+      <div>
+        <dt class="text-brand-300 mb-1">建設業許可</dt>
+        <dd>{site.legal.license}</dd>
+      </div>
+    </dl>
   </div>
-  <div class="border-t border-brand-700">
-    <div class="container-x py-5 text-xs text-ink-300 num">© {year} {site.name}. All rights reserved.</div>
+  <div class="border-t border-white/10">
+    <div class="container-x py-5 text-xs text-ink-300 num flex flex-wrap justify-between gap-3">
+      <span>© {year} {site.name}.</span>
+      <span class="text-ink-500">Built with care — Swiss System × Warm Modern</span>
+    </div>
   </div>
 </footer>

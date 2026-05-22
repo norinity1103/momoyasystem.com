@@ -2,11 +2,7 @@
 import { site } from "../data/site";
 ---
 <section class="relative isolate overflow-hidden bg-brand-900 text-white">
-  <!--
-    動画ヒーロー（指定動画 = 東京の街並み）の差し込みポイント。
-    public/hero.mp4 を配置すると自動で <video> がアクティブになる。
-    現在は仮の静止画（既存サイトの足場写真）を使用。
-  -->
+  <!-- 動画 or 静止画背景（既存サイト写真を仮素材として流用） -->
   <video
     id="hero-video"
     class="absolute inset-0 -z-10 w-full h-full object-cover"
@@ -18,7 +14,6 @@ import { site } from "../data/site";
     <source src="/hero.mp4" type="video/mp4" />
   </video>
 
-  <!-- 静止画ヒーロー（仮）：足場写真 + ブランドカラーグラデーションの多層オーバーレイ -->
   <div id="hero-bg" class="absolute inset-0 -z-10">
     <img
       src="/img/scaffold-1920.jpg"
@@ -29,15 +24,71 @@ import { site } from "../data/site";
       fetchpriority="high"
       decoding="async"
     />
-    <div class="absolute inset-0 bg-gradient-to-br from-brand-900/95 via-brand-900/85 to-ink-900/95"></div>
-    <div class="absolute inset-0 mix-blend-overlay opacity-30"
-         style="background-image: radial-gradient(900px 450px at 75% 25%, #6c97cc 0%, transparent 65%), radial-gradient(700px 350px at 15% 85%, #d97706 0%, transparent 70%);"></div>
-    <div class="absolute inset-0 opacity-15"
-         style="background-image: linear-gradient(transparent 0, rgba(255,255,255,.10) 1px, transparent 2px), linear-gradient(90deg, transparent 0, rgba(255,255,255,.08) 1px, transparent 2px); background-size: 48px 48px;"></div>
-    <!-- 下端を暗くして次セクションとの境界を作る -->
-    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-brand-900"></div>
+    <!-- Swiss: ほぼ単色のフラットレイヤー（情報の読みやすさ最優先） -->
+    <div class="absolute inset-0 bg-brand-900/92"></div>
+    <!-- Warm: 右下にテラコッタの差し色を一点だけ -->
+    <div class="absolute inset-0 mix-blend-overlay opacity-50"
+         style="background-image: radial-gradient(700px 350px at 85% 90%, var(--color-warm-500) 0%, transparent 70%);"></div>
+    <!-- Swiss: 露出するグリッド線（控えめ） -->
+    <div class="absolute inset-0 opacity-[0.07]"
+         style="background-image: linear-gradient(transparent 0, rgba(255,255,255,.18) 1px, transparent 2px), linear-gradient(90deg, transparent 0, rgba(255,255,255,.15) 1px, transparent 2px); background-size: 64px 64px;"></div>
   </div>
   <div id="hero-overlay" class="absolute inset-0 -z-10 bg-black/55" hidden></div>
+
+  <div class="container-x relative pt-16 md:pt-20 pb-12 md:pb-16">
+    <!-- Top ルール：日付と版数（Swiss/swissmiss スタイル） -->
+    <div class="grid grid-cols-12 gap-6 items-end border-b border-white/15 pb-5 text-[10px] md:text-xs tracking-[0.25em] text-brand-300 font-bold uppercase">
+      <div class="col-span-6 md:col-span-3 num">2026 / Vol. 20</div>
+      <div class="hidden md:block md:col-span-3">Momoya System</div>
+      <div class="col-span-6 md:col-span-3 text-right md:text-left">大阪 ＋ 東京</div>
+      <div class="hidden md:block md:col-span-3 text-right num">No. 001 — Direction Co.</div>
+    </div>
+
+    <!-- メインタイトル：12-col Swiss layout -->
+    <div class="grid grid-cols-12 gap-x-6 mt-12 md:mt-20">
+      <h1 class="col-span-12 md:col-span-10 font-serif font-black text-[2.75rem] sm:text-6xl md:text-[6.5rem] lg:text-[8rem] leading-[0.95] tracking-[-0.03em]">
+        電気工事の、<br />
+        <span class="inline-flex items-baseline gap-2 md:gap-4">
+          打ち合わせ屋<span class="text-warm-500">.</span>
+        </span>
+      </h1>
+    </div>
+
+    <!-- セカンダリ：説明 + 数値スペック -->
+    <div class="grid grid-cols-12 gap-x-6 gap-y-12 mt-12 md:mt-20 items-start">
+      <p class="col-span-12 md:col-span-6 lg:col-span-5 text-base md:text-lg text-ink-100 leading-[1.85]">
+        現場の言葉で、プロジェクトを最適化する実務番頭。<br />
+        ゼネコン・設計・メーカーと、施工現場の<strong class="text-white border-b border-warm-500 pb-0.5">「あいだ」</strong>に立ち、
+        図面・打ち合わせ・工程・コストを翻訳します。
+      </p>
+
+      <!-- Swiss スペックリスト：見出しを左、データを右にflushする -->
+      <dl class="col-span-12 md:col-span-6 lg:col-start-7 lg:col-span-6 divide-y divide-white/15 border-t-2 border-white/40">
+        {site.metrics.map((m, i) => (
+          <div class="flex items-baseline gap-4 py-4">
+            <span class="num text-[10px] tracking-[0.25em] text-brand-300 font-bold w-8">{String(i + 1).padStart(2, "0")}</span>
+            <span class="text-xs md:text-sm tracking-[0.15em] text-brand-300 uppercase flex-1">{m.label}</span>
+            <span class="num-display text-3xl md:text-5xl text-white">{m.num}<span class="text-base md:text-lg text-brand-300 ml-1">{m.unit}</span></span>
+          </div>
+        ))}
+      </dl>
+    </div>
+
+    <!-- CTA：Swiss flush-left + Warm primary -->
+    <div class="mt-14 md:mt-20 grid grid-cols-12 gap-x-6 gap-y-4">
+      <div class="col-span-12 md:col-span-8 flex flex-wrap gap-4">
+        <a href="/why" data-track="cta_click:hero_why" class="btn-warm">
+          なぜ「あいだ」が必要か <span aria-hidden="true">→</span>
+        </a>
+        <a href="/contact" data-track="cta_click:hero_contact" class="btn-ghost text-white">
+          見積・相談する
+        </a>
+      </div>
+      <div class="col-span-12 md:col-span-4 flex md:justify-end items-center text-xs text-brand-300 tracking-[0.15em]">
+        <span class="border-l border-white/30 pl-4">電話 <span class="num text-white text-sm">06-4392-7136</span></span>
+      </div>
+    </div>
+  </div>
 
   <script is:inline>
     fetch("/hero.mp4", { method: "HEAD" }).then((r) => {
@@ -50,46 +101,4 @@ import { site } from "../data/site";
       if (ov) ov.hidden = false;
     }).catch(() => {});
   </script>
-
-  <!-- 装飾用：左端の縦バー（ブランドカラーアクセント） -->
-  <div class="absolute left-0 top-1/4 bottom-1/4 w-[2px] bg-gradient-to-b from-transparent via-accent-500/60 to-transparent" aria-hidden="true"></div>
-
-  <div class="container-x py-28 md:py-40 reveal relative">
-    <div class="flex items-center gap-3">
-      <span class="block w-10 h-[1px] bg-brand-300"></span>
-      <p class="text-xs md:text-sm tracking-[0.3em] text-brand-300">MOMOYA SYSTEM ／ 20<span class="num">th</span> SEASON</p>
-    </div>
-    <h1 class="mt-8 font-serif font-black text-[2.5rem] sm:text-5xl md:text-7xl leading-[1.1] tracking-tight">
-      電気工事の、<br class="md:hidden" /><span class="relative inline-block">
-        打ち合わせ屋<span class="text-accent-500">。</span>
-        <span class="absolute -bottom-2 left-0 right-0 h-[3px] bg-accent-500/80 hidden md:block"></span>
-      </span>
-    </h1>
-    <p class="mt-8 text-base md:text-xl text-ink-100 max-w-2xl leading-relaxed">
-      現場の言葉で、プロジェクトを最適化する実務番頭。<br />
-      ゼネコン・設計・メーカーと、施工現場の<strong class="text-white border-b border-accent-500/60 pb-0.5">「あいだ」</strong>に立ち、<br class="hidden md:inline" />
-      図面・打ち合わせ・工程・コストを翻訳します。
-    </p>
-
-    <div class="mt-10 flex flex-wrap gap-4">
-      <a href="/why" data-track="cta_click:hero_why" class="inline-flex items-center gap-2 px-7 py-4 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 transition">
-        なぜ「あいだ」が必要か <span aria-hidden="true">→</span>
-      </a>
-      <a href="/contact" data-track="cta_click:hero_contact" class="inline-flex items-center gap-2 px-7 py-4 border border-white/40 text-white rounded-sm hover:bg-white/10 transition">
-        お問い合わせ
-      </a>
-    </div>
-
-    <dl class="mt-16 grid grid-cols-3 gap-6 max-w-2xl border-t border-white/15 pt-8">
-      {site.metrics.map((m) => (
-        <div>
-          <dt class="text-[10px] md:text-xs tracking-[0.2em] text-brand-300">{m.label}</dt>
-          <dd class="mt-1 flex items-baseline gap-1">
-            <span class="num text-3xl md:text-5xl font-black text-white">{m.num}</span>
-            <span class="text-sm md:text-base text-ink-100">{m.unit}</span>
-          </dd>
-        </div>
-      ))}
-    </dl>
-  </div>
 </section>

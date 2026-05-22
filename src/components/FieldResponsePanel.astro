@@ -1,0 +1,80 @@
+---
+/**
+ * 現場対応力パネル：設備工事会社としての信頼を、Swiss グリッドで定量提示する。
+ * - 受付〜着手の標準リードタイム
+ * - 24h以内一次連絡
+ * - 全国パートナー数
+ * - 1級電気施工管理技士保有
+ * - 各種保険完備
+ */
+const responseSteps = [
+  { step: "01", label: "受付・一次連絡", duration: "24h以内", note: "営業日中は最短で当日中" },
+  { step: "02", label: "現地調査・要件確認", duration: "1〜3日", note: "上流の意図と現場の制約を翻訳" },
+  { step: "03", label: "見積・パートナー選定", duration: "3〜7日", note: "50社+から最適チーム編成" },
+  { step: "04", label: "着工・運用", duration: "随時", note: "打ち合わせ・図面・工程を一括管理" },
+];
+
+const trustItems = [
+  { k: "建設業許可",   v: "大阪府知事許可（電気工事業ほか）" },
+  { k: "資格保有",     v: "1級電気施工管理技士／2級建築士" },
+  { k: "パートナー",   v: "全国 50 社以上の協力会社網" },
+  { k: "保険完備",     v: "請負業者賠償／生産物賠償（PL）／労災総合" },
+  { k: "対応エリア",   v: "全国（大阪本社・東京営業所の二拠点体制）" },
+  { k: "営業時間",     v: "平日 9:00–18:00（緊急時は時間外応相談）" },
+];
+---
+<section class="bg-warm-50 py-24 md:py-32" id="field-response">
+  <div class="container-x">
+    <!-- 番号付きルール（Swiss） -->
+    <div class="numbered-rule">
+      <span class="num-mark">N°02</span>
+      <span class="num-mark text-warm-700">／ 現場対応力</span>
+    </div>
+
+    <div class="grid grid-cols-12 gap-x-6 gap-y-12 mt-12">
+      <h2 class="col-span-12 md:col-span-7 font-serif font-black text-3xl md:text-5xl leading-[1.1] tracking-[-0.02em]">
+        受けてから動き出すまで、<br class="hidden md:inline" />標準で<span class="text-warm-500">3日</span>。<br class="hidden md:inline" />
+        必要なら、<span class="text-warm-500">当日</span>。
+      </h2>
+      <p class="col-span-12 md:col-span-5 text-ink-700 leading-[1.9] md:pt-6">
+        20年の現場ノウハウは、即応スピードに表れます。<br />
+        営業日中の一次連絡は24時間以内。現地調査・見積・パートナー手配を、
+        最短で<strong class="text-ink-900">1週間以内</strong>に着工可能な状態まで進めます。
+      </p>
+    </div>
+
+    <!-- 4ステップタイムライン（Swiss グリッド） -->
+    <div class="mt-20 grid grid-cols-1 md:grid-cols-4 gap-0 border-t-2 border-ink-900 border-b border-ink-100 observe-stagger">
+      {responseSteps.map((s, i) => (
+        <div class:list={["relative p-6 md:p-7", i !== 0 && "md:border-l border-ink-100"]}>
+          <div class="flex items-baseline gap-3">
+            <span class="num text-[10px] tracking-[0.25em] text-warm-600 font-bold">STEP {s.step}</span>
+          </div>
+          <p class="mt-4 font-serif text-lg md:text-xl font-bold text-ink-900 leading-snug">{s.label}</p>
+          <p class="mt-3 num-display text-2xl md:text-3xl text-warm-700">{s.duration}</p>
+          <p class="mt-2 text-xs text-ink-500 leading-relaxed">{s.note}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- 信頼スペックシート -->
+    <div class="mt-20 grid grid-cols-12 gap-x-6 gap-y-6">
+      <div class="col-span-12 md:col-span-4">
+        <p class="swiss-eyebrow text-warm-700">TRUST SHEET</p>
+        <h3 class="mt-4 font-serif text-2xl md:text-3xl font-bold leading-tight">許可・資格・体制。</h3>
+        <p class="mt-4 text-sm text-ink-700 leading-relaxed">
+          設備工事会社としての基礎は、20年の積み重ねの中で揃えてきました。
+          数字とラベルで、淡々と。
+        </p>
+      </div>
+      <dl class="col-span-12 md:col-span-8 border-t-2 border-ink-900">
+        {trustItems.map((row) => (
+          <div class="spec-row">
+            <dt>{row.k}</dt>
+            <dd>{row.v}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>

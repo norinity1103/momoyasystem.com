@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
-import Section from "../components/Section.astro";
+import FieldResponsePanel from "../components/FieldResponsePanel.astro";
 import { getCollection } from "astro:content";
 
 const latest = (await getCollection("news", ({ data }) => !data.draft))
@@ -12,88 +12,167 @@ const fmt = (d: Date) =>
 ---
 <BaseLayout
   title=""
-  description="20年の電気工事の現場経験を武器に、ゼネコン・設計・メーカーと施工現場の「あいだ」に立ち、図面・打ち合わせ・工程・コストを翻訳する電気工事ディレクション会社。大阪・東京の二拠点で全国対応。"
+  description="設備工事の現場で20年。電気工事のディレクション・打ち合わせ代行・パートナー網・材料調達まで一括対応。大阪・東京の二拠点で全国対応する電気工事の実務番頭。"
 >
   <Hero />
 
-  <Section
-    eyebrow="POSITIONING"
-    title="施工会社ではなく、現場を熟知した「実務番頭」。"
-    lead="モモヤシステムは20期目（2026年4月〜）に経営方針を転換しました。これまで20年磨いてきた電気工事の現場ノウハウを、自社で職人を抱えるリスクを切り離した「管理・調整・ディレクション」というかたちで提供します。"
-    grid={true}
-  >
-    <div class="grid md:grid-cols-3 gap-5 observe-stagger">
-      {[
-        { n: "01", t: "打ち合わせ代行", d: "電気の専門知識が薄い元請担当者の代わりに、施工現場との打ち合わせを巻き取り、レスを速く、図面を一発で決めます。" },
-        { n: "02", t: "業者選定・パートナー網", d: "全国50社+の電気工事パートナーから、案件の規模・地域・仕様に合わせて最適な施工会社を選定。元請の業者選定工数をゼロにします。" },
-        { n: "03", t: "材料調達・コスト最適化", d: "電気工事の原価の半分を占める材料を、メーカー直取引のスケールメリットで一括調達。工事費とは別の利益源を作ります。" },
-      ].map((c) => (
-        <article class="group relative p-7 bg-white border border-ink-100 hover:border-brand-500 hover:-translate-y-1 hover:shadow-[0_12px_30px_-12px_rgba(30,90,159,.25)] transition-all duration-300 overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-brand-500 via-accent-500 to-brand-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-          <p class="num text-xs text-brand-500 font-bold tracking-[0.2em]">{c.n}</p>
-          <h3 class="mt-3 font-serif text-xl font-bold leading-snug">{c.t}</h3>
-          <p class="mt-3 text-sm text-ink-700 leading-relaxed">{c.d}</p>
-          <span class="mt-5 inline-flex items-center gap-2 text-xs text-brand-700 group-hover:text-brand-500 group-hover:translate-x-1 transition">
-            詳しく見る <span aria-hidden="true">→</span>
-          </span>
-        </article>
-      ))}
-    </div>
-  </Section>
+  <!-- N°01 — POSITIONING（Swiss ナンバリング + 3軸サービス） -->
+  <section class="bg-white py-24 md:py-32">
+    <div class="container-x">
+      <div class="numbered-rule">
+        <span class="num-mark">N°01</span>
+        <span class="num-mark text-brand-700">／ ポジショニング</span>
+      </div>
+      <div class="grid grid-cols-12 gap-x-6 gap-y-10 mt-12">
+        <h2 class="col-span-12 md:col-span-7 font-serif font-black text-3xl md:text-5xl leading-[1.1] tracking-[-0.02em]">
+          施工会社ではなく、<br class="hidden md:inline" />
+          現場を熟知した「実務番頭」。
+        </h2>
+        <p class="col-span-12 md:col-span-5 text-ink-700 leading-[1.9] md:pt-2">
+          モモヤシステムは20期目（2026年4月〜）に経営方針を転換しました。
+          これまで20年磨いてきた電気工事の現場ノウハウを、自社で職人を抱えるリスクを切り離した
+          <strong>「管理・調整・ディレクション」</strong>というかたちで提供します。
+        </p>
+      </div>
 
-  <Section
-    tone="tint"
-    eyebrow="WHY"
-    title="なぜ、いま「あいだ」に立つ会社が必要なのか。"
-    lead="建設業法改正（2025年12月完全施行）、2024年問題、外国人労働者の急増、上流の電気知識不足。業界構造の変化が、翻訳者・調整役のポジションを必要としています。"
-  >
-    <a href="/why" class="inline-flex items-center gap-2 text-brand-700 font-bold hover:text-brand-500 transition">
-      業界課題と私たちの役割を読む <span aria-hidden="true">→</span>
-    </a>
-  </Section>
-
-  <Section
-    tone="dark"
-    eyebrow="VALUE"
-    title="数字で見る、介在価値。"
-    lead="商談で1時間説明している内容を、3分で。"
-  >
-    <div class="grid md:grid-cols-3 gap-6 mt-4 mb-12 observe-stagger">
-      {[
-        { num: "5–15", unit: "%", label: "管理不在で失われる利益" },
-        { num: "2–5",  unit: "%", label: "モモヤ介在のディレクション費" },
-        { num: "3–10", unit: "%", label: "守られる純利益（差分）" },
-      ].map((m) => (
-        <div class="p-6 border border-white/15 bg-white/5 backdrop-blur-sm">
-          <p class="text-[10px] tracking-[0.2em] text-brand-300">{m.label}</p>
-          <p class="mt-3 num text-4xl md:text-5xl font-black">{m.num}<span class="text-xl ml-1 text-brand-300">{m.unit}</span></p>
-        </div>
-      ))}
-    </div>
-    <a href="/value" data-track="cta_click:home_value" class="inline-flex items-center gap-2 px-7 py-4 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 transition">
-      介在価値の図解を見る <span aria-hidden="true">→</span>
-    </a>
-  </Section>
-
-  {latest.length > 0 && (
-    <Section tone="tint" eyebrow="NEWS" title="最新のお知らせ">
-      <ul class="divide-y divide-ink-100 border-y border-ink-100 max-w-3xl">
-        {latest.map((entry) => (
-          <li>
-            <a href={`/news/${entry.id}`} class="grid md:grid-cols-[100px_120px_1fr] gap-4 py-5 group items-baseline">
-              <time class="num text-sm text-ink-500" datetime={entry.data.date.toISOString()}>{fmt(entry.data.date)}</time>
-              <span class="text-[10px] tracking-[0.2em] text-brand-700 border border-brand-700 px-2 py-1 inline-block w-fit">{entry.data.category}</span>
-              <span class="text-base leading-snug font-bold group-hover:text-brand-500 transition">{entry.data.title}</span>
-            </a>
-          </li>
+      <div class="mt-16 grid md:grid-cols-3 gap-0 border-t-2 border-ink-900 observe-stagger">
+        {[
+          { n: "01", t: "打ち合わせ代行", d: "電気の専門知識が薄い元請担当者の代わりに、施工現場との打ち合わせを巻き取り、レスを速く、図面を一発で決めます。" },
+          { n: "02", t: "業者選定・パートナー網", d: "全国50社+の電気工事パートナーから、案件の規模・地域・仕様に合わせて最適な施工会社を選定。元請の業者選定工数をゼロにします。" },
+          { n: "03", t: "材料調達・コスト最適化", d: "電気工事の原価の半分を占める材料を、メーカー直取引のスケールメリットで一括調達。工事費とは別の利益源を作ります。" },
+        ].map((c, i) => (
+          <article class:list={["group relative p-7 md:p-8 bg-white hover:bg-warm-50 transition-colors duration-300 border-b border-ink-100", i !== 0 && "md:border-l border-ink-100"]}>
+            <div class="flex items-baseline justify-between">
+              <span class="num text-xs tracking-[0.25em] text-warm-600 font-bold">N°{c.n}</span>
+              <span class="text-xs text-ink-500 group-hover:translate-x-1 transition">→</span>
+            </div>
+            <h3 class="mt-6 font-serif text-xl md:text-2xl font-bold leading-snug text-ink-900">{c.t}</h3>
+            <p class="mt-4 text-sm text-ink-700 leading-relaxed">{c.d}</p>
+          </article>
         ))}
-      </ul>
-      <a href="/news" class="mt-8 inline-flex items-center gap-2 text-brand-700 font-bold hover:text-brand-500 transition">
-        ニュース一覧へ <span aria-hidden="true">→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- N°02 — 現場対応力 -->
+  <FieldResponsePanel />
+
+  <!-- N°03 — WHY（業界背景の入り口） -->
+  <section class="bg-ink-50 py-24 md:py-32">
+    <div class="container-x">
+      <div class="numbered-rule">
+        <span class="num-mark">N°03</span>
+        <span class="num-mark text-brand-700">／ なぜ「あいだ」か</span>
+      </div>
+      <div class="grid grid-cols-12 gap-x-6 gap-y-10 mt-12">
+        <h2 class="col-span-12 md:col-span-7 font-serif font-black text-3xl md:text-5xl leading-[1.1] tracking-[-0.02em]">
+          業界構造の変化が、<br class="hidden md:inline" />
+          翻訳者を必要としている。
+        </h2>
+        <p class="col-span-12 md:col-span-5 text-ink-700 leading-[1.9] md:pt-2">
+          建設業法改正（2025年12月完全施行）、2024年問題、外国人労働者の急増、上流の電気知識不足。
+          翻訳者・調整役のポジションは、ここから10年で間違いなく強い需要を持ちます。
+        </p>
+      </div>
+      <a href="/why" class="mt-12 inline-flex items-center gap-2 text-warm-700 font-bold border-b-2 border-warm-500 pb-1 hover:text-warm-500 transition">
+        業界課題と私たちの役割を読む <span aria-hidden="true">→</span>
       </a>
-    </Section>
+    </div>
+  </section>
+
+  <!-- N°04 — VALUE -->
+  <section class="bg-brand-900 text-white py-24 md:py-32">
+    <div class="container-x">
+      <div class="numbered-rule border-white">
+        <span class="num-mark text-brand-300">N°04</span>
+        <span class="num-mark text-brand-300">／ 介在価値</span>
+      </div>
+      <div class="grid grid-cols-12 gap-x-6 gap-y-10 mt-12">
+        <h2 class="col-span-12 md:col-span-7 font-serif font-black text-3xl md:text-5xl leading-[1.1] tracking-[-0.02em]">
+          数字で見る、<br class="hidden md:inline" />介在価値。
+        </h2>
+        <p class="col-span-12 md:col-span-5 text-ink-100 leading-[1.9] md:pt-2">
+          商談で1時間説明している内容を、3分で。<br />
+          1億円規模の電気工事案件モデルで、損失と介在費用を比較しています。
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-0 mt-16 border-t-2 border-white observe-stagger">
+        {[
+          { num: "5–15", unit: "%", label: "管理不在で失われる利益", note: "▲ 500–1,500万円／億" },
+          { num: "2–5",  unit: "%", label: "モモヤ介在のディレクション費", note: "+ 200–500万円／億" },
+          { num: "3–10", unit: "%", label: "守られる純利益（差分）", note: "= 300–1,000万円／億" },
+        ].map((m, i) => (
+          <div class:list={["p-6 md:p-8 border-b border-white/20", i !== 0 && "md:border-l border-white/20"]}>
+            <p class="text-[10px] tracking-[0.25em] text-brand-300 font-bold uppercase">{m.label}</p>
+            <p class="mt-5 num-display text-5xl md:text-6xl">{m.num}<span class="text-xl ml-1 text-brand-300">{m.unit}</span></p>
+            <p class="mt-3 text-xs text-ink-100 num">{m.note}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-14 flex flex-wrap gap-4">
+        <a href="/value" data-track="cta_click:home_value" class="btn-warm">
+          介在価値の図解を見る <span aria-hidden="true">→</span>
+        </a>
+        <a href="/works" class="btn-ghost text-white">施工実績を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- N°05 — 協力会社募集（warm-modern） -->
+  <section class="bg-warm-grid py-24 md:py-32">
+    <div class="container-x">
+      <div class="numbered-rule" style="border-color: var(--color-warm-700);">
+        <span class="num-mark text-warm-700">N°05</span>
+        <span class="num-mark text-warm-700">／ 協力会社募集</span>
+      </div>
+      <div class="grid grid-cols-12 gap-x-6 gap-y-10 mt-12 items-end">
+        <h2 class="col-span-12 md:col-span-7 font-serif font-black text-3xl md:text-5xl leading-[1.1] tracking-[-0.02em] text-warm-900">
+          一緒に、<br class="hidden md:inline" />現場を回す方を募集しています。
+        </h2>
+        <p class="col-span-12 md:col-span-5 text-ink-700 leading-[1.9]">
+          電気工事業、内装、空調、軽天、塗装ほか。<br />
+          案件の規模・地域・時期に応じて、最適なチームをご紹介・ご一緒します。
+          <strong class="text-warm-700">支払サイトは月末締・翌月末払い（応相談）</strong>。
+        </p>
+      </div>
+      <div class="mt-12 flex flex-wrap gap-4">
+        <a href="/partners" class="btn-warm">
+          募集要項を見る <span aria-hidden="true">→</span>
+        </a>
+        <a href="/partners#form" class="btn-ghost text-warm-700">エントリーフォーム</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- N°06 — NEWS -->
+  {latest.length > 0 && (
+    <section class="bg-white py-24 md:py-32">
+      <div class="container-x">
+        <div class="numbered-rule">
+          <span class="num-mark">N°06</span>
+          <span class="num-mark text-brand-700">／ お知らせ</span>
+        </div>
+        <ul class="mt-12 border-t-2 border-ink-900 divide-y divide-ink-100 observe-stagger">
+          {latest.map((entry) => (
+            <li>
+              <a href={`/news/${entry.id}`} class="grid grid-cols-12 gap-x-6 py-5 group items-baseline">
+                <time class="col-span-3 md:col-span-2 num text-sm text-ink-500" datetime={entry.data.date.toISOString()}>{fmt(entry.data.date)}</time>
+                <span class="col-span-9 md:col-span-2 text-[10px] tracking-[0.2em] text-warm-700 uppercase">{entry.data.category}</span>
+                <span class="col-span-12 md:col-span-8 text-base leading-snug font-bold group-hover:text-warm-700 transition">{entry.data.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a href="/news" class="mt-8 inline-flex items-center gap-2 text-warm-700 font-bold border-b-2 border-warm-500 pb-1 hover:text-warm-500 transition">
+          ニュース一覧へ <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
   )}
 
+  <!-- N°07 — CONTACT -->
   <section class="relative isolate overflow-hidden text-white">
     <img
       src="/img/cityscape-1280.jpg"
@@ -101,23 +180,25 @@ const fmt = (d: Date) =>
       class="absolute inset-0 -z-10 w-full h-full object-cover"
       loading="lazy" decoding="async"
     />
-    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-brand-900/95 via-brand-900/80 to-brand-900/40"></div>
+    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-brand-900/95 via-brand-900/85 to-brand-900/55"></div>
     <div class="container-x py-24 md:py-32 observe">
-      <div class="flex items-center gap-3">
-        <span class="block w-8 h-[2px] bg-brand-300"></span>
-        <p class="text-[10px] md:text-xs tracking-[0.3em] font-bold text-brand-300">CONTACT</p>
+      <div class="numbered-rule border-white">
+        <span class="num-mark text-brand-300">N°07</span>
+        <span class="num-mark text-brand-300">／ お問い合わせ</span>
       </div>
-      <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.15] tracking-tight">まずは、ご相談ください。</h2>
-      <p class="mt-6 max-w-3xl text-base md:text-lg leading-relaxed text-ink-100">
+      <h2 class="mt-12 font-serif font-black text-3xl md:text-6xl leading-[1.1] tracking-[-0.02em]">
+        まずは、ご相談ください。
+      </h2>
+      <p class="mt-6 max-w-3xl text-base md:text-lg leading-[1.9] text-ink-100">
         案件の規模・段階を問わず、見積依頼の段階からお声がけいただけます。<br class="hidden md:inline" />
         東京・大阪二拠点で全国対応。最短で当日中にご返信します。
       </p>
       <div class="mt-12 flex flex-wrap gap-4">
-        <a href="/contact" data-track="cta_click:home_contact" class="inline-flex items-center gap-2 px-8 py-5 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 hover:-translate-y-0.5 transition shadow-[0_10px_30px_-10px_rgba(0,0,0,.5)]">
+        <a href="/contact" data-track="cta_click:home_contact" class="btn-warm">
           お問い合わせフォームへ <span aria-hidden="true">→</span>
         </a>
-        <a href="tel:0643927136" data-track="cta_click:home_tel" class="inline-flex items-center gap-2 px-8 py-5 border border-white/40 text-white rounded-sm hover:bg-white/10 transition">
-          06-4392-7136
+        <a href="tel:0643927136" data-track="cta_click:home_tel" class="btn-ghost text-white">
+          <span class="num">06-4392-7136</span>
         </a>
       </div>
     </div>

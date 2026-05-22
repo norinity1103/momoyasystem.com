@@ -1,0 +1,213 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+
+const roles = [
+  { tag: "電気", title: "電気工事業", detail: "強電・弱電・通信・高圧まで対応可能な事業者様" },
+  { tag: "内装", title: "内装・軽天・クロス", detail: "店舗・オフィス・住宅の内装一式を担える事業者様" },
+  { tag: "空調", title: "空調・換気設備", detail: "業務用エアコン・換気・ダクト工事の事業者様" },
+  { tag: "設計", title: "電気設計／CAD", detail: "電気設計図・施工図・申請図のCAD作成パートナー様" },
+  { tag: "土工", title: "土木・付帯", detail: "充電器設置に伴う基礎・配管・舗装等の事業者様" },
+  { tag: "他", title: "その他関連工事", detail: "メンテナンス・小規模リフォーム・緊急対応の事業者様" },
+];
+
+const conditions = [
+  { k: "支払サイト",   v: "月末締・翌月末払い（応相談）" },
+  { k: "支払方法",     v: "銀行振込" },
+  { k: "対応エリア",   v: "全国（案件発生地ベースで応相談）" },
+  { k: "発注ロット",   v: "数万円〜数千万円規模まで案件規模を選びません" },
+  { k: "図面・打合せ", v: "原則モモヤが翻訳・調整。施工に集中いただける体制" },
+  { k: "材料",         v: "モモヤ手配または各社手配（応相談・モモヤ手配時は支給）" },
+  { k: "求める姿勢",   v: "報連相が早い・現場が誠実・無理は無理と言える方" },
+  { k: "保険",         v: "労災・賠償等の必要保険にご加入の事業者様" },
+];
+
+const flow = [
+  { n: "01", t: "エントリーフォーム送信", d: "下記フォームから事業所情報をお送りください。1〜3営業日でご返信します。" },
+  { n: "02", t: "面談・現場視察", d: "お互いの体制・得意領域・条件を確認。可能であれば現場ご一緒も。" },
+  { n: "03", t: "条件合意・取引開始", d: "請負基本契約を締結のうえ、案件のマッチング開始。" },
+  { n: "04", t: "案件マッチング・継続取引", d: "規模・地域・時期に応じて継続的に案件をご紹介します。" },
+];
+---
+<BaseLayout
+  title="協力会社募集"
+  description="モモヤシステムでは、電気工事・内装・空調・設計・土工など、現場を一緒に回せる協力会社様を募集しています。支払サイト 月末締・翌月末払い、全国エリア対応。"
+  breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "協力会社募集", href: "/partners" }]}
+>
+  <PageHero
+    eyebrow="PARTNERS"
+    title="協力会社募集"
+    lead={`一緒に現場を回せる、施工パートナー様を募集しています。<br />図面・打合せ・工程・材料はモモヤが翻訳・調整するので、施工に集中いただける環境です。`}
+  />
+
+  <!-- イントロ：温かみのあるトーン -->
+  <section class="bg-warm-50 py-24 md:py-32">
+    <div class="container-x">
+      <div class="numbered-rule" style="border-color: var(--color-warm-700);">
+        <span class="num-mark text-warm-700">N°01</span>
+        <span class="num-mark text-warm-700">／ お願いしたいこと</span>
+      </div>
+      <div class="grid grid-cols-12 gap-x-6 gap-y-10 mt-12">
+        <h2 class="col-span-12 md:col-span-7 font-serif font-black text-3xl md:text-5xl leading-[1.1] tracking-[-0.02em] text-warm-900">
+          現場で動ける方を、<br class="hidden md:inline" />
+          長くお付き合いしたい。
+        </h2>
+        <p class="col-span-12 md:col-span-5 text-ink-700 leading-[1.9] md:pt-2">
+          モモヤシステムは20期目に経営方針を「管理・ディレクション」へ転換しました。
+          上流（ゼネコン・設計会社・メーカー）からいただく案件を、最適なチームに分配・調整するのが私たちの役目です。
+          <strong class="text-warm-700">現場で力を発揮できる事業者様</strong>と、一緒に成長していきたいと思っています。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 募集職種 -->
+  <section class="bg-white py-24 md:py-32">
+    <div class="container-x">
+      <div class="numbered-rule">
+        <span class="num-mark">N°02</span>
+        <span class="num-mark text-brand-700">／ 募集職種</span>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-0 mt-12 border-t-2 border-ink-900 observe-stagger">
+        {roles.map((r, i) => (
+          <article class:list={["p-7 md:p-8 border-b border-ink-100", i % 3 !== 0 && "md:border-l border-ink-100"]}>
+            <span class="inline-block text-[10px] tracking-[0.25em] text-warm-700 font-bold uppercase border border-warm-500 px-2 py-1">{r.tag}</span>
+            <h3 class="mt-5 font-serif text-xl font-bold leading-snug text-ink-900">{r.title}</h3>
+            <p class="mt-3 text-sm text-ink-700 leading-relaxed">{r.detail}</p>
+          </article>
+        ))}
+      </div>
+      <p class="mt-8 text-sm text-ink-500">※ 上記以外の業種でも、現場のニーズに合えばお声がけください。</p>
+    </div>
+  </section>
+
+  <!-- 条件 -->
+  <section class="bg-warm-grid py-24 md:py-32">
+    <div class="container-x">
+      <div class="numbered-rule" style="border-color: var(--color-warm-700);">
+        <span class="num-mark text-warm-700">N°03</span>
+        <span class="num-mark text-warm-700">／ お取引条件</span>
+      </div>
+      <div class="grid grid-cols-12 gap-x-6 gap-y-6 mt-12">
+        <div class="col-span-12 md:col-span-4">
+          <h3 class="font-serif text-2xl md:text-3xl font-bold leading-tight text-warm-900">
+            支払はきちんと、<br />
+            条件は誠実に。
+          </h3>
+          <p class="mt-4 text-sm text-ink-700 leading-relaxed">
+            建設業界の慣行から、お互いが続けやすい関係を意識しています。<br />
+            記載のない事項もお気軽にご相談ください。
+          </p>
+        </div>
+        <dl class="col-span-12 md:col-span-8 border-t-2 border-warm-700 bg-white">
+          {conditions.map((row) => (
+            <div class="spec-row px-6">
+              <dt>{row.k}</dt>
+              <dd>{row.v}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- フロー -->
+  <section class="bg-white py-24 md:py-32">
+    <div class="container-x">
+      <div class="numbered-rule">
+        <span class="num-mark">N°04</span>
+        <span class="num-mark text-brand-700">／ お取引開始までの流れ</span>
+      </div>
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-4 gap-0 border-t-2 border-ink-900 observe-stagger">
+        {flow.map((f, i) => (
+          <div class:list={["relative p-6 md:p-7 border-b border-ink-100", i !== 0 && "md:border-l border-ink-100"]}>
+            <span class="num text-[10px] tracking-[0.25em] text-warm-700 font-bold">STEP {f.n}</span>
+            <p class="mt-4 font-serif text-lg md:text-xl font-bold text-ink-900 leading-snug">{f.t}</p>
+            <p class="mt-3 text-sm text-ink-500 leading-relaxed">{f.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- エントリーフォーム -->
+  <section id="form" class="bg-warm-50 py-24 md:py-32">
+    <div class="container-x">
+      <div class="numbered-rule" style="border-color: var(--color-warm-700);">
+        <span class="num-mark text-warm-700">N°05</span>
+        <span class="num-mark text-warm-700">／ エントリーフォーム</span>
+      </div>
+      <div class="grid grid-cols-12 gap-x-6 gap-y-10 mt-12">
+        <div class="col-span-12 md:col-span-4">
+          <h3 class="font-serif text-2xl md:text-3xl font-bold leading-tight text-warm-900">
+            まずは事業所情報を<br />お送りください。
+          </h3>
+          <p class="mt-4 text-sm text-ink-700 leading-relaxed">
+            1〜3営業日以内に担当よりご返信します。<br />
+            お電話でも歓迎です：<a class="num text-warm-700 underline" href="tel:0643927136">06-4392-7136</a>
+          </p>
+        </div>
+
+        <form
+          action="/api/contact"
+          method="POST"
+          class="col-span-12 md:col-span-8 space-y-6 bg-white p-6 md:p-10 border border-warm-100"
+        >
+          <input type="hidden" name="form-name" value="partners" />
+          <input type="hidden" name="topic" value="協力会社エントリー" />
+          <p class="hidden"><label>Bot field <input name="_gotcha" /></label></p>
+
+          <div>
+            <label class="text-[10px] tracking-[0.25em] text-warm-700 font-bold uppercase" for="company">会社名 <span class="text-warm-500">*</span></label>
+            <input id="company" name="company" required class="mt-2 w-full border-b-2 border-ink-300 px-1 py-3 focus:border-warm-500 focus:outline-none bg-transparent" />
+          </div>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="text-[10px] tracking-[0.25em] text-warm-700 font-bold uppercase" for="name">ご担当者名 <span class="text-warm-500">*</span></label>
+              <input id="name" name="name" required class="mt-2 w-full border-b-2 border-ink-300 px-1 py-3 focus:border-warm-500 focus:outline-none bg-transparent" />
+            </div>
+            <div>
+              <label class="text-[10px] tracking-[0.25em] text-warm-700 font-bold uppercase" for="email">メールアドレス <span class="text-warm-500">*</span></label>
+              <input id="email" name="email" type="email" required class="mt-2 w-full border-b-2 border-ink-300 px-1 py-3 focus:border-warm-500 focus:outline-none bg-transparent" />
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="text-[10px] tracking-[0.25em] text-warm-700 font-bold uppercase" for="phone">電話番号</label>
+              <input id="phone" name="phone" class="mt-2 w-full border-b-2 border-ink-300 px-1 py-3 focus:border-warm-500 focus:outline-none bg-transparent" />
+            </div>
+            <div>
+              <label class="text-[10px] tracking-[0.25em] text-warm-700 font-bold uppercase" for="region">対応エリア</label>
+              <select id="region" name="region" class="mt-2 w-full border-b-2 border-ink-300 px-1 py-3 focus:border-warm-500 focus:outline-none bg-transparent">
+                <option>関東</option>
+                <option>関西</option>
+                <option>中部</option>
+                <option>その他</option>
+                <option>全国対応可</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="text-[10px] tracking-[0.25em] text-warm-700 font-bold uppercase" for="trade">主な業種 <span class="text-warm-500">*</span></label>
+            <select id="trade" name="trade" required class="mt-2 w-full border-b-2 border-ink-300 px-1 py-3 focus:border-warm-500 focus:outline-none bg-transparent">
+              <option>電気工事業</option>
+              <option>内装・軽天・クロス</option>
+              <option>空調・換気</option>
+              <option>電気設計／CAD</option>
+              <option>土木・付帯</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[10px] tracking-[0.25em] text-warm-700 font-bold uppercase" for="message">事業内容・得意領域・実績など <span class="text-warm-500">*</span></label>
+            <textarea id="message" name="message" rows="6" required class="mt-2 w-full border border-ink-300 px-3 py-3 focus:border-warm-500 focus:outline-none bg-transparent leading-relaxed"></textarea>
+          </div>
+          <button type="submit" class="btn-warm">
+            エントリーする <span aria-hidden="true">→</span>
+          </button>
+          <p class="text-xs text-ink-500">送信いただいた内容は、ご返信およびお取引検討以外には利用しません。</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
