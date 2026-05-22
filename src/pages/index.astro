@@ -9,109 +9,128 @@ const latest = (await getCollection("news", ({ data }) => !data.draft))
   .slice(0, 3);
 const fmt = (d: Date) =>
   `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
+
+// N°01 ポジショニング —— 三軸を editorial split で見せる（4-cell card grid ではない）
+const pillars = [
+  {
+    no: "I",
+    title: "打ち合わせ代行",
+    body: "電気の専門知識が薄い元請担当者の代わりに、施工現場との打ち合わせを巻き取り、レスを速く、図面を一発で決めます。",
+  },
+  {
+    no: "II",
+    title: "業者選定とパートナー網",
+    body: "全国50社+の電気工事パートナーから、案件の規模・地域・仕様に合わせて最適な施工会社を選定。元請の業者選定工数をゼロにします。",
+  },
+  {
+    no: "III",
+    title: "材料調達とコスト最適化",
+    body: "電気工事の原価の半分を占める材料を、メーカー直取引のスケールメリットで一括調達。工事費とは別の利益源を作ります。",
+  },
+];
 ---
 <BaseLayout
   title=""
   description="設備工事の現場で20年。電気工事のディレクション・打ち合わせ代行・パートナー網・材料調達まで一括対応。大阪・東京の二拠点で全国対応する電気工事の実務番頭。"
 >
+  <!-- ============ HERO（dark / Swiss poster field） ============ -->
   <Hero />
 
-  <!-- N°01 — POSITIONING（Swiss ナンバリング + 3軸サービス） -->
-  <section class="bg-white py-24 md:py-32">
+  <!-- ============ N°01 — ポジショニング（white / editorial split） ============ -->
+  <section class="bg-white pt-24 md:pt-32 pb-20 md:pb-24">
     <div class="container-x">
-      <div class="numbered-rule">
-        <span class="num-mark">N°01</span>
-        <span class="num-mark text-brand-700">／ ポジショニング</span>
-      </div>
-      <div class="grid grid-cols-12 gap-x-6 gap-y-10 mt-12">
-        <h2 class="col-span-12 md:col-span-7 font-serif font-black text-3xl md:text-5xl leading-[1.1] tracking-[-0.02em]">
-          施工会社ではなく、<br class="hidden md:inline" />
-          現場を熟知した「実務番頭」。
-        </h2>
-        <p class="col-span-12 md:col-span-5 text-ink-700 leading-[1.9] md:pt-2">
-          モモヤシステムは20期目（2026年4月〜）に経営方針を転換しました。
-          これまで20年磨いてきた電気工事の現場ノウハウを、自社で職人を抱えるリスクを切り離した
-          <strong>「管理・調整・ディレクション」</strong>というかたちで提供します。
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-6">
+          <p class="swiss-eyebrow text-ink-700">N°01 / Position</p>
+          <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.05] tracking-[-0.02em] max-w-[18ch]">
+            施工会社ではなく、<br />
+            現場を熟知した<span class="text-warm-500">実務番頭</span>。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-5 md:col-start-8 md:pl-6 md:border-l border-ink-100 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[36ch]">
+          20期目に経営方針を転換しました。これまで20年磨いてきた電気工事の現場ノウハウを、自社で職人を抱えるリスクを切り離した
+          <strong>「管理・調整・ディレクション」</strong>として提供します。
         </p>
       </div>
 
-      <div class="mt-16 grid md:grid-cols-3 gap-0 border-t-2 border-ink-900 observe-stagger">
-        {[
-          { n: "01", t: "打ち合わせ代行", d: "電気の専門知識が薄い元請担当者の代わりに、施工現場との打ち合わせを巻き取り、レスを速く、図面を一発で決めます。" },
-          { n: "02", t: "業者選定・パートナー網", d: "全国50社+の電気工事パートナーから、案件の規模・地域・仕様に合わせて最適な施工会社を選定。元請の業者選定工数をゼロにします。" },
-          { n: "03", t: "材料調達・コスト最適化", d: "電気工事の原価の半分を占める材料を、メーカー直取引のスケールメリットで一括調達。工事費とは別の利益源を作ります。" },
-        ].map((c, i) => (
-          <article class:list={["group relative p-7 md:p-8 bg-white hover:bg-warm-50 transition-colors duration-300 border-b border-ink-100", i !== 0 && "md:border-l border-ink-100"]}>
-            <div class="flex items-baseline justify-between">
-              <span class="num text-xs tracking-[0.25em] text-warm-600 font-bold">N°{c.n}</span>
-              <span class="text-xs text-ink-500 group-hover:translate-x-1 transition">→</span>
+      <!-- 三本柱：均等カードではなく、左右の重みが違う editorial split -->
+      <div class="mt-16 md:mt-20 space-y-12 md:space-y-16">
+        {pillars.map((p, i) => (
+          <article class:list={[
+            "grid grid-cols-12 gap-x-6 gap-y-4 items-start border-t border-ink-100 pt-10",
+            i === 0 && "border-0 pt-0"
+          ]}>
+            <div class="col-span-12 md:col-span-2 md:col-start-1">
+              <p class="num-display text-warm-500 text-4xl md:text-5xl leading-none">{p.no}</p>
             </div>
-            <h3 class="mt-6 font-serif text-xl md:text-2xl font-bold leading-snug text-ink-900">{c.t}</h3>
-            <p class="mt-4 text-sm text-ink-700 leading-relaxed">{c.d}</p>
+            <h3 class="col-span-12 md:col-span-4 font-serif text-2xl md:text-3xl font-bold leading-[1.15] tracking-tight text-ink-900">
+              {p.title}
+            </h3>
+            <p class="col-span-12 md:col-span-5 md:col-start-8 text-base text-ink-700 leading-[1.85] max-w-[40ch]">
+              {p.body}
+            </p>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- N°02 — 現場対応力 -->
+  <!-- ============ N°02 — 現場対応力（white-cool / process rail） ============ -->
   <FieldResponsePanel />
 
-  <!-- N°03 — WHY（業界背景の入り口） -->
+  <!-- ============ N°03 — Why（cool tint / single argument） ============ -->
   <section class="bg-ink-50 py-24 md:py-32">
     <div class="container-x">
-      <div class="numbered-rule">
-        <span class="num-mark">N°03</span>
-        <span class="num-mark text-brand-700">／ なぜ「あいだ」か</span>
-      </div>
-      <div class="grid grid-cols-12 gap-x-6 gap-y-10 mt-12">
-        <h2 class="col-span-12 md:col-span-7 font-serif font-black text-3xl md:text-5xl leading-[1.1] tracking-[-0.02em]">
-          業界構造の変化が、<br class="hidden md:inline" />
-          翻訳者を必要としている。
-        </h2>
-        <p class="col-span-12 md:col-span-5 text-ink-700 leading-[1.9] md:pt-2">
-          建設業法改正（2025年12月完全施行）、2024年問題、外国人労働者の急増、上流の電気知識不足。
+      <div class="grid grid-cols-12 gap-x-6 gap-y-10 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-ink-700">N°03 / Why</p>
+          <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.05] tracking-[-0.02em] max-w-[20ch]">
+            業界構造の変化が、<br />
+            翻訳者を必要としている。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+          建設業法改正（2025年12月完全施行）、2024年問題、現場の外国人化、上流の電気知識不足。
           翻訳者・調整役のポジションは、ここから10年で間違いなく強い需要を持ちます。
         </p>
       </div>
-      <a href="/why" class="mt-12 inline-flex items-center gap-2 text-warm-700 font-bold border-b-2 border-warm-500 pb-1 hover:text-warm-500 transition">
-        業界課題と私たちの役割を読む <span aria-hidden="true">→</span>
+      <a href="/why" class="mt-12 inline-flex items-center gap-3 text-ink-900 font-bold border-b-2 border-ink-900 pb-1 hover:text-warm-700 hover:border-warm-500 transition">
+        業界課題と私たちの役割を読む <span class="num" aria-hidden="true">→</span>
       </a>
     </div>
   </section>
 
-  <!-- N°04 — VALUE -->
-  <section class="bg-brand-900 text-white py-24 md:py-32">
+  <!-- ============ N°04 — Value（ink-900 dark / data slab） ============ -->
+  <section class="bg-ink-900 text-white py-24 md:py-32">
     <div class="container-x">
-      <div class="numbered-rule border-white">
-        <span class="num-mark text-brand-300">N°04</span>
-        <span class="num-mark text-brand-300">／ 介在価値</span>
-      </div>
-      <div class="grid grid-cols-12 gap-x-6 gap-y-10 mt-12">
-        <h2 class="col-span-12 md:col-span-7 font-serif font-black text-3xl md:text-5xl leading-[1.1] tracking-[-0.02em]">
-          数字で見る、<br class="hidden md:inline" />介在価値。
-        </h2>
-        <p class="col-span-12 md:col-span-5 text-ink-100 leading-[1.9] md:pt-2">
-          商談で1時間説明している内容を、3分で。<br />
-          1億円規模の電気工事案件モデルで、損失と介在費用を比較しています。
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-white">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-warm-300">N°04 / Value</p>
+          <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.05] tracking-[-0.02em]">
+            数字で見る、<br class="hidden md:inline" />介在価値。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-100/85 leading-[1.85] max-w-[34ch]">
+          1億円規模の電気工事案件モデルで、損失と介在費用を並べた比較です。商談で1時間説明している内容を、3分で。
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-0 mt-16 border-t-2 border-white observe-stagger">
+      <!-- Stats slab — Swiss strong numeric typography（カードでなく数字を支配） -->
+      <div class="mt-16 grid grid-cols-3 gap-0 border-t-2 border-warm-500 observe-stagger">
         {[
-          { num: "5–15", unit: "%", label: "管理不在で失われる利益", note: "▲ 500–1,500万円／億" },
-          { num: "2–5",  unit: "%", label: "モモヤ介在のディレクション費", note: "+ 200–500万円／億" },
-          { num: "3–10", unit: "%", label: "守られる純利益（差分）", note: "= 300–1,000万円／億" },
+          { num: "5–15", unit: "%", label: "管理不在で失われる利益", note: "▲ 500–1,500 万円 ／ 億" },
+          { num: "2–5",  unit: "%", label: "介在のディレクション費",   note: "+ 200–500 万円 ／ 億" },
+          { num: "3–10", unit: "%", label: "守られる純利益（差分）",   note: "= 300–1,000 万円 ／ 億" },
         ].map((m, i) => (
-          <div class:list={["p-6 md:p-8 border-b border-white/20", i !== 0 && "md:border-l border-white/20"]}>
-            <p class="text-[10px] tracking-[0.25em] text-brand-300 font-bold uppercase">{m.label}</p>
-            <p class="mt-5 num-display text-5xl md:text-6xl">{m.num}<span class="text-xl ml-1 text-brand-300">{m.unit}</span></p>
-            <p class="mt-3 text-xs text-ink-100 num">{m.note}</p>
+          <div class:list={["py-8 md:py-10 px-3 md:px-6", i !== 0 && "border-l border-white/20"]}>
+            <p class="text-[10px] md:text-xs tracking-[0.25em] text-warm-300 font-bold uppercase leading-tight">{m.label}</p>
+            <p class="mt-6 num-display text-[2.5rem] md:text-7xl">{m.num}<span class="text-base md:text-2xl text-warm-300 ml-1 align-baseline">{m.unit}</span></p>
+            <p class="mt-4 text-xs text-ink-100/70 num">{m.note}</p>
           </div>
         ))}
       </div>
 
-      <div class="mt-14 flex flex-wrap gap-4">
+      <div class="mt-14 flex flex-wrap gap-3">
         <a href="/value" data-track="cta_click:home_value" class="btn-warm">
           介在価値の図解を見る <span aria-hidden="true">→</span>
         </a>
@@ -120,24 +139,28 @@ const fmt = (d: Date) =>
     </div>
   </section>
 
-  <!-- N°05 — 協力会社募集（warm-modern） -->
-  <section class="bg-warm-grid py-24 md:py-32">
-    <div class="container-x">
-      <div class="numbered-rule" style="border-color: var(--color-warm-700);">
-        <span class="num-mark text-warm-700">N°05</span>
-        <span class="num-mark text-warm-700">／ 協力会社募集</span>
-      </div>
-      <div class="grid grid-cols-12 gap-x-6 gap-y-10 mt-12 items-end">
-        <h2 class="col-span-12 md:col-span-7 font-serif font-black text-3xl md:text-5xl leading-[1.1] tracking-[-0.02em] text-warm-900">
-          一緒に、<br class="hidden md:inline" />現場を回す方を募集しています。
-        </h2>
-        <p class="col-span-12 md:col-span-5 text-ink-700 leading-[1.9]">
+  <!-- ============ N°05 — 協力会社募集（warm / 唯一の温色支配ゾーン） ============ -->
+  <section class="bg-warm-50 py-24 md:py-32 relative isolate overflow-hidden">
+    <!-- 装飾：細い grid を warm 100で重ねる（Swiss + Warm Modern bridge） -->
+    <div class="absolute inset-0 -z-10 opacity-50"
+         style="background-image: linear-gradient(rgba(124,66,32,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(124,66,32,.06) 1px, transparent 1px); background-size: 48px 48px;"></div>
+
+    <div class="container-x relative">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-warm-700">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-warm-700">N°05 / Partners</p>
+          <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.05] tracking-[-0.02em] text-warm-900 max-w-[20ch]">
+            一緒に、<br />
+            現場を回す方を募集しています。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
           電気工事業、内装、空調、軽天、塗装ほか。<br />
-          案件の規模・地域・時期に応じて、最適なチームをご紹介・ご一緒します。
-          <strong class="text-warm-700">支払サイトは月末締・翌月末払い（応相談）</strong>。
+          <strong class="text-warm-700">月末締・翌月末払い</strong>（応相談）。
+          打合せ・図面・工程はモモヤが調整、施工に集中いただける環境です。
         </p>
       </div>
-      <div class="mt-12 flex flex-wrap gap-4">
+      <div class="mt-12 flex flex-wrap gap-3">
         <a href="/partners" class="btn-warm">
           募集要項を見る <span aria-hidden="true">→</span>
         </a>
@@ -146,33 +169,35 @@ const fmt = (d: Date) =>
     </div>
   </section>
 
-  <!-- N°06 — NEWS -->
+  <!-- ============ N°06 — News（white / list） ============ -->
   {latest.length > 0 && (
     <section class="bg-white py-24 md:py-32">
       <div class="container-x">
-        <div class="numbered-rule">
-          <span class="num-mark">N°06</span>
-          <span class="num-mark text-brand-700">／ お知らせ</span>
+        <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+          <div class="col-span-12 md:col-span-7">
+            <p class="swiss-eyebrow text-ink-700">N°06 / News</p>
+            <h2 class="mt-5 font-serif font-black text-3xl md:text-4xl leading-[1.1] tracking-[-0.02em]">最新のお知らせ</h2>
+          </div>
+          <a href="/news" class="col-span-12 md:col-span-3 md:col-start-10 md:text-right text-sm font-bold text-ink-700 hover:text-warm-700 transition">
+            一覧へ <span class="num" aria-hidden="true">→</span>
+          </a>
         </div>
-        <ul class="mt-12 border-t-2 border-ink-900 divide-y divide-ink-100 observe-stagger">
+        <ul class="mt-12 observe-stagger">
           {latest.map((entry) => (
-            <li>
+            <li class="border-b border-ink-100">
               <a href={`/news/${entry.id}`} class="grid grid-cols-12 gap-x-6 py-5 group items-baseline">
-                <time class="col-span-3 md:col-span-2 num text-sm text-ink-500" datetime={entry.data.date.toISOString()}>{fmt(entry.data.date)}</time>
-                <span class="col-span-9 md:col-span-2 text-[10px] tracking-[0.2em] text-warm-700 uppercase">{entry.data.category}</span>
-                <span class="col-span-12 md:col-span-8 text-base leading-snug font-bold group-hover:text-warm-700 transition">{entry.data.title}</span>
+                <time class="col-span-4 md:col-span-2 num text-sm text-ink-500" datetime={entry.data.date.toISOString()}>{fmt(entry.data.date)}</time>
+                <span class="col-span-8 md:col-span-2 text-[10px] tracking-[0.2em] text-warm-700 uppercase font-bold">{entry.data.category}</span>
+                <span class="col-span-12 md:col-span-8 text-base md:text-lg leading-snug font-bold group-hover:text-warm-700 transition">{entry.data.title}</span>
               </a>
             </li>
           ))}
         </ul>
-        <a href="/news" class="mt-8 inline-flex items-center gap-2 text-warm-700 font-bold border-b-2 border-warm-500 pb-1 hover:text-warm-500 transition">
-          ニュース一覧へ <span aria-hidden="true">→</span>
-        </a>
       </div>
     </section>
   )}
 
-  <!-- N°07 — CONTACT -->
+  <!-- ============ N°07 — Contact（dark image-led） ============ -->
   <section class="relative isolate overflow-hidden text-white">
     <img
       src="/img/cityscape-1280.jpg"
@@ -180,20 +205,20 @@ const fmt = (d: Date) =>
       class="absolute inset-0 -z-10 w-full h-full object-cover"
       loading="lazy" decoding="async"
     />
-    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-brand-900/95 via-brand-900/85 to-brand-900/55"></div>
-    <div class="container-x py-24 md:py-32 observe">
-      <div class="numbered-rule border-white">
-        <span class="num-mark text-brand-300">N°07</span>
-        <span class="num-mark text-brand-300">／ お問い合わせ</span>
+    <div class="absolute inset-0 -z-10 bg-ink-900/88"></div>
+    <div class="container-x py-24 md:py-32">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-white">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-warm-300">N°07 / Contact</p>
+          <h2 class="mt-5 font-serif font-black text-3xl md:text-6xl leading-[1.05] tracking-[-0.025em]">
+            まずは、ご相談ください。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-100/85 leading-[1.85] max-w-[34ch]">
+          案件の規模・段階を問わず、見積依頼の段階からお声がけいただけます。東京・大阪二拠点で全国対応。最短で当日中にご返信します。
+        </p>
       </div>
-      <h2 class="mt-12 font-serif font-black text-3xl md:text-6xl leading-[1.1] tracking-[-0.02em]">
-        まずは、ご相談ください。
-      </h2>
-      <p class="mt-6 max-w-3xl text-base md:text-lg leading-[1.9] text-ink-100">
-        案件の規模・段階を問わず、見積依頼の段階からお声がけいただけます。<br class="hidden md:inline" />
-        東京・大阪二拠点で全国対応。最短で当日中にご返信します。
-      </p>
-      <div class="mt-12 flex flex-wrap gap-4">
+      <div class="mt-12 flex flex-wrap gap-3">
         <a href="/contact" data-track="cta_click:home_contact" class="btn-warm">
           お問い合わせフォームへ <span aria-hidden="true">→</span>
         </a>
