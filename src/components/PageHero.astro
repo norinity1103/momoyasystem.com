@@ -27,7 +27,7 @@ const veilClass = bgKind === "pattern"
   ? "bg-gradient-to-br from-brand-900/72 via-brand-900/60 to-ink-900/82"
   : "bg-gradient-to-br from-brand-900/95 via-brand-900/85 to-ink-900/95";
 ---
-<section class="relative isolate overflow-hidden bg-brand-900 text-white py-24 md:py-32">
+<section class="relative isolate overflow-hidden bg-brand-900 text-white py-20 md:py-28">
   {bg && (
     <>
       <picture class="absolute inset-0 -z-10 w-full h-full">
@@ -62,7 +62,7 @@ const veilClass = bgKind === "pattern"
       <span class="block w-10 h-[2px] bg-brand-300"></span>
       <p class="text-[10px] md:text-xs tracking-[0.3em] font-bold text-brand-300">{eyebrow}</p>
     </div>
-    <h1 class="mt-6 font-serif text-4xl md:text-6xl font-black leading-[1.1] tracking-tight reveal" set:html={title}></h1>
-    {lead && <p class="mt-8 max-w-[64ch] text-base md:text-lg text-ink-100 leading-[1.85] reveal" set:html={lead}></p>}
+    <h1 class="mt-5 font-serif text-[1.75rem] sm:text-3xl md:text-4xl lg:text-5xl font-black leading-[1.15] tracking-[-0.02em] reveal" set:html={title}></h1>
+    {lead && <p class="mt-6 max-w-[60ch] text-sm md:text-base text-ink-100 leading-[1.85] reveal" set:html={lead}></p>}
   </div>
 </section>

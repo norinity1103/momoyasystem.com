@@ -36,7 +36,7 @@ const fmt = (d: Date) =>
         <time class="num text-sm text-ink-100" datetime={entry.data.date.toISOString()}>{fmt(entry.data.date)}</time>
         <span class="text-[10px] tracking-[0.2em] text-brand-300 border border-brand-300 px-2 py-1">{entry.data.category}</span>
       </div>
-      <h1 class="mt-4 font-serif text-3xl md:text-5xl font-black leading-tight">{entry.data.title}</h1>
+      <h1 class="mt-4 font-serif text-xl md:text-2xl lg:text-3xl font-black leading-tight">{entry.data.title}</h1>
     </div>
   </section>
 

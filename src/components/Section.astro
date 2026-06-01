@@ -25,7 +25,7 @@ const accentLine = tone === "dark" ? "bg-brand-300" : "bg-brand-500";
         <p class:list={["text-[10px] md:text-xs tracking-[0.3em] font-bold", eyebrowColor]}>{eyebrow}</p>
       </div>
     )}
-    <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.15] tracking-tight observe max-w-[22ch]">{title}</h2>
+    <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.15] tracking-tight observe md:max-w-[22ch]">{title}</h2>
     {lead && <p class:list={["mt-6 max-w-[60ch] text-base md:text-lg leading-[1.85] observe", leadColor]}>{lead}</p>}
     <div class="mt-12 observe"><slot /></div>
   </div>
