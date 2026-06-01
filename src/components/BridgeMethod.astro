@@ -1,0 +1,104 @@
+---
+/**
+ * The Bridge Method — 4-Phase Direction
+ * 自社メソドロジーをコンサル的に可視化する Swiss セクション。
+ *
+ * 4工程:
+ *   01 Diagnose（診断）  — 上流の意図・現場の制約・コスト構造を分解
+ *   02 Translate（翻訳）  — 設計言語 ↔ 現場言語 ↔ 経営言語の三方向に変換
+ *   03 Direct（編成）    — 50社+のパートナーから案件専任チームを編成
+ *   04 Verify（検証）    — 工程・原価・品質を週次でモニタリング
+ */
+
+const phases = [
+  {
+    no: "01",
+    code: "Diagnose",
+    ja: "診断",
+    title: "上流の意図と現場の制約を、図面と原価で分解する。",
+    inputs: ["案件概要", "設計図・仕様書", "工期・予算"],
+    outputs: ["要件整理書", "現場制約マップ", "VE提案候補"],
+    duration: "1–3 day",
+  },
+  {
+    no: "02",
+    code: "Translate",
+    ja: "翻訳",
+    title: "設計言語 ↔ 現場言語 ↔ 経営言語を、三方向に変換する。",
+    inputs: ["設計意図", "施工側の懸念", "発注側の損益要求"],
+    outputs: ["定例議事録", "施工図フィードバック", "VE提案書"],
+    duration: "案件中 継続",
+  },
+  {
+    no: "03",
+    code: "Direct",
+    ja: "編成",
+    title: "全国50社+のパートナーから、案件専任チームを編成する。",
+    inputs: ["案件規模・地域・仕様", "工期", "材料リスト"],
+    outputs: ["施工パートナー選定", "材料調達計画", "工程計画書"],
+    duration: "3–7 day",
+  },
+  {
+    no: "04",
+    code: "Verify",
+    ja: "検証",
+    title: "工程・原価・品質を週次でモニタリングし、ズレを即補正する。",
+    inputs: ["週次進捗", "コストトラッキング", "品質チェック"],
+    outputs: ["週次レポート", "差異是正提案", "完工報告"],
+    duration: "工期中 週次",
+  },
+];
+---
+<section class="bg-white py-24 md:py-32">
+  <div class="wrap-content">
+    <!-- Section header -->
+    <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+      <div class="col-span-12 md:col-span-7">
+        <p class="swiss-eyebrow text-ink-700">Methodology / The Bridge Method</p>
+        <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.05] tracking-[-0.025em] max-w-[20ch]">
+          4 つの工程で<br />
+          「あいだ」を<span class="text-warm-500">設計</span>する。
+        </h2>
+      </div>
+      <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+        モモヤシステムが介在する20年来のディレクション工程を、
+        <strong>Diagnose → Translate → Direct → Verify</strong> の 4 フェーズとして体系化しました。
+      </p>
+    </div>
+
+    <!-- 4-phase table -->
+    <ol class="mt-16 md:mt-20 space-y-12 md:space-y-16">
+      {phases.map((p, i) => (
+        <li class="grid grid-cols-12 gap-x-6 gap-y-6 items-start border-t border-ink-200 pt-10">
+          <!-- Phase number + code -->
+          <div class="col-span-12 md:col-span-3">
+            <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold">PHASE {p.no}</p>
+            <p class="mt-3 font-serif text-3xl md:text-4xl font-black text-ink-900 leading-none">{p.code}</p>
+            <p class="mt-2 font-serif text-base text-ink-500">{p.ja}</p>
+            <p class="mt-4 num text-xs tracking-[0.2em] text-ink-500">期間：<span class="text-ink-900 font-bold">{p.duration}</span></p>
+          </div>
+
+          <!-- Title + I/O -->
+          <div class="col-span-12 md:col-span-9 md:pl-6 md:border-l border-ink-200">
+            <h3 class="font-serif text-xl md:text-2xl font-bold text-ink-900 leading-[1.4] tracking-tight max-w-[36ch]">{p.title}</h3>
+
+            <div class="mt-6 grid md:grid-cols-2 gap-x-8 gap-y-4">
+              <div>
+                <p class="text-[10px] tracking-[0.25em] text-ink-500 font-bold uppercase">Input</p>
+                <ul class="mt-3 space-y-1.5 text-sm text-ink-700">
+                  {p.inputs.map((x) => <li class="flex gap-2"><span class="text-ink-300">—</span>{x}</li>)}
+                </ul>
+              </div>
+              <div>
+                <p class="text-[10px] tracking-[0.25em] text-warm-700 font-bold uppercase">Output</p>
+                <ul class="mt-3 space-y-1.5 text-sm text-ink-900">
+                  {p.outputs.map((x) => <li class="flex gap-2"><span class="text-warm-500">▸</span>{x}</li>)}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

@@ -7,7 +7,7 @@ const news = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     category: z
-      .enum(["お知らせ", "メディア掲載", "実績", "リリース"])
+      .enum(["お知らせ", "メディア掲載", "施工レポート", "業界レポート", "リリース"])
       .default("お知らせ"),
     summary: z.string().optional(),
     draft: z.boolean().default(false),

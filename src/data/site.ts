@@ -10,9 +10,9 @@ export const site = {
   ga4: "G-SZGQZ8DF9S",
   brand: { primary: "#1e5a9f" },
   metrics: [
-    { num: "20", unit: "年", label: "電気工事 現場実績" },
-    { num: "50", unit: "社+", label: "全国パートナー網" },
-    { num: "2", unit: "拠点", label: "東京・大阪 二拠点体制" },
+    { num: "20", unit: "年",   label: "電気工事 現場経験" },
+    { num: "50", unit: "社+",  label: "全国パートナー網" },
+    { num: "▲ 5–15", unit: "%", label: "手戻り損失の抑制レンジ" },
   ],
   nav: [
     { href: "/why",      label: "なぜ「あいだ」か" },

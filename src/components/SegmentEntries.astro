@@ -1,0 +1,73 @@
+---
+/**
+ * セグメント別エントリー：ターゲットごとの "自分への約束" を提示。
+ * B2B コンサル LP の鉄則：「あなたが◯◯なら、こちらから」。
+ */
+const segments = [
+  {
+    code: "A",
+    role: "ゼネコン／建設会社の電気担当",
+    promise: "「あいだ」に立ち、定例・図面・工程を巻き取ります。",
+    detail: "電気の細部追いきれない／返信が回らない／施工会社との温度差を埋めたい — そんな現場ごとモモヤが受け取ります。",
+    cta: { text: "定例代行の見積を依頼する", href: "/contact?topic=direction" },
+  },
+  {
+    code: "B",
+    role: "設計事務所",
+    promise: "電気監理だけを切り出し、図面整合と原価を保証します。",
+    detail: "電気主任技術者の選任から施工図整合まで。設計監理の電気領域を、契約単位でディレクションを引き受けます。",
+    cta: { text: "電気監理の部分受託を相談する", href: "/contact?topic=design" },
+  },
+  {
+    code: "C",
+    role: "電気メーカー／商社",
+    promise: "案件起点での施工パートナー選定と現場運用を担います。",
+    detail: "貴社の機器が決まっている案件で、設計・施工・申請までの実装パートを丸ごと受託。製造側の意図を施工側に翻訳します。",
+    cta: { text: "メーカー案件の実装パートを話す", href: "/contact?topic=maker" },
+  },
+  {
+    code: "D",
+    role: "電気工事会社（協力会社）",
+    promise: "上流案件のディレクションを差し込み、施工は御社のチームへ。",
+    detail: "図面・打合せ・工程・材料はモモヤが翻訳・調整。施工に集中いただける環境です。月末締・翌月末払い。",
+    cta: { text: "協力会社エントリー", href: "/partners#form" },
+  },
+];
+---
+<section class="bg-white py-24 md:py-32">
+  <div class="wrap-content">
+    <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+      <div class="col-span-12 md:col-span-7">
+        <p class="swiss-eyebrow text-ink-700">For You / Segments</p>
+        <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.05] tracking-[-0.02em] max-w-[20ch]">
+          あなたが <span class="text-warm-500">◯◯</span> なら、<br />
+          ここから読んでください。
+        </h2>
+      </div>
+      <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+        4つのセグメントで、モモヤから貴社への提案を変えています。当てはまるものを選んでください。
+      </p>
+    </div>
+
+    <div class="mt-16 grid md:grid-cols-2 gap-x-6 gap-y-10 observe-stagger">
+      {segments.map((s) => (
+        <article class="group relative border-t-2 border-ink-900 pt-7">
+          <div class="flex items-baseline justify-between">
+            <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold">SEG. {s.code}</p>
+            <p class="text-[10px] tracking-[0.25em] text-ink-500 font-bold">SEGMENT</p>
+          </div>
+          <h3 class="mt-4 font-serif text-xl md:text-2xl font-bold leading-tight text-ink-900">
+            あなたが <span class="text-warm-700">{s.role}</span> なら
+          </h3>
+          <p class="mt-4 font-serif text-base md:text-lg font-bold text-ink-900 leading-[1.5] max-w-[30ch] border-l-2 border-warm-500 pl-4">
+            {s.promise}
+          </p>
+          <p class="mt-5 text-sm text-ink-700 leading-[1.85] max-w-[40ch]">{s.detail}</p>
+          <a href={s.cta.href} class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-warm-700 border-b-2 border-warm-500 pb-0.5 hover:text-warm-500 transition">
+            {s.cta.text} <span class="num" aria-hidden="true">→</span>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

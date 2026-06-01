@@ -29,6 +29,37 @@ const profile = [
     bg="/img/cityscape-1280.jpg"
   />
 
+  <!-- 代表からのスタンス（編集者的レター） -->
+  <section class="bg-white py-24 md:py-32">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 gap-y-10 items-start">
+        <div class="col-span-12 md:col-span-4">
+          <p class="swiss-eyebrow text-warm-700">Letter / 代表のスタンス</p>
+          <h2 class="mt-5 font-serif font-black text-2xl md:text-4xl leading-[1.15] tracking-[-0.02em] text-ink-900 max-w-[18ch]">
+            「あいだ」の翻訳工数を、見積に書き込む。
+          </h2>
+        </div>
+        <div class="col-span-12 md:col-span-7 md:col-start-6">
+          <div class="border-t-2 border-ink-900 pt-8 font-serif text-base md:text-lg leading-[1.95] text-ink-900 space-y-5 max-w-[44ch]">
+            <p>
+              この20年で、電気工事は「ものづくり」から「ものごとづくり」に変わりました。
+            </p>
+            <p>
+              図面と現場、上流と下流、設計と施工 — その<strong class="text-warm-700">「あいだ」の翻訳工数</strong>は、誰の見積にも入っていません。
+              だから誰かがそれを引き受け、しかも報われないという構造が、業界の慢性的なロスを生んでいます。
+            </p>
+            <p>
+              私たちはこの空白を、20年の現場経験と50社の協力会社網で埋めます。
+              施工は他社に、管理は私たちに。<br />
+              そして翻訳工数を、契約に明示します。
+            </p>
+          </div>
+          <p class="mt-8 num text-xs tracking-[0.25em] text-warm-700 font-bold">— 株式会社モモヤシステム 代表取締役　{site.legal.representative}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <Section eyebrow="PROFILE" title="基本情報">
     <dl class="divide-y divide-ink-100 border-y border-ink-100">
       {profile.map((row) => (

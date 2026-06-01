@@ -2,10 +2,82 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
 import PageHero from "../components/PageHero.astro";
+
+const issues = [
+  {
+    n: "01",
+    title: "上流の電気知識ギャップ。",
+    context: "ゼネコン・設計会社のプロジェクト担当者は建築全体を見るため、電気の細部までは追えません。電気メーカーの担当者ですら、現場の段取りや施工会社との折衝には不慣れなことが多くあります。",
+    before: {
+      label: "Before モモヤ介在",
+      points: [
+        "施工会社への指示が曖昧化",
+        "確認のターンが 2〜3 往復",
+        "確認待ちで 工期 +3〜7日",
+        "追加工事費 +2〜4%",
+      ],
+    },
+    after: {
+      label: "After モモヤ介在",
+      points: [
+        "モモヤが定例に同席し設計意図を施工言語に翻訳",
+        "1 ターンで決まる図面と仕様",
+        "確認のターンが 24h 以内に収束",
+        "追加工事費はゼロもしくは予見済み",
+      ],
+    },
+  },
+  {
+    n: "02",
+    title: "レス遅延が、原価を膨らませる。",
+    context: "確認待ちの一日は、施工会社にとって人件費の流出です。上流の担当者は他案件も抱えているため、メールの返信に2〜3日かかることが珍しくありません。この遅延が積み重なって、工期の押し出し、追加費用、関係悪化を生みます。",
+    before: {
+      label: "Before モモヤ介在",
+      points: [
+        "上流のレス 平均 2〜3 営業日",
+        "施工会社の人員待機コスト発生",
+        "工程ズレが原価圧迫を誘発",
+        "現場の信頼関係が摩耗",
+      ],
+    },
+    after: {
+      label: "After モモヤ介在",
+      points: [
+        "一次連絡 24h 以内（営業日中は最短当日）",
+        "意思決定の権限委譲を整理",
+        "週次工程モニタリングで早期是正",
+        "現場と上流の摩擦を中和",
+      ],
+    },
+  },
+  {
+    n: "03",
+    title: "2024年問題と、現場の外国人化。",
+    context: "時間外労働の上限規制と週休2日工事の原則化は、限られた時間での生産性向上を必須にしました。一方で施工現場の労働力は、確実に外国人比率が高まっていきます。技術通訳・施工通訳の役、つまり「あいだに立つ会社」のニーズは、今後さらに高まります。",
+    before: {
+      label: "Before モモヤ介在",
+      points: [
+        "適正工期の見極めが現場任せ",
+        "外国人施工者と元請の認識ズレ",
+        "見積に翻訳工数が含まれず属人化",
+        "建設業法改正への対応が後手",
+      ],
+    },
+    after: {
+      label: "After モモヤ介在",
+      points: [
+        "適正工期算定書を発行（建設業法改正対応）",
+        "施工言語・設計言語・経営言語の三方向翻訳",
+        "翻訳工数を契約に明示・標準化",
+        "週休2日制を踏まえた工程・工数設計",
+      ],
+    },
+  },
+];
 ---
 <BaseLayout
   title="なぜ「あいだ」が必要か"
-  description="建設業法改正・2024年問題・外国人労働者の急増・上流の電気知識不足。業界構造の変化が、電気工事の翻訳者・調整役を必要としています。モモヤシステムが「あいだ」に立つ理由。"
+  description="建設業法改正・2024年問題・外国人労働者の急増・上流の電気知識ギャップ。3つの業界課題を Before/After 構造で分析し、モモヤシステムが「あいだ」に立つ理由を提示します。"
   breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "なぜ「あいだ」か", href: "/why" }]}
   jsonLd={{
     "@context": "https://schema.org",
@@ -16,7 +88,7 @@ import PageHero from "../components/PageHero.astro";
         name: "なぜモモヤシステムは「あいだ」に立つのか？",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "上流（ゼネコン・設計・メーカー）の電気の知識不足と、レス遅延が現場の手戻り・原価膨張を生むため。20年の現場経験を持つ実務者が翻訳・調整役として介在することで、利益と工期と品質を守ります。",
+          text: "上流（ゼネコン・設計・メーカー）の電気の知識ギャップと、レス遅延が現場の手戻り・原価膨張を生むため。20年の現場経験を持つ実務者が翻訳・調整役として介在することで、利益と工期と品質を守ります。",
         },
       },
       {
@@ -41,37 +113,53 @@ import PageHero from "../components/PageHero.astro";
   <PageHero
     eyebrow="WHY"
     title={`なぜ、いま「あいだ」に<br />立つ会社が必要なのか。`}
-    lead={`建設電気工事の現場では、上流（元請・設計・メーカー）と下流（施工会社）のあいだに、慢性的なコミュニケーション・ロスが発生しています。その損失は、原価・工期・品質・人材リスクのすべてに跳ね返り、案件の利益を蝕みます。`}
+    lead={`建設電気工事の現場では、上流（元請・設計・メーカー）と下流（施工会社）のあいだに、慢性的なコミュニケーション・ロスが発生しています。原価・工期・品質・人材リスクのすべてに跳ね返るこのロスを、3つの ISSUE と Before/After で分解します。`}
   />
 
+  <!-- ISSUE Before/After block -->
   <section class="bg-white py-24 md:py-32">
     <div class="wrap-content">
-      <div class="space-y-16 md:space-y-24">
-        {[
-          {
-            n: "01",
-            title: "上流担当者は、電気の専門知識が浅い。",
-            body: "ゼネコンや設計会社のプロジェクト担当者は、建築全体を見ているため、電気の細部までは追いきれません。電気メーカーの担当者ですら、現場の段取りや施工会社との折衝には不慣れなことが多くあります。結果、施工会社へ「曖昧な指示」が降り、現場で確認が止まります。",
-          },
-          {
-            n: "02",
-            title: "レスが遅いほど、原価は膨らむ。",
-            body: "確認待ちの一日は、施工会社にとって人件費の流出です。上流の担当者は他案件も抱えているため、メールの返信に2〜3日かかることが珍しくありません。この遅延が積み重なって、工期の押し出し、追加費用、関係悪化を生みます。",
-          },
-          {
-            n: "03",
-            title: "2024年問題と、現場の外国人化。",
-            body: "時間外労働の上限規制と週休2日工事の原則化は、限られた時間内での生産性向上を必須にしました。一方で施工現場の労働力は、確実に外国人比率が高まっていきます。技術通訳・施工通訳のポジション、つまり「あいだに立つ会社」のニーズは、今後さらに高まります。",
-          },
-        ].map((it) => (
-          <article class="grid md:grid-cols-[140px_1fr] gap-6 md:gap-12 items-start observe">
-            <div class="flex md:flex-col gap-3 md:gap-2 items-baseline md:items-start">
-              <p class="num text-5xl md:text-7xl font-black text-brand-500 leading-none">{it.n}</p>
-              <p class="text-[10px] tracking-[0.3em] text-brand-700 font-bold mt-3">ISSUE</p>
+      <div class="space-y-20 md:space-y-28">
+        {issues.map((it) => (
+          <article class="observe">
+            <!-- Title block -->
+            <div class="grid grid-cols-12 gap-x-6 gap-y-6 items-start border-t-2 border-ink-900 pt-8">
+              <div class="col-span-12 md:col-span-3">
+                <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold">ISSUE {it.n}</p>
+                <p class="mt-3 num-display text-5xl md:text-6xl text-warm-500 leading-none">{it.n}</p>
+              </div>
+              <div class="col-span-12 md:col-span-9 md:pl-6 md:border-l border-ink-200">
+                <h2 class="font-serif text-2xl md:text-4xl font-black leading-[1.15] tracking-tight text-ink-900 max-w-[24ch]">{it.title}</h2>
+                <p class="mt-5 max-w-[64ch] text-ink-700 leading-[1.85]">{it.context}</p>
+              </div>
             </div>
-            <div>
-              <h2 class="font-serif text-2xl md:text-4xl font-black leading-tight tracking-tight">{it.title}</h2>
-              <p class="mt-5 max-w-[60ch] text-ink-700 leading-relaxed">{it.body}</p>
+
+            <!-- Before / After 比較 -->
+            <div class="mt-10 grid md:grid-cols-2 gap-0 border-t border-ink-200">
+              <!-- BEFORE -->
+              <div class="md:col-span-1 p-6 md:p-8 bg-ink-50 border-b border-ink-200 md:border-b-0 md:border-r border-ink-200">
+                <p class="text-[10px] tracking-[0.28em] text-ink-500 font-bold uppercase">{it.before.label}</p>
+                <ul class="mt-5 space-y-3 text-sm md:text-base text-ink-700">
+                  {it.before.points.map((p) => (
+                    <li class="flex gap-3 leading-relaxed">
+                      <span class="text-ink-400 mt-1 flex-shrink-0">—</span>
+                      <span>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <!-- AFTER -->
+              <div class="md:col-span-1 p-6 md:p-8 bg-warm-50">
+                <p class="text-[10px] tracking-[0.28em] text-warm-700 font-bold uppercase">{it.after.label}</p>
+                <ul class="mt-5 space-y-3 text-sm md:text-base text-ink-900">
+                  {it.after.points.map((p) => (
+                    <li class="flex gap-3 leading-relaxed">
+                      <span class="text-warm-500 mt-1 flex-shrink-0">▸</span>
+                      <span>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </article>
         ))}
@@ -83,24 +171,25 @@ import PageHero from "../components/PageHero.astro";
     <div class="grid md:grid-cols-2 gap-8 max-w-4xl">
       <div>
         <h3 class="font-serif text-2xl font-bold">20年の現場経験を、上流側から。</h3>
-        <p class="mt-3 text-ink-100 leading-relaxed">
-          施工会社として20年蓄積した経験を、施工側ではなく管理・調整側から提供します。
+        <p class="mt-3 text-ink-100 leading-[1.85] max-w-[44ch]">
+          施工会社として蓄積した経験を、施工側ではなく管理・調整側から提供します。
           現場の言葉が分かる人間が上流に立つことで、はじめて翻訳が成立します。
         </p>
       </div>
       <div>
         <h3 class="font-serif text-2xl font-bold">職人を抱えない、軽い体制。</h3>
-        <p class="mt-3 text-ink-100 leading-relaxed">
-          自社施工は最小限。50社+の協力会社を案件ごとに選定する体制で、
-          人員規模に左右されない柔軟さと、適材適所のコスト最適化を両立します。
+        <p class="mt-3 text-ink-100 leading-[1.85] max-w-[44ch]">
+          自社施工は最小限。50社+の協力会社を案件ごとに編成する体制で、
+          人員規模に左右されない柔軟さと、適材適所の原価最適化を両立します。
         </p>
       </div>
     </div>
 
-    <div class="mt-12">
-      <a href="/value" class="inline-flex items-center gap-2 px-7 py-4 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 transition">
-        次：介在価値の図解 <span aria-hidden="true">→</span>
+    <div class="mt-12 flex flex-wrap gap-3">
+      <a href="/value" class="btn-warm">
+        1億円案件モデルを商談用に印刷する <span aria-hidden="true">→</span>
       </a>
+      <a href="/service" class="btn-ghost text-white">4つのサービス領域を見る</a>
     </div>
   </Section>
 </BaseLayout>
