@@ -21,6 +21,7 @@
     "@cloudflare/workers-types": "^4.20260510.1",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/typography": "^0.5.19",
+    "puppeteer": "^25.1.0",
     "satori": "^0.26.0"
   }
 }
