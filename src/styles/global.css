@@ -3,13 +3,18 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* — Cool: 信頼の青（既存ブランドカラー、Swiss 軸） — */
-  --color-brand-50:  #eaf2fb;
-  --color-brand-100: #cfdff3;
-  --color-brand-300: #6c97cc;
-  --color-brand-500: #1e5a9f;
-  --color-brand-700: #154371;
-  --color-brand-900: #0c2545;
+  /* — Cool: 信頼の青（公式ロゴのテキスト色を中心に再設計） — */
+  --color-brand-50:  #eaedf6;
+  --color-brand-100: #cdd2e6;
+  --color-brand-300: #6776a3;
+  --color-brand-500: #1e2d66;     /* logo に近いネイビー */
+  --color-brand-700: #131e47;
+  --color-brand-900: #060c24;     /* logo テキストの最深部 */
+
+  /* — Gold: 公式ロゴのMマーク金色（特別な強調にのみ使用） — */
+  --color-gold-300:  #d9c188;
+  --color-gold-500:  #b8964a;     /* primary gold */
+  --color-gold-700:  #8a6e2f;
 
   /* — Warm: 人肌の温かさ（Warm Modern 軸） — */
   --color-warm-50:   #fdf8f2;  /* バニラホワイト */

@@ -8,7 +8,10 @@ export const site = {
   url: "https://momoyasystem.com",
   ogImage: "/ogp.png",
   ga4: "G-SZGQZ8DF9S",
-  brand: { primary: "#1e5a9f" },
+  brand: {
+    primary: "#1e2d66",  // 公式ロゴのテキスト色（深いネイビー）
+    gold:    "#b8964a",  // Mマークのゴールド
+  },
   metrics: [
     { num: "20", unit: "年",   label: "電気工事 現場経験" },
     { num: "50", unit: "社+",  label: "全国パートナー網" },

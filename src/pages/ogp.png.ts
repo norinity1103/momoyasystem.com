@@ -59,7 +59,7 @@ export const GET: APIRoute = async () => {
         justifyContent: "space-between",
         padding: "72px 80px",
         background:
-          "linear-gradient(135deg, #0c2545 0%, #1e5a9f 60%, #154371 100%)",
+          "linear-gradient(135deg, #060c24 0%, #1e2d66 60%, #131e47 100%)",
         color: "#fff",
         fontFamily: "Noto Sans JP",
       },
@@ -75,7 +75,7 @@ export const GET: APIRoute = async () => {
                   style: {
                     fontSize: "20px",
                     letterSpacing: "0.3em",
-                    color: "#6c97cc",
+                    color: "#d9c188",
                   },
                   children: "MOMOYA SYSTEM",
                 },
@@ -119,7 +119,7 @@ export const GET: APIRoute = async () => {
                 props: {
                   style: {
                     fontSize: "20px",
-                    color: "#cfdff3",
+                    color: "#cdd2e6",
                     fontWeight: 500,
                   },
                   children: site.name,

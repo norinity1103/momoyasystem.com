@@ -4,12 +4,13 @@ const { pathname } = Astro.url;
 ---
 <header class="sticky top-0 z-40 bg-white/92 backdrop-blur border-b border-ink-100">
   <div class="wrap-wide flex items-center justify-between h-16 md:h-20">
-    <a href="/" class="flex items-center gap-3 group" aria-label="モモヤシステム ホームへ">
-      <img src="/logo-mark.svg" alt="" width="36" height="36" class="block" />
-      <span class="flex flex-col leading-tight">
-        <span class="font-serif text-base md:text-lg font-black tracking-tight text-ink-900 group-hover:text-warm-700 transition">モモヤシステム</span>
-        <span class="hidden md:inline text-[9px] tracking-[0.3em] text-ink-500 font-bold mt-0.5">MOMOYA SYSTEM</span>
-      </span>
+    <a href="/" class="flex items-center group" aria-label="株式会社モモヤシステム ホームへ">
+      <!-- 公式ロゴ。デスクトップではフルロゴ、モバイルではマークのみ -->
+      <picture class="hidden sm:block">
+        <source srcset="/brand/logo-full.webp" type="image/webp" />
+        <img src="/brand/logo-full.png" alt="株式会社モモヤシステム" width="220" height="36" class="block h-7 md:h-9 w-auto group-hover:opacity-85 transition" />
+      </picture>
+      <img src="/brand/logo-mark.png" alt="モモヤシステム" width="36" height="36" class="sm:hidden block h-9 w-9 group-hover:opacity-85 transition" />
     </a>
 
     <nav class="hidden lg:flex items-center gap-6 text-sm">
