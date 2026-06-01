@@ -104,7 +104,24 @@ body {
 }
 
 /* Headings — Swiss: tight tracking, large size jumps */
-h1, h2, h3, h4 { font-family: var(--font-serif); letter-spacing: -0.01em; }
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+  /* 日本語の改行ルール：単語(句節)単位で改行。文字単位の不自然な切れを抑制 */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  line-break: strict;
+}
+/* モダンブラウザ：自動でラインバランスを取る */
+@supports (text-wrap: balance) {
+  h1, h2, h3, h4 { text-wrap: balance; }
+}
+/* 見出しに付けると行頭/行末の禁則を強める */
+.jp-tight {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-break: strict;
+}
 
 .swiss-eyebrow {
   display: inline-flex; align-items: center; gap: 0.75rem;
