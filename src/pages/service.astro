@@ -112,6 +112,68 @@ const services = [
     ))}
   </div>
 
+  <!-- ============ Coverage / 対応領域 ============ -->
+  <section class="bg-white py-24 md:py-32 border-t border-ink-100">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-ink-700">Coverage / 対応領域</p>
+          <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.05] tracking-[-0.02em] max-w-[20ch]">
+            電気工事と<span class="text-warm-500">付帯領域</span>を、<br />
+            ひとつの窓口で。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+          受電・分電・配線から、内装・空調・土工までをパートナー50社+のチーム編成でカバー。元請の発注先を、私たちで束ねます。
+        </p>
+      </div>
+
+      <!-- 電気工事 -->
+      <div class="mt-16">
+        <div class="flex items-baseline gap-4">
+          <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold">N°01</p>
+          <h3 class="font-serif text-xl md:text-2xl font-bold text-ink-900 tracking-tight">電気工事</h3>
+        </div>
+        <dl class="mt-6 border-t-2 border-ink-900">
+          {[
+            { k: "強電",   v: "受変電設備 ／ 動力設備 ／ 幹線設備 ／ 分電盤・制御盤" },
+            { k: "弱電",   v: "LAN・電話・放送 ／ 防犯カメラ ／ 入退室管理 ／ 火災報知" },
+            { k: "高圧",   v: "キュービクル ／ 高圧引込 ／ 自家用電気工作物の保安" },
+            { k: "特殊",   v: "EV／PHV 急速充電器 ／ 太陽光・蓄電池 連系 ／ 非常用発電" },
+          ].map((row) => (
+            <div class="spec-row">
+              <dt>{row.k}</dt>
+              <dd>{row.v}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <!-- 付帯工事 -->
+      <div class="mt-16">
+        <div class="flex items-baseline gap-4">
+          <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold">N°02</p>
+          <h3 class="font-serif text-xl md:text-2xl font-bold text-ink-900 tracking-tight">付帯工事</h3>
+        </div>
+        <dl class="mt-6 border-t-2 border-ink-900">
+          {[
+            { k: "内装",   v: "軽天・ボード ／ クロス ／ 床仕上げ ／ 間仕切" },
+            { k: "空調",   v: "業務用エアコン ／ 換気・排煙 ／ ダクト" },
+            { k: "土工",   v: "充電器基礎 ／ 配管引込 ／ 舗装復旧" },
+            { k: "メンテ", v: "店舗・住宅の電気・空調・弱電 ／ 緊急対応" },
+          ].map((row) => (
+            <div class="spec-row">
+              <dt>{row.k}</dt>
+              <dd>{row.v}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <p class="mt-12 text-xs text-ink-500 max-w-[60ch] italic">※ 自社施工は最小限。50社+のパートナーから案件専任チームを編成します。記載のない領域もお気軽にご相談ください。</p>
+    </div>
+  </section>
+
   <Section tone="dark" eyebrow="NEXT" title="どのサービスから話しますか？">
     <p class="text-ink-100 max-w-[60ch] leading-[1.85]">
       4つすべてを一括でお任せいただくことも、定例代行だけ／施工図監修だけといった部分受託も可能です。

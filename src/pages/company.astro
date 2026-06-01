@@ -60,6 +60,109 @@ const profile = [
     </div>
   </section>
 
+  <!-- ============ Greeting / 代表挨拶（フル版） ============ -->
+  <section class="bg-ink-50 py-24 md:py-32">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-ink-700">Greeting / 代表挨拶</p>
+          <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.05] tracking-[-0.025em] max-w-[20ch]">
+            「高かろう良かろう」から、<br class="hidden md:inline" />
+            <span class="text-warm-500">「翻訳のプロ」</span>へ。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+          20年の現場経験を持つ実務者が、なぜ「ディレクション会社」を選んだのか。
+        </p>
+      </div>
+
+      <div class="mt-14 grid grid-cols-12 gap-x-6 gap-y-8">
+        <!-- 左: メタ -->
+        <div class="col-span-12 md:col-span-3">
+          <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold">From the founder</p>
+          <p class="mt-5 num-display text-warm-500 text-3xl md:text-4xl leading-none">2026 — 20th</p>
+          <p class="mt-3 font-serif text-base text-ink-700">代表取締役<br /><strong class="text-ink-900">{site.legal.representative}</strong></p>
+        </div>
+
+        <!-- 右: 本文 -->
+        <div class="col-span-12 md:col-span-8 md:col-start-5 font-serif text-base md:text-lg leading-[2.0] text-ink-900 space-y-6 max-w-[44ch]">
+          <p>
+            この20年で、電気工事は「ものづくり」から<strong class="text-warm-700">「ものごとづくり」</strong>に変わりました。
+            図面と現場、上流と下流、設計と施工 — その「あいだ」の翻訳工数は、誰の見積にも入っていません。
+          </p>
+          <p>
+            私たちはずっと、現場に強い「工事屋」として生きてきました。施工単価は高かったかもしれませんが、
+            「全部任せられる」価値を引き受けてきた自負はあります。<br />
+            ところが、その<strong>「高かろう良かろう」を社員に継承することができなかった</strong>。
+            やがて「高かろう悪かろう」へ近づき、案件は減り、行き詰まりを感じました。
+          </p>
+          <p>
+            ふと自分の手で現場に戻ってみて、はっきり見えたものがあります。
+            <strong class="text-warm-700">業界に足りていないのは、施工者ではなく翻訳者だ</strong>。
+            電気の言葉を経営の言葉に変え、設計の意図を施工の段取りに変え、現場の困りごとを上流の意思決定に変える ―
+            その「あいだ」を埋める職能こそ、20年磨いてきたものの本質でした。
+          </p>
+          <p>
+            20期目を機に、施工会社から<strong>テクニカル・ディレクション会社</strong>へ完全に切り替えます。
+            施工は協力会社に。図面・打合せ・工程・原価は、私たちが翻訳・調整する。
+            支払サイトと翻訳工数を、契約に明示する ― それが私たちの最初のルールです。
+          </p>
+          <p>
+            10年で全国、30年で世界中。<br />
+            「あいだに立つ会社」が業界の標準になる未来を、ここから20年かけてつくります。
+          </p>
+
+          <p class="pt-4 num text-xs tracking-[0.25em] text-warm-700 font-bold">— 株式会社モモヤシステム 代表取締役　{site.legal.representative}</p>
+        </div>
+      </div>
+
+      <p class="mt-12 text-xs text-ink-500 italic">※ 文章は社内レビュー前のドラフトです。正式版は確定次第差し替えます。</p>
+    </div>
+  </section>
+
+  <!-- ============ History / 沿革 ============ -->
+  <section class="bg-white py-24 md:py-32">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-ink-700">History / 沿革</p>
+          <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.05] tracking-[-0.025em]">
+            創業から、20期目へ。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm text-ink-500 leading-relaxed max-w-[34ch]">
+          年号・実績は確定値ではなく、公開情報・打合せ記録から推定しています。社長レビューにより最終確定。
+        </p>
+      </div>
+
+      <ol class="mt-14 max-w-3xl">
+        {[
+          { year: "2007", body: "創業。電気工事業として大阪府生野区にて事業を開始。" },
+          { year: "2010", body: "電気工事業 大阪府知事許可を取得。" },
+          { year: "2018", body: "産業廃棄物収集運搬業 許可（第02700196866号）取得。" },
+          { year: "2020", body: "EV／PHV 急速充電器インフラ案件の受託を本格開始。" },
+          { year: "2023", body: "東京営業所を開設。二拠点体制での全国対応を本格化。" },
+          { year: "2024", body: "都知事による視察対象案件（東京・電気付帯）を完工。" },
+          { year: "2025", body: "経済産業省「事業継続力強化計画」認定。" },
+          { year: "2026", body: "20期目を迎え、経営方針を「施工」から「管理・ディレクション」へ転換。",
+            highlight: true },
+        ].map((entry, i, arr) => (
+          <li class:list={["relative grid grid-cols-12 gap-x-6 gap-y-2 pl-6 pb-10 border-l-2", entry.highlight ? "border-warm-500" : "border-ink-200"]}>
+            <span class:list={["absolute -left-[7px] top-1 w-3 h-3", entry.highlight ? "bg-warm-500" : "bg-ink-300"]} aria-hidden="true"></span>
+            <div class="col-span-12 md:col-span-3">
+              <p class:list={["num-display text-3xl md:text-4xl leading-none", entry.highlight ? "text-warm-500" : "text-ink-900"]}>{entry.year}</p>
+            </div>
+            <div class="col-span-12 md:col-span-9">
+              <p class:list={["text-base leading-[1.85] max-w-[40ch]", entry.highlight ? "text-ink-900 font-bold" : "text-ink-700"]}>{entry.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <p class="mt-4 text-xs text-ink-500 italic">※ 年号は推定値含む。確定値への置き換えを社長レビュー時に実施予定。</p>
+    </div>
+  </section>
+
   <Section eyebrow="PROFILE" title="基本情報">
     <dl class="divide-y divide-ink-100 border-y border-ink-100">
       {profile.map((row) => (
