@@ -28,11 +28,12 @@ const contactLinks = [
     <!-- ロゴと社名 -->
     <div class="grid grid-cols-12 gap-x-6 gap-y-10 pb-12 border-b-2 border-white/15">
       <div class="col-span-12 md:col-span-5">
-        <div class="flex items-center gap-4">
-          <img src="/brand/logo-mark.png" alt="" width="48" height="48" class="block w-12 h-12" />
-          <p class="font-serif text-xl font-black tracking-tight">{site.name}</p>
-        </div>
-        <p class="mt-5 text-sm leading-relaxed text-ink-300 max-w-md">{site.subTagline}</p>
+        <!-- 暗背景用の白抜きフルロゴ（ロゴに社名が含まれるためテキストは併走しない） -->
+        <picture>
+          <source srcset="/brand/logo-full-inverse.webp" type="image/webp" />
+          <img src="/brand/logo-full-inverse.png" alt="株式会社モモヤシステム" width="260" height="42" class="block h-10 md:h-11 w-auto" />
+        </picture>
+        <p class="mt-6 text-sm leading-relaxed text-ink-300 max-w-md">{site.subTagline}</p>
         <dl class="mt-6 space-y-2 text-xs text-ink-300">
           <div class="flex gap-3"><dt class="w-20 text-brand-300">大阪本社</dt><dd>{site.contact.address.hq}</dd></div>
           <div class="flex gap-3"><dt class="w-20 text-brand-300">東京営業所</dt><dd>{site.contact.address.tokyo}</dd></div>
