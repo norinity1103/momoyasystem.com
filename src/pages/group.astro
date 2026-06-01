@@ -1,0 +1,187 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Section from "../components/Section.astro";
+
+const entities = [
+  {
+    code: "01",
+    name: "株式会社モモヤシステム",
+    role: "コア事業",
+    tag: "Direction",
+    body: "電気工事のディレクション・管理・調整を担う中核会社。20年の現場経験を活かし、ゼネコン・設計・メーカーと施工現場の「あいだ」を翻訳します。",
+    link: { text: "サービスを見る", href: "/service" },
+    color: "warm",
+  },
+  {
+    code: "02",
+    name: "イフス",
+    role: "電気以外の工事事業",
+    tag: "Construction",
+    body: "電気工事に隣接する内装・空調・付帯工事を独立事業として展開（構想中）。ディレクションでカバーしきれない自社施工領域を補完します。",
+    link: { text: "詳しくはお問い合わせください", href: "/contact?topic=group" },
+    color: "ink",
+  },
+  {
+    code: "03",
+    name: "モモヤコネクト",
+    role: "業界課題解決の支援事業",
+    tag: "Platform / M-System",
+    body: "業界の慢性課題（人材不足・属人化・ナレッジ散逸）を解決するためのプラットフォームと、社内DXツール「Mシステム」の外販を準備中。",
+    link: { text: "詳しくはお問い合わせください", href: "/contact?topic=group" },
+    color: "ink",
+  },
+  {
+    code: "04",
+    name: "一般社団法人 日本防災支援機構",
+    role: "連携",
+    tag: "Affiliated",
+    body: "防災・BCPに関する取り組みを支援する関連法人。電気工事と防災インフラの接点で、社会課題に応える役割を担います。",
+    link: { text: "外部団体への連携", href: "/contact?topic=group" },
+    color: "ink",
+  },
+];
+
+const synergy = [
+  { k: "ディレクション × 施工",   v: "管理はモモヤシステム、自社施工はイフス。需要に応じて補完。" },
+  { k: "ディレクション × 業界支援", v: "現場知見をモモヤコネクトのMシステム・サポート事業に還元。" },
+  { k: "建設 × 防災",          v: "電力・通信インフラの設計力を、防災支援機構の事業計画に提供。" },
+];
+---
+<BaseLayout
+  title="グループ"
+  description="モモヤホールディングス構想。電気工事のディレクション（モモヤシステム）を中核に、電気以外の工事（イフス）、業界課題解決（モモヤコネクト）、防災支援（日本防災支援機構）を連携させた「業界課題解決型のトータルソリューション提供会社」を目指します。"
+  breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "グループ", href: "/group" }]}
+>
+  <PageHero
+    eyebrow="GROUP"
+    title={`業界課題解決型の、<br />トータルソリューション集団へ。`}
+    lead={`電気工事のディレクションを中核に、隣接事業を連携させた「モモヤホールディングス」構想を進めています。<br />中核から派生する4つの事業体で、電気・建設・防災の業界課題を多面的に解きます。`}
+  />
+
+  <!-- ============ Vision Diagram ============ -->
+  <section class="bg-white py-24 md:py-32">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-ink-700">N°01 / Vision</p>
+          <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.05] tracking-[-0.025em] max-w-[22ch]">
+            ひとつの「あいだ」から、<br />
+            ひろがる事業の<span class="text-warm-500">射程</span>。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+          中核のディレクション会社から、施工・プラットフォーム・防災へと、必要に応じて事業を派生させていきます。
+        </p>
+      </div>
+
+      <!-- HD構造の図解（Swiss グリッド） -->
+      <div class="mt-16 md:mt-20 grid grid-cols-12 gap-x-6 gap-y-8 items-stretch">
+        <!-- 中心：モモヤシステム -->
+        <div class="col-span-12 md:col-span-5 md:row-span-2 bg-ink-900 text-white p-8 md:p-10 relative">
+          <p class="text-[10px] tracking-[0.28em] text-warm-300 font-bold">N°01 — CORE</p>
+          <h3 class="mt-4 font-serif text-2xl md:text-4xl font-black leading-[1.1] tracking-tight">
+            モモヤ<br />システム
+          </h3>
+          <p class="mt-3 text-[10px] tracking-[0.28em] text-warm-300 font-bold">DIRECTION</p>
+          <p class="mt-6 text-sm md:text-base text-ink-100/90 leading-[1.85] max-w-[30ch]">
+            電気工事のディレクション・管理・調整。<br />
+            ゼネコン・設計・メーカーと施工現場の「あいだ」を翻訳する実務番頭。
+          </p>
+          <a href="/service" class="mt-8 inline-flex items-center gap-2 text-warm-300 font-bold border-b-2 border-warm-500 pb-1 hover:text-white transition">
+            サービスを見る <span class="num" aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <!-- 右上：イフス -->
+        <div class="col-span-12 md:col-span-7">
+          <article class="bg-white border-t-2 border-ink-900 pt-7 p-1">
+            <div class="flex items-baseline justify-between">
+              <p class="num text-[10px] tracking-[0.28em] text-ink-700 font-bold">N°02 — CONSTRUCTION</p>
+              <p class="text-[10px] tracking-[0.25em] text-ink-500">構想中</p>
+            </div>
+            <h3 class="mt-4 font-serif text-xl md:text-2xl font-bold text-ink-900 leading-tight">イフス</h3>
+            <p class="mt-3 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[40ch]">
+              電気工事に隣接する内装・空調・付帯工事を独立事業として展開。ディレクションでカバーしきれない自社施工領域を補完します。
+            </p>
+          </article>
+        </div>
+
+        <!-- 右下：モモヤコネクト -->
+        <div class="col-span-12 md:col-span-7">
+          <article class="bg-white border-t-2 border-ink-900 pt-7 p-1">
+            <div class="flex items-baseline justify-between">
+              <p class="num text-[10px] tracking-[0.28em] text-ink-700 font-bold">N°03 — PLATFORM</p>
+              <p class="text-[10px] tracking-[0.25em] text-ink-500">準備中</p>
+            </div>
+            <h3 class="mt-4 font-serif text-xl md:text-2xl font-bold text-ink-900 leading-tight">モモヤコネクト<span class="ml-2 text-sm font-normal text-ink-500">（M-System）</span></h3>
+            <p class="mt-3 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[40ch]">
+              業界の慢性課題（人材不足・属人化・ナレッジ散逸）を解くためのプラットフォームと、社内DXツール「Mシステム」の外販を準備中。
+            </p>
+          </article>
+        </div>
+
+        <!-- 下：日本防災支援機構 -->
+        <div class="col-span-12">
+          <article class="bg-warm-50 border-t-2 border-warm-700 pt-7 p-1 mt-2">
+            <div class="grid grid-cols-12 gap-x-6 items-baseline">
+              <div class="col-span-12 md:col-span-3">
+                <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold">N°04 — AFFILIATED</p>
+                <p class="text-[10px] tracking-[0.25em] text-warm-500 mt-2">連携</p>
+              </div>
+              <div class="col-span-12 md:col-span-9">
+                <h3 class="font-serif text-xl md:text-2xl font-bold text-ink-900 leading-tight">一般社団法人 日本防災支援機構</h3>
+                <p class="mt-3 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[60ch]">
+                  防災・BCPに関する取り組みを支援する関連法人。電気・通信インフラの設計力を、防災支援機構の事業計画に提供します。
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <p class="mt-12 text-xs text-ink-500 italic max-w-[60ch]">
+        ※ ホールディングス体制への移行は構想段階を含みます。事業ステータスは順次更新します。
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ Synergy ============ -->
+  <section class="bg-ink-50 py-24 md:py-32">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-ink-700">N°02 / Synergy</p>
+          <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.05] tracking-[-0.025em] max-w-[20ch]">
+            連携で何が生まれるか。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+          中核と派生の組み合わせから、独立した1社では出せない解像度の解決策が生まれます。
+        </p>
+      </div>
+
+      <dl class="mt-12 border-t-2 border-ink-900">
+        {synergy.map((row) => (
+          <div class="spec-row">
+            <dt>{row.k}</dt>
+            <dd>{row.v}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ Contact ============ -->
+  <Section tone="dark" eyebrow="NEXT" title="グループ全体のご相談はこちら。">
+    <p class="text-ink-100 max-w-[60ch] leading-[1.85]">
+      事業提携・連携、Mシステム外販の検討、防災・BCP関連のお問い合わせは、お気軽にご連絡ください。
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/contact?topic=group" class="btn-warm">
+        グループ全体の連携を相談する <span aria-hidden="true">→</span>
+      </a>
+      <a href="/company" class="btn-ghost text-white">会社概要に戻る</a>
+    </div>
+  </Section>
+</BaseLayout>

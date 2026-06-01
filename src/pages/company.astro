@@ -199,12 +199,76 @@ const profile = [
     </ol>
   </Section>
 
+  <!-- ============ SDGs / 業界課題解決と社会貢献 ============ -->
+  <section class="bg-warm-50 py-24 md:py-32">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-warm-700">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-warm-700">Sustainability / 業界課題解決と社会貢献</p>
+          <h2 class="mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.05] tracking-[-0.025em] text-warm-900 max-w-[20ch]">
+            事業そのものが、<br />社会課題への応答。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+          SDGs を別建てのCSRではなく、事業の射程として捉えています。
+          関連するゴールを、いま取り組んでいる施策とともに開示します。
+        </p>
+      </div>
+
+      <ol class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
+        {[
+          {
+            num: "07",
+            label: "エネルギーをみんなに",
+            sub:   "Affordable and Clean Energy",
+            body:  "EV／PHV 急速充電器インフラの設計・施工・申請を全国展開。クリーンエネルギーの社会実装を、電気工事のディレクションから支えます。",
+          },
+          {
+            num: "09",
+            label: "産業と技術革新の基盤",
+            sub:   "Industry, Innovation and Infrastructure",
+            body:  "「電気工事のディレクション」という業界に存在しなかった職能を、20年の現場経験から立ち上げています。中間翻訳の標準化が、産業の生産性を底上げします。",
+          },
+          {
+            num: "11",
+            label: "住み続けられるまちづくり",
+            sub:   "Sustainable Cities and Communities",
+            body:  "公共・行政視察対象の案件を含め、都市インフラの電気工事を担います。工期遵守・品質維持で、住み続けられる街づくりの底力を担保します。",
+          },
+          {
+            num: "12",
+            label: "つくる責任 つかう責任",
+            sub:   "Responsible Consumption and Production",
+            body:  "産業廃棄物収集運搬業許可（第02700196866号）の適正運用。メーカー直 VE ソーシングで、過剰な材料調達と廃棄を抑制します。",
+          },
+        ].map((g) => (
+          <li class="bg-white border-t-2 border-warm-700 p-6 md:p-7">
+            <div class="flex items-baseline justify-between">
+              <p class="num-display text-warm-500 text-4xl md:text-5xl leading-none">{g.num}</p>
+              <p class="text-[10px] tracking-[0.25em] text-warm-700 font-bold uppercase">SDG</p>
+            </div>
+            <p class="mt-5 font-serif text-lg md:text-xl font-bold text-ink-900 leading-snug">{g.label}</p>
+            <p class="mt-1 text-[10px] tracking-[0.2em] text-ink-500 font-bold uppercase">{g.sub}</p>
+            <p class="mt-4 text-sm text-ink-700 leading-[1.85] max-w-[36ch]">{g.body}</p>
+          </li>
+        ))}
+      </ol>
+
+      <p class="mt-12 text-xs text-ink-500 italic max-w-[60ch]">※ 取り組みの定量実績（CO2削減量等）は、確定次第本ページに掲載します。</p>
+    </div>
+  </section>
+
   <Section tone="dark" eyebrow="GROUP" title="モモヤホールディングス（構想）">
-    <p class="max-w-[60ch] text-ink-100 leading-relaxed">
+    <p class="max-w-[60ch] text-ink-100 leading-[1.85]">
       電気工事の管理・ディレクションを担うモモヤシステムを中核に、
       電気以外の工事事業（イフス）、業界課題解決の支援事業（モモヤコネクト）、
       防災支援（一般社団法人 日本防災支援機構）と連携し、
       「業界課題解決型のトータルソリューション提供会社」を目指します。
     </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/group" class="btn-warm">
+        グループ構成と連携の射程を見る <span aria-hidden="true">→</span>
+      </a>
+    </div>
   </Section>
 </BaseLayout>
