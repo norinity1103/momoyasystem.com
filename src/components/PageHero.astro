@@ -3,23 +3,52 @@ interface Props {
   eyebrow: string;
   title: string;
   lead?: string;
-  /** 任意：背景画像URL */
+  /** 任意：背景画像URL（1920幅推奨） */
   bg?: string;
+  /** 任意：モバイル用の小さい画像URL（指定なければbgをそのまま使う） */
+  bgMobile?: string;
+  /** 背景の不透明度（写真は0.4前後、procedural 図解は 0.55-0.7） */
+  bgOpacity?: number;
+  /** 図面・パターン素材か写真か。pattern なら暗幕を弱める */
+  bgKind?: "photo" | "pattern";
 }
-const { eyebrow, title, lead, bg } = Astro.props;
+const {
+  eyebrow,
+  title,
+  lead,
+  bg,
+  bgMobile,
+  bgOpacity,
+  bgKind = "photo",
+} = Astro.props;
+
+const opacity = bgOpacity ?? (bgKind === "pattern" ? 0.65 : 0.4);
+const veilClass = bgKind === "pattern"
+  ? "bg-gradient-to-br from-brand-900/72 via-brand-900/60 to-ink-900/82"
+  : "bg-gradient-to-br from-brand-900/95 via-brand-900/85 to-ink-900/95";
 ---
 <section class="relative isolate overflow-hidden bg-brand-900 text-white py-24 md:py-32">
   {bg && (
     <>
-      <img src={bg} alt="" class="absolute inset-0 -z-10 w-full h-full object-cover opacity-40" loading="eager" decoding="async" />
-      <div class="absolute inset-0 -z-10 bg-gradient-to-br from-brand-900/95 via-brand-900/85 to-ink-900/95"></div>
+      <picture class="absolute inset-0 -z-10 w-full h-full">
+        {bgMobile && <source media="(max-width: 768px)" srcset={bgMobile} />}
+        <img
+          src={bg}
+          alt=""
+          class="absolute inset-0 w-full h-full object-cover"
+          style={`opacity: ${opacity};`}
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
+      <div class={`absolute inset-0 -z-10 ${veilClass}`}></div>
     </>
   )}
   {!bg && (
     <div class="absolute inset-0 -z-10">
       <div class="absolute inset-0 bg-gradient-to-br from-brand-900 via-brand-700 to-ink-900"></div>
       <div class="absolute inset-0 opacity-20 mix-blend-screen"
-           style="background-image: radial-gradient(900px 450px at 75% 25%, #6c97cc 0%, transparent 65%), radial-gradient(700px 350px at 15% 85%, #d97706 0%, transparent 70%);"></div>
+           style="background-image: radial-gradient(900px 450px at 75% 25%, #6776a3 0%, transparent 65%), radial-gradient(700px 350px at 15% 85%, #b8964a 0%, transparent 70%);"></div>
     </div>
   )}
   <!-- 装飾：グリッド -->
