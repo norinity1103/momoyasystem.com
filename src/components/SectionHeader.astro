@@ -1,0 +1,46 @@
+---
+/**
+ * セクション見出し：Swiss split（eyebrow + heading + 右側 lead）を1つの単位に。
+ * tone: light (default) | dark
+ * align: split (default 7+4 grid) | stacked (single column)
+ */
+interface Props {
+  eyebrow: string;
+  title: string;            // HTML可（<br /> 等）
+  lead?: string;             // HTML可
+  tone?: "light" | "dark";
+  align?: "split" | "stacked";
+  ruleColor?: "ink" | "warm" | "white";
+}
+
+const {
+  eyebrow,
+  title,
+  lead,
+  tone = "light",
+  align = "split",
+  ruleColor = tone === "dark" ? "white" : "ink",
+} = Astro.props;
+
+const eyebrowColor = tone === "dark" ? "text-warm-300" : "text-ink-700";
+const titleColor = tone === "dark" ? "text-white" : "text-ink-900";
+const leadColor = tone === "dark" ? "text-ink-100/85" : "text-ink-700";
+const ruleClass = {
+  ink:   "border-ink-900",
+  warm:  "border-warm-700",
+  white: "border-white",
+}[ruleColor];
+---
+<div class:list={["grid grid-cols-12 gap-x-6 gap-y-6 items-end pb-5 border-b-2", ruleClass]}>
+  <div class={align === "split" ? "col-span-12 md:col-span-7" : "col-span-12"}>
+    <p class:list={["swiss-eyebrow", eyebrowColor]}>{eyebrow}</p>
+    <h2 class:list={["mt-5 font-serif font-black text-3xl md:text-5xl leading-[1.05] tracking-[-0.02em]", titleColor, "max-w-[20ch]"]} set:html={title}></h2>
+  </div>
+  {lead && (
+    <p class:list={[
+      "text-sm md:text-base leading-[1.85] max-w-[34ch]",
+      leadColor,
+      align === "split" ? "col-span-12 md:col-span-4 md:col-start-9 md:pl-6 md:border-l border-ink-200/60" : "col-span-12 max-w-[60ch]",
+    ]} set:html={lead}></p>
+  )}
+</div>

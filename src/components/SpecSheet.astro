@@ -1,0 +1,22 @@
+---
+/**
+ * Swiss スペックシート：key/value のテーブル状の表示。
+ * 例: 許可番号、サービス内容、お取引条件 など。
+ */
+interface Row { k: string; v: string; }
+interface Props {
+  rows: Row[];
+  ruleColor?: "ink" | "warm";
+  class?: string;
+}
+const { rows, ruleColor = "ink", class: className = "" } = Astro.props;
+const ruleClass = ruleColor === "warm" ? "border-warm-700" : "border-ink-900";
+---
+<dl class:list={["border-t-2", ruleClass, className]}>
+  {rows.map((row) => (
+    <div class="spec-row">
+      <dt>{row.k}</dt>
+      <dd>{row.v}</dd>
+    </div>
+  ))}
+</dl>

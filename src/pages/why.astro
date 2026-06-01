@@ -45,7 +45,7 @@ import PageHero from "../components/PageHero.astro";
   />
 
   <section class="bg-white py-24 md:py-32">
-    <div class="container-x">
+    <div class="wrap-content">
       <div class="space-y-16 md:space-y-24">
         {[
           {
@@ -71,7 +71,7 @@ import PageHero from "../components/PageHero.astro";
             </div>
             <div>
               <h2 class="font-serif text-2xl md:text-4xl font-black leading-tight tracking-tight">{it.title}</h2>
-              <p class="mt-5 max-w-3xl text-ink-700 leading-relaxed">{it.body}</p>
+              <p class="mt-5 max-w-[60ch] text-ink-700 leading-relaxed">{it.body}</p>
             </div>
           </article>
         ))}

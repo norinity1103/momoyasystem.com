@@ -1,0 +1,56 @@
+---
+/**
+ * 統一ボタンコンポーネント
+ * variant: warm (primary CTA), ghost-light, ghost-dark, link
+ * size:    md (default), lg (hero), sm (inline)
+ */
+interface Props {
+  href?: string;
+  variant?: "warm" | "ghost-light" | "ghost-dark" | "link";
+  size?: "sm" | "md" | "lg";
+  type?: "button" | "submit";
+  track?: string;
+  arrow?: boolean;
+  "aria-label"?: string;
+  class?: string;
+}
+
+const {
+  href,
+  variant = "warm",
+  size = "md",
+  type = "button",
+  track,
+  arrow = true,
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+const sizeMap: Record<string, string> = {
+  sm: "px-5 py-2.5 text-xs tracking-[0.1em]",
+  md: "px-7 py-4 text-sm tracking-[0.05em]",
+  lg: "px-8 py-5 text-base tracking-[0.05em]",
+};
+
+const variantMap: Record<string, string> = {
+  warm: "bg-warm-500 text-white hover:bg-warm-600 shadow-[0_8px_24px_-10px_rgba(201,123,62,.45)] hover:shadow-[0_14px_32px_-12px_rgba(201,123,62,.55)] hover:-translate-y-px",
+  "ghost-light": "border border-current text-current hover:bg-black/5",
+  "ghost-dark":  "border border-white/40 text-white hover:bg-white/10",
+  link: "underline underline-offset-4 decoration-2 hover:decoration-warm-500 hover:text-warm-700",
+};
+
+const base = "inline-flex items-center gap-2 font-bold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-warm-500";
+const cls = `${base} ${sizeMap[size]} ${variantMap[variant]} ${className}`;
+const Tag = href ? "a" : "button";
+---
+{href ? (
+  <a href={href} class={cls} data-track={track} {...rest}>
+    <slot />
+    {arrow && <span aria-hidden="true">→</span>}
+  </a>
+) : (
+  <button type={type} class={cls} data-track={track} {...rest}>
+    <slot />
+    {arrow && <span aria-hidden="true">→</span>}
+  </button>
+)}

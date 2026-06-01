@@ -3,7 +3,7 @@ import { site } from "../data/site";
 const { pathname } = Astro.url;
 ---
 <header class="sticky top-0 z-40 bg-white/92 backdrop-blur border-b border-ink-100">
-  <div class="container-x flex items-center justify-between h-16 md:h-20">
+  <div class="wrap-wide flex items-center justify-between h-16 md:h-20">
     <a href="/" class="flex items-center gap-3 group" aria-label="モモヤシステム ホームへ">
       <img src="/logo-mark.svg" alt="" width="36" height="36" class="block" />
       <span class="flex flex-col leading-tight">
@@ -42,7 +42,7 @@ const { pathname } = Astro.url;
 
   <!-- Mobile menu -->
   <nav id="mobile-nav" class="lg:hidden border-t border-ink-100 bg-white hidden" aria-label="モバイルメニュー">
-    <ul class="container-x py-4 divide-y divide-ink-100">
+    <ul class="wrap-wide py-4 divide-y divide-ink-100">
       {site.nav.map((item) => (
         <li>
           <a

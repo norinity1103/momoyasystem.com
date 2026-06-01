@@ -30,7 +30,7 @@ const fmt = (d: Date) =>
   }}
 >
   <section class="bg-brand-900 text-white py-20 md:py-28">
-    <div class="container-x">
+    <div class="wrap-content">
       <p class="text-xs tracking-[0.3em] text-brand-300">NEWS</p>
       <div class="mt-4 flex items-center gap-3">
         <time class="num text-sm text-ink-100" datetime={entry.data.date.toISOString()}>{fmt(entry.data.date)}</time>
@@ -41,7 +41,7 @@ const fmt = (d: Date) =>
   </section>
 
   <Section title="">
-    <article class="prose prose-lg prose-neutral max-w-3xl
+    <article class="prose prose-neutral max-w-[64ch]
                     prose-headings:font-serif prose-headings:font-bold
                     prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:border-l-4 prose-h2:border-brand-500 prose-h2:pl-4
                     prose-a:text-brand-700 prose-a:underline hover:prose-a:text-brand-500

@@ -51,6 +51,11 @@ body {
   background: #fff;
   font-feature-settings: "palt";
   -webkit-font-smoothing: antialiased;
+  font-size: 15px;
+  line-height: 1.7;
+}
+@media (min-width: 768px) {
+  body { font-size: 16px; line-height: 1.75; }
 }
 
 /* —————————————————————————————————————————————————————
@@ -61,7 +66,24 @@ body {
   --baseline: 0.5rem;             /* 8px = ベースライン単位 */
   --rule-thin: 1px;
   --rule-bold: 2px;
+  /* 横方向の clamp 余白: 1.5rem → 4vw → 4rem を補間。1440px+ で確実に 64px 余白を確保 */
+  --gutter-x: clamp(1.25rem, 4vw, 4rem);
 }
+
+/* ————————————————————————————————————
+   4-Tier Width System
+   wrap-full     ... 100%（フォト・動画 / 暗幕背景）
+   wrap-wide     ... 1280px（Hero, データテーブル, Footer）
+   wrap-content  ... 1120px（章セクションの土台）
+   wrap-read     ...  680px（本文・リード文 / 64ch 級）
+   ———————————————————————————————————— */
+.wrap-full     { width: 100%; }
+.wrap-wide     { width: 100%; max-width: 80rem;  margin-inline: auto; padding-inline: var(--gutter-x); }
+.wrap-content  { width: 100%; max-width: 70rem;  margin-inline: auto; padding-inline: var(--gutter-x); }
+.wrap-read     { width: 100%; max-width: 42.5rem; margin-inline: auto; padding-inline: var(--gutter-x); }
+
+/* 旧 .container-x も互換維持（段階的移行のため） */
+.container-x   { width: 100%; max-width: 70rem;  margin-inline: auto; padding-inline: var(--gutter-x); }
 
 /* グリッド可視化（デスクトップで意図的にグリッド線を見せる） */
 .swiss-grid {
