@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # R007 / R018: npm ci は macOS lockfile の platform 差異で落ちうるので --ignore-scripts
+      - run: npm install --ignore-scripts
+      - run: npm run lint:copy
+      # [[R004]] Vercel 想定でビルド（api/contact.ts を含めて検証）
+      - run: DEPLOY_TARGET=vercel npm run build
+      - run: npm run smoke

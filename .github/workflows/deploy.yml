@@ -23,16 +23,18 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
+      # [[R007]] npm ci は macOS lockfile の platform 差異で落ちうるため --ignore-scripts
+      - run: npm install --ignore-scripts
       - uses: actions/configure-pages@v5
         id: pages
-      - run: npx astro build
+      # Vercel adapter 同梱ビルドで dist/client に静的成果物を生成（[[R004]] 移行期）
+      - run: DEPLOY_TARGET=vercel npx astro build
         env:
           PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
           PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: dist/client
 
   deploy:
     needs: build
