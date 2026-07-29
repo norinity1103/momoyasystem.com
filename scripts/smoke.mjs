@@ -29,6 +29,7 @@ const REQUIRED_PAGES = [
   "index.html",
   "why/index.html",
   "service/index.html",
+  "maintenance/index.html",
   "value/index.html",
   "works/index.html",
   "partners/index.html",
