@@ -3,7 +3,8 @@ import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
 import { site } from "../data/site";
 
-async function loadFont(family: string, weight: number): Promise<Uint8Array | null> {
+// satori は ArrayBuffer / Buffer を受け取るため、Uint8Array に包まず素の ArrayBuffer を返す
+async function loadFont(family: string, weight: number): Promise<ArrayBuffer | null> {
   try {
     // Modern Chrome UA forces woff2 hosts on fonts.gstatic.com
     const ua =
@@ -16,8 +17,7 @@ async function loadFont(family: string, weight: number): Promise<Uint8Array | nu
     const css = await res.text();
     const url = css.match(/url\((https:[^)\s]+?\.(?:woff2|otf|ttf))\)/)?.[1];
     if (!url) return null;
-    const buf = await (await fetch(url)).arrayBuffer();
-    return new Uint8Array(buf);
+    return await (await fetch(url)).arrayBuffer();
   } catch (e) {
     console.warn(`OGP loadFont failed for ${family} ${weight}:`, e);
     return null;
