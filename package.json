@@ -10,9 +10,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "typecheck": "astro check",
     "lint:copy": "node scripts/lint-copy.mjs",
     "smoke": "node scripts/smoke.mjs",
-    "verify": "npm run lint:copy && npm run build && npm run smoke",
+    "verify": "npm run typecheck && npm run lint:copy && npm run build && npm run smoke",
     "test:e2e": "playwright test",
     "lhci": "lhci autorun"
   },
@@ -24,12 +25,14 @@
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@lhci/cli": "^0.14.0",
+    "@playwright/test": "^1.45.3",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/typography": "^0.5.19",
     "puppeteer": "^25.1.0",
     "satori": "^0.26.0",
     "sharp": "^0.33.5",
-    "@playwright/test": "^1.45.3",
-    "@lhci/cli": "^0.14.0"
+    "typescript": "^6.0.3"
   }
 }
