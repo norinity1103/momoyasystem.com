@@ -37,9 +37,9 @@ const fmt = (d: Date) =>
     />
   </div>
 
-  <!-- 下重心のグラデ暗幕：左下のキャッチを読ませる -->
-  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900/92 via-ink-900/55 to-ink-900/35"></div>
-  <div id="hero-overlay" class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900/88 via-ink-900/45 to-ink-900/25" hidden></div>
+  <!-- 暗幕は控えめに（帯あしらいでキャッチは可読）。下側だけ軽く締める -->
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900/60 via-ink-900/20 to-ink-900/5"></div>
+  <div id="hero-overlay" class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900/48 via-ink-900/12 to-transparent" hidden></div>
 
   <div class="wrap-wide relative flex-1 flex flex-col">
     <!-- 下寄せスペーサー -->

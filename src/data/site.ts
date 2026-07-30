@@ -30,7 +30,7 @@ export const site = {
     { href: "/why",      label: "なぜ「あいだ」か" },
     { href: "/service",  label: "事業内容" },
     { href: "/value",    label: "介在価値" },
-    { href: "/works",    label: "実績" },
+    { href: "/works",    label: "事例紹介" },
     { href: "/partners", label: LABELS.partners },
     { href: "/company",  label: "会社概要" },
     { href: "/contact",  label: "お問い合わせ" },
