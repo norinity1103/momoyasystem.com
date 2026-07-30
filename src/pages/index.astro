@@ -12,22 +12,23 @@ const latest = (await getCollection("news", ({ data }) => !data.draft))
 const fmt = (d: Date) =>
   `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
 
-// N°01 ポジショニング —— 三軸（業界用語化）
-const pillars = [
+// N°01 事業の二軸 —— テクニカルディレクション（軸A）／ メンテナンス（軸B）
+const axes = [
   {
-    no: "I",
-    title: "定例代行・VE提案",
-    body: "電気の知識が薄い元請担当者の代わりに、定例に出席。設計意図を施工言語に翻訳し、VE提案で原価を 3–8% 圧縮します。",
+    key: "A",
+    href: "/service/direction",
+    en: "TECHNICAL DIRECTION",
+    title: "テクニカルディレクション",
+    lead: "元請と施工現場の「あいだ」に立ち、電気の全体最適を設計する。定例・図面・工程・原価を翻訳・調整します。",
+    points: ["定例代行・VE提案", "施工図監修・申請対応", "工程プランニング", "メーカー直材料調達"],
   },
   {
-    no: "II",
-    title: "業者選定・パートナー編成",
-    body: "全国50社+の電気工事パートナーから、案件の規模・地域・仕様に合わせて専任チームを編成。元請の業者選定工数をゼロにします。",
-  },
-  {
-    no: "III",
-    title: "メーカー直ソーシング",
-    body: "工事原価の半分を占める材料を、メーカー直で調達。リードタイム短縮と原価圧縮を、ディレクション費の原資にも充てます。",
+    key: "B",
+    href: "/service/maintenance",
+    en: "MAINTENANCE",
+    title: "メンテナンス",
+    lead: "資材に頼らず、全国で動く。漏電・絶縁調査から設備診断、高圧機器の交換、店舗設備の保守まで。",
+    points: ["漏電・絶縁調査", "設備診断・老朽化調査", "高圧機器の交換", "照明・看板・サイネージ"],
   },
 ];
 ---
@@ -43,41 +44,43 @@ const pillars = [
     <div class="wrap-content">
       <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
         <div class="col-span-12 md:col-span-6">
-          <p class="swiss-eyebrow text-ink-700">N°01 / Position</p>
+          <p class="swiss-eyebrow text-ink-700">N°01 / Two Axes</p>
           <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[20ch]">
             施工会社ではなく、<br />
             電気工事の<span class="text-warm-500">テクニカル・ディレクター</span>。
           </h2>
         </div>
         <p class="col-span-12 md:col-span-5 md:col-start-8 md:pl-6 md:border-l border-ink-100 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[36ch]">
-          20期目に経営方針を転換しました。20年磨いた現場ノウハウを、自社施工リスクを切り離した
-          <strong>「管理・調整・ディレクション」</strong>として、上流の貴社に提供します。
+          20期目に経営方針を転換しました。20年磨いた現場ノウハウを、上流に立つ
+          <strong>テクニカルディレクション</strong>と、全国で動く<strong>メンテナンス</strong>の
+          二軸で、貴社に提供します。
         </p>
       </div>
 
-      <!-- 三本柱：均等カードではなく、左右の重みが違う editorial split -->
-      <div class="mt-16 md:mt-20 space-y-12 md:space-y-16">
-        {pillars.map((p, i) => (
-          <article class:list={[
-            "grid grid-cols-12 gap-x-6 gap-y-4 items-start border-t border-ink-100 pt-10",
-            i === 0 && "border-0 pt-0"
-          ]}>
-            <div class="col-span-12 md:col-span-2 md:col-start-1">
-              <p class="num-display text-warm-500 text-4xl md:text-5xl leading-none">{p.no}</p>
-            </div>
-            <h3 class="col-span-12 md:col-span-4 font-serif text-lg md:text-xl lg:text-2xl font-bold leading-[1.15] tracking-tight text-ink-900">
-              {p.title}
-            </h3>
-            <p class="col-span-12 md:col-span-5 md:col-start-8 text-base text-ink-700 leading-[1.85] max-w-[40ch]">
-              {p.body}
-            </p>
-          </article>
+      <!-- 事業の二軸：ディレクション（軸A）／ メンテナンス（軸B） -->
+      <div class="mt-16 md:mt-20 grid md:grid-cols-2 gap-6 lg:gap-8 observe-stagger">
+        {axes.map((a) => (
+          <a href={a.href} class="group relative flex flex-col bg-white border border-ink-100 hover:border-brand-500 transition-colors rounded-sm p-8 md:p-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500">
+            <span class="block w-12 h-[3px] bg-warm-500"></span>
+            <p class="mt-6 text-[10px] tracking-[0.3em] text-ink-500 font-bold">軸{a.key} ／ {a.en}</p>
+            <h3 class="mt-3 font-serif text-xl md:text-2xl font-black text-ink-900 tracking-tight">{a.title}</h3>
+            <p class="mt-5 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[42ch]">{a.lead}</p>
+            <ul class="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
+              {a.points.map((p) => (
+                <li class="flex gap-2.5 text-sm text-ink-700 leading-relaxed">
+                  <span class="text-warm-500 mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-warm-500 inline-block"></span>
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+            <span class="mt-8 pt-6 border-t border-ink-100 text-sm font-bold text-brand-700 group-hover:text-warm-600 transition-colors">詳しく見る <span aria-hidden="true">→</span></span>
+          </a>
         ))}
       </div>
 
-      <div class="mt-16 flex flex-wrap gap-3">
+      <div class="mt-14 flex flex-wrap gap-3">
         <a href="/service" class="btn-warm">
-          二つの事業の軸を見る <span aria-hidden="true">→</span>
+          事業内容の全体を見る <span aria-hidden="true">→</span>
         </a>
       </div>
     </div>
