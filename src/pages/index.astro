@@ -139,10 +139,8 @@ const axes = [
         ))}
       </div>
 
-      <div class="mt-14 flex flex-wrap gap-3">
-        <a href="/service" class="btn-warm">
-          事業内容の全体を見る <span aria-hidden="true">→</span>
-        </a>
+      <div class="mt-14">
+        <ViewMore href="/service" label="事業内容の全体を見る" />
       </div>
     </div>
   </section>
@@ -207,11 +205,12 @@ const axes = [
         ))}
       </div>
 
-      <div class="mt-14 flex flex-wrap gap-3">
-        <a href="/about#value" data-track="cta_click:home_value" class="btn-warm">
-          1億円案件モデルを商談用に印刷する <span aria-hidden="true">→</span>
+      <div class="mt-14 flex flex-wrap items-center gap-6">
+        <a href="/contact?topic=reserve" data-track="cta_click:home_value" class="btn-warm">
+          相談を予約する <span aria-hidden="true">→</span>
         </a>
-        <a href="/works" class="btn-ghost text-white">事例紹介を見る</a>
+        <a href="/contact?topic=docs" class="btn-ghost text-white">資料請求する</a>
+        <ViewMore href="/about#value" tone="dark" label="介在価値を見る" />
       </div>
     </div>
   </section>
