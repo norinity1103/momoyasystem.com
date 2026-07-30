@@ -1,3 +1,10 @@
+// サイト内で再利用するラベルの SSOT（表記ゆれ防止・一括変更用）。
+// ラベル文言を変えるときは必ずここを変更し、各ページ/コンポーネントは参照する。
+const LABELS = {
+  partners: "業務パートナー募集",       // グローバルナビ・フッター・partners ページ見出し
+  partnersEntry: "業務パートナーエントリー", // 応募フォームの CTA / topic 値
+} as const;
+
 export const site = {
   name: "株式会社モモヤシステム",
   shortName: "モモヤシステム",
@@ -22,10 +29,11 @@ export const site = {
     { href: "/service",  label: "事業内容" },
     { href: "/value",    label: "介在価値" },
     { href: "/works",    label: "実績" },
-    { href: "/partners", label: "協力会社募集" },
+    { href: "/partners", label: LABELS.partners },
     { href: "/company",  label: "会社概要" },
     { href: "/contact",  label: "お問い合わせ" },
   ],
+  labels: LABELS,
   contact: {
     phone: "06-4392-7136",
     email: "info@momoyasystem.com",

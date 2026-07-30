@@ -3,6 +3,7 @@
  * セグメント別エントリー：ターゲットごとの "自分への約束" を提示。
  * B2B コンサル LP の鉄則：「あなたが◯◯なら、こちらから」。
  */
+import { site } from "../data/site";
 const segments = [
   {
     code: "A",
@@ -27,10 +28,10 @@ const segments = [
   },
   {
     code: "D",
-    role: "電気工事会社（協力会社）",
+    role: "電気工事会社（業務パートナー）",
     promise: "上流案件のディレクションを差し込み、施工は御社のチームへ。",
     detail: "図面・打合せ・工程・材料はモモヤが翻訳・調整。施工に集中いただける環境です。月末締・翌月末払い。",
-    cta: { text: "協力会社エントリー", href: "/partners#form" },
+    cta: { text: site.labels.partnersEntry, href: "/partners#form" },
   },
 ];
 ---
