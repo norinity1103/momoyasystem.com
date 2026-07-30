@@ -197,6 +197,7 @@ h1, h2, h3, h4 {
 .btn-warm {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 1rem 1.75rem;
+  border-radius: 0.5rem;
   background: var(--color-warm-500); color: #fff;
   font-weight: 700;
   transition: background .2s ease, transform .2s ease, box-shadow .3s ease;
@@ -210,6 +211,7 @@ h1, h2, h3, h4 {
 .btn-ghost {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 1rem 1.75rem;
+  border-radius: 0.5rem;
   border: var(--rule-thin) solid currentColor;
   transition: background .2s ease;
 }

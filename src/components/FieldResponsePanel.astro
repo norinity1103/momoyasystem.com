@@ -5,6 +5,7 @@
  * - 接続線を visible に、duration を anchor に、step を checkpoint に
  * - tabular numerals、accent は warm-500 一点のみ
  */
+import EditorialHeading from "./EditorialHeading.astro";
 const steps = [
   { step: "01", label: "受付・一次連絡", duration: "24h",      hint: "営業日中は最短で当日中" },
   { step: "02", label: "現地調査・要件確認", duration: "1–3 day", hint: "上流の意図と現場制約を翻訳" },
@@ -23,21 +24,13 @@ const credentials = [
 ---
 <section class="bg-white py-24 md:py-32 border-y border-ink-100 scroll-mt-24" id="flow">
   <div class="wrap-content">
-    <!-- Section header — Swiss numbered rule、左右で役割明示 -->
-    <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
-      <div class="col-span-12 md:col-span-6">
-        <p class="swiss-eyebrow text-ink-700">Flow / 相談の流れ</p>
-        <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[16ch]">
-          相談の流れ<span class="text-warm-500">.</span>
-        </h2>
-      </div>
-      <div class="col-span-12 md:col-span-5 md:col-start-8 md:pl-6 md:border-l border-ink-100">
-        <p class="text-sm md:text-base text-ink-700 leading-[1.85] max-w-[35ch]">
-          <strong>受けてから着工準備まで、標準3日。</strong><br />
-          営業日中の一次連絡は <strong>24時間以内</strong>。現地調査・見積・パートナー手配を、最短で<strong>1週間以内</strong>に着工可能な状態まで進めます。
-        </p>
-      </div>
-    </div>
+    <!-- Section header — 共通あしらい（EditorialHeading） -->
+    <EditorialHeading
+      enTop="Our"
+      enBottom="Flow"
+      jp="相談の流れ"
+      intro="受けてから着工準備まで、標準3日。営業日中の一次連絡は24時間以内。現地調査・見積・パートナー手配を、最短で1週間以内に着工可能な状態まで進めます。"
+    />
 
     <!-- Process rail（接続線あり） -->
     <div class="mt-16 md:mt-20 relative">
