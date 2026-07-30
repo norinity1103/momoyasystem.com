@@ -42,7 +42,9 @@
   --color-accent-500: #d97706;
   --color-accent-600: #b45309;
 
-  --font-serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  /* 見出しも本文も Noto Sans JP に統一（明朝＝Noto Serif JP は廃止）。
+     旧 `font-serif` / var(--font-serif) はゴシックの見出しレジスタとして温存。 */
+  --font-serif: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
   --font-sans:  "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
   --font-mono:  "BIZ UDPGothic", monospace;
   --font-num:   "Montserrat", "Noto Sans JP", sans-serif;
