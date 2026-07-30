@@ -1,0 +1,165 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Section from "../../components/Section.astro";
+import PageHero from "../../components/PageHero.astro";
+import { site } from "../../data/site";
+
+// ── 軸B：メンテナンス（材料に頼らない、全国対応の本業） ──
+const menu = [
+  {
+    n: "01",
+    title: "漏電・絶縁調査",
+    lead: "絶縁抵抗の測定、回路・幹線の点検により、漏電や老朽化のリスクを早期に発見。是正が必要な箇所を優先度付きで報告します。",
+  },
+  {
+    n: "02",
+    title: "設備診断・老朽化調査",
+    lead: "受変電・分電・照明・空調などの各設備を点検し、対応年数と劣化状況を診断。更新すべき機器を根拠とともに提示します。",
+  },
+  {
+    n: "03",
+    title: "高圧機器の交換・更新",
+    lead: "キュービクル・高圧機器の老朽化に伴う入れ替えに対応。停電計画から施工・復電確認まで、稼働を止めない段取りで進めます。",
+  },
+  {
+    n: "04",
+    title: "照明・看板・サイネージ",
+    lead: "店舗の照明・外部看板・スポットライト・デジタルサイネージの設置・交換・保守。全国の店舗網をまとめて巡回対応します。",
+  },
+];
+
+const flow = [
+  { no: "01", code: "Survey", ja: "調査", body: "現地で設備の状態を測定・記録。写真と実測値で現況を押さえます。" },
+  { no: "02", code: "Report", ja: "報告書", body: "物件管理者が必要とする情報を、詳細かつスピーディーに報告。指摘を優先度で整理します。" },
+  { no: "03", code: "Propose", ja: "是正提案", body: "改修・交換プランを根拠とともに提案。材料手配から施工まで一貫で対応します。" },
+];
+
+const strengths = [
+  { k: "材料に頼らない", v: "調査・診断は資材の入荷を待ちません。資材難で新設現場が止まる局面でも、メンテナンスは動き続けます。" },
+  { k: "全国対応",       v: "大阪・東京の二拠点と全国パートナー網で、多店舗・広域の巡回案件をまとめて受けられます。" },
+  { k: "報告の質",       v: "「調べて終わり」にしない。是正提案までを一つの窓口で完結させ、次の判断を早めます。" },
+];
+---
+<BaseLayout
+  title="メンテナンス"
+  description="漏電・絶縁調査、設備診断、老朽化調査、高圧機器の交換、店舗の照明・看板・サイネージ保守。材料に頼らず全国対応できる、モモヤシステムのメンテナンス事業。調査から報告書・是正提案までを一つの窓口で。"
+  breadcrumbs={[
+    { name: "ホーム", href: "/" },
+    { name: "事業内容", href: "/service" },
+    { name: "メンテナンス", href: "/service/maintenance" },
+  ]}
+  jsonLd={menu.map((m) => ({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: m.title,
+    description: m.lead,
+    provider: { "@type": "Organization", name: site.name, url: site.url },
+    areaServed: "JP",
+  }))}
+>
+  <PageHero
+    eyebrow="SERVICE ─ 軸B ／ MAINTENANCE"
+    title="メンテナンス"
+    lead="材料に頼らず、全国で動く。漏電調査・設備診断・老朽化調査から高圧機器の交換、店舗設備の保守まで。調査して終わりではなく、報告書と是正提案までを一つの窓口で完結させます。"
+  />
+
+  <!-- ============ 定義：実は本業 ============ -->
+  <section class="bg-white pt-20 md:pt-28 pb-4">
+    <div class="wrap-content grid grid-cols-12 gap-x-6 gap-y-8 items-end pb-6 border-b-2 border-ink-900 observe">
+      <div class="col-span-12 md:col-span-7">
+        <p class="swiss-eyebrow text-ink-700">Definition / 立ち位置</p>
+        <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[22ch]">
+          資材が止まっても、<br />
+          <span class="text-warm-500">現場は止まらない。</span>
+        </h2>
+      </div>
+      <p class="col-span-12 md:col-span-5 md:col-start-8 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[38ch]">
+        新設工事が資材の入荷に左右される一方、点検・調査・診断は材料をほとんど必要としません。全国のチェーン店・メーカー・施設の設備を、稼働を止めずに支え続けます。
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 対応メニュー ============ -->
+  <section class="bg-white py-16 md:py-20">
+    <div class="wrap-content">
+      <div class="flex items-center gap-3 observe">
+        <span class="block w-8 h-[2px] bg-brand-500"></span>
+        <p class="text-[10px] md:text-xs tracking-[0.3em] font-bold text-brand-500">MENU / 対応メニュー</p>
+      </div>
+      <div class="mt-10 grid md:grid-cols-2 gap-px bg-ink-100 border border-ink-100 observe-stagger">
+        {menu.map((m) => (
+          <article class="bg-white p-8 md:p-10">
+            <div class="flex items-baseline gap-4">
+              <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold">N°{m.n}</p>
+              <h3 class="font-serif text-lg md:text-xl font-bold text-ink-900 tracking-tight">{m.title}</h3>
+            </div>
+            <p class="mt-4 text-sm md:text-base text-ink-700 leading-[1.85]">{m.lead}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ フロー：調査→報告書→是正提案 ============ -->
+  <section class="bg-ink-50 py-24 md:py-32">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-ink-700">Flow / 対応の流れ</p>
+          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[20ch]">
+            調べて、<span class="text-warm-500">直すところまで</span>。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+          調査の報告書で終わらせず、是正提案と施工までを一貫で担うことが、私たちの付加価値です。
+        </p>
+      </div>
+      <ol class="mt-12 grid md:grid-cols-3 gap-px bg-ink-100 border border-ink-100 observe-stagger">
+        {flow.map((f) => (
+          <li class="bg-white p-8 md:p-10 list-none">
+            <div class="flex items-baseline justify-between">
+              <span class="num-display text-4xl md:text-5xl text-brand-500/20">{f.no}</span>
+              <span class="text-[10px] tracking-[0.28em] text-ink-500 font-bold uppercase">{f.code}</span>
+            </div>
+            <h3 class="mt-4 font-serif text-lg md:text-xl font-bold text-ink-900">{f.ja}</h3>
+            <p class="mt-3 text-sm md:text-base text-ink-700 leading-[1.85]">{f.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 強み ============ -->
+  <section class="bg-white py-24 md:py-32">
+    <div class="wrap-content">
+      <div class="flex items-center gap-3 observe">
+        <span class="block w-8 h-[2px] bg-brand-500"></span>
+        <p class="text-[10px] md:text-xs tracking-[0.3em] font-bold text-brand-500">STRENGTH / 選ばれる理由</p>
+      </div>
+      <dl class="mt-8 border-t-2 border-ink-900">
+        {strengths.map((s) => (
+          <div class="spec-row observe">
+            <dt>{s.k}</dt>
+            <dd>{s.v}</dd>
+          </div>
+        ))}
+      </dl>
+      <!-- 全国チェーン実績。固有名（丸ハン/QB/ファミマ/スギ薬局 等）の掲載可否は要確認のため匿名表現 -->
+      <p class="mt-12 text-xs text-ink-500 max-w-[64ch] italic">
+        ※ パチンコ・理美容・コンビニ・ドラッグストアなど、全国チェーンの店舗設備メンテナンスの実績があります。個別の企業名・事例の掲載は、確認のうえ順次追加します。
+      </p>
+    </div>
+  </section>
+
+  <Section tone="dark" eyebrow="NEXT" title="設備を、調べるところから。">
+    <p class="text-ink-100 max-w-[60ch] leading-[1.85]">
+      「対応年数が古い」「漏電が心配」「多店舗をまとめて見てほしい」——まずは現況の調査からご相談ください。報告書と是正提案でお応えします。
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/contact" class="btn-warm">
+        調査を依頼する <span aria-hidden="true">→</span>
+      </a>
+      <a href="/service/direction" class="btn-ghost text-white">もう一つの軸：ディレクション →</a>
+    </div>
+  </Section>
+</BaseLayout>

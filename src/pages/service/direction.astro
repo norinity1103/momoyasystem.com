@@ -1,0 +1,212 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Section from "../../components/Section.astro";
+import PageHero from "../../components/PageHero.astro";
+import BridgeMethod from "../../components/BridgeMethod.astro";
+import LossSavingsInfographic from "../../components/LossSavingsInfographic.astro";
+import { site } from "../../data/site";
+
+// ── 軸A：テクニカルディレクション（打ち合わせ屋）の受託領域 ──
+const services = [
+  {
+    n: "01",
+    title: "定例代行・VE提案",
+    subtitle: "上流の意思決定を、現場の言葉で巻き取ります。",
+    lead: "元請担当者の代わりに定例に出席し、設計意図を施工言語に翻訳。VE提案（仕様変更による価値工学）で原価を3–8%圧縮しながら、確認のターン数を圧縮します。",
+    items: [
+      "定例会議の代行出席・議事録展開",
+      "施工側からの質疑を24時間以内に上流へエスカレート",
+      "VE提案（代替仕様・代替施工法）で原価圧縮",
+      "決定事項の図面・工程への即時反映",
+    ],
+    metric: { num: "▲ 3–8", unit: "%", label: "VE提案による原価圧縮レンジ" },
+  },
+  {
+    n: "02",
+    title: "施工図監修・申請対応",
+    subtitle: "設計図と施工図の整合を、ディレクションが担保します。",
+    lead: "施工図の整合性確認・修正展開、官公庁および電力会社への各種申請を一括対応。1級電気施工管理技士が監修し、設計段階から関与可能です。",
+    items: [
+      "施工図のCADチェック・修正・整合展開",
+      "電気主任技術者選任・電力会社申請の代行",
+      "官公庁届出（消防・保安等）の手配",
+      "設計監理の電気領域だけを切り出して受託",
+    ],
+    metric: { num: "1", unit: "級", label: "電気施工管理技士保有" },
+  },
+  {
+    n: "03",
+    title: "工程・週休2日プランニング",
+    subtitle: "2024年問題に対応した、現実的な工程設計。",
+    lead: "時間外労働の上限規制と週休2日工事の原則化を踏まえた工程設計。適正工期算定書を発行し、工程・原価・人員配置のバランスを設計します。",
+    items: [
+      "週休2日制を前提とした工程の組み直し",
+      "適正工期算定書の発行（建設業法改正対応）",
+      "パートナー稼働状況に基づく現実的なリソース配分",
+      "週次の工程モニタリングと差異報告",
+    ],
+    metric: { num: "95+", unit: "%", label: "工期遵守率（目標）" },
+  },
+  {
+    n: "04",
+    title: "メーカー直材料調達・VEソーシング",
+    subtitle: "原価の半分を占める材料を、上流で握ります。",
+    lead: "電気・照明・通信機材を、長年取引のあるメーカーから直接調達。リードタイム短縮と原価圧縮を実現しながら、ディレクション費の原資にも充当します。",
+    items: [
+      "電気機器・照明・通信機材のメーカー直購入",
+      "VEソーシング（代替品調達による原価圧縮）",
+      "リードタイム短縮（短納期案件への対応）",
+      "材料費・工事費・管理費の分離請求にも対応",
+    ],
+    metric: { num: "1/2", unit: "", label: "工事原価に占める材料費の比率" },
+  },
+];
+---
+<BaseLayout
+  title="テクニカルディレクション"
+  description="元請と施工現場の「あいだ」に立ち、定例代行・施工図監修・工程設計・材料ソーシングで電気工事を翻訳・調整する。現場常駐ではなく、打ち合わせ・図面・お金・工程の“流れ”を管理するテクニカルディレクション。"
+  breadcrumbs={[
+    { name: "ホーム", href: "/" },
+    { name: "事業内容", href: "/service" },
+    { name: "テクニカルディレクション", href: "/service/direction" },
+  ]}
+  jsonLd={services.map((s) => ({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: s.title,
+    description: s.lead,
+    provider: { "@type": "Organization", name: site.name, url: site.url },
+    areaServed: "JP",
+  }))}
+>
+  <PageHero
+    eyebrow="SERVICE ─ 軸A ／ TECHNICAL DIRECTION"
+    title="テクニカルディレクション"
+    lead="元請と施工現場の「あいだ」に立ち、電気の全体最適を設計する。現場に常駐する管理ではなく、打ち合わせ・図面・お金・工程という“流れ”を管理する、電気工事のディレクションです。"
+  />
+
+  <!-- ============ 定義：打ち合わせ屋とは ============ -->
+  <section class="bg-white pt-20 md:pt-28 pb-4">
+    <div class="wrap-content grid grid-cols-12 gap-x-6 gap-y-8 items-end pb-6 border-b-2 border-ink-900 observe">
+      <div class="col-span-12 md:col-span-7">
+        <p class="swiss-eyebrow text-ink-700">Definition / 立ち位置</p>
+        <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[22ch]">
+          施工を<span class="text-warm-500">受ける</span>のではなく、<br />
+          現場を<span class="text-warm-500">通訳</span>する。
+        </h2>
+      </div>
+      <p class="col-span-12 md:col-span-5 md:col-start-8 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[38ch]">
+        建設会社・設計事務所・メーカーの担当者は、電気に詳しいとは限りません。上流の意図が現場に降りず、現場の懸念が上流に届かない——その断絶を、現場を知る者が“あいだ”で埋めます。
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ The Bridge Method（進め方） ============ -->
+  <BridgeMethod />
+
+  <!-- ============ 受託領域（4サービス） ============ -->
+  <section class="bg-white pt-8 pb-4">
+    <div class="wrap-content">
+      <div class="flex items-center gap-3 observe">
+        <span class="block w-8 h-[2px] bg-brand-500"></span>
+        <p class="text-[10px] md:text-xs tracking-[0.3em] font-bold text-brand-500">SCOPE / 受託領域</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="bg-white">
+    {services.map((s, i) => (
+      <section class:list={["py-16 md:py-24 relative", i % 2 === 1 ? "bg-ink-50" : ""]}>
+        <div class="wrap-content grid lg:grid-cols-[220px_1fr] gap-10 lg:gap-16 observe">
+          <div class="relative">
+            <p class="num text-5xl md:text-6xl font-black text-brand-500/15 leading-none select-none" aria-hidden="true">{s.n}</p>
+            <div class="absolute top-0 left-0 flex flex-col">
+              <p class="text-[10px] tracking-[0.3em] text-brand-700 font-bold pt-3">SCOPE {s.n}</p>
+              <span class="block w-10 h-[2px] bg-warm-500 mt-3"></span>
+            </div>
+          </div>
+          <div>
+            <h2 class="font-serif text-lg md:text-xl lg:text-2xl font-black leading-tight tracking-tight">{s.title}</h2>
+            <p class="mt-4 text-sm md:text-base text-warm-700 font-bold tracking-tight">{s.subtitle}</p>
+            <p class="mt-6 text-base md:text-lg text-ink-700 leading-[1.85] max-w-[60ch]">{s.lead}</p>
+            <ul class="mt-8 grid md:grid-cols-2 gap-x-8 gap-y-3 max-w-[64ch]">
+              {s.items.map((item) => (
+                <li class="flex gap-3 text-sm md:text-base text-ink-700 leading-relaxed">
+                  <span class="text-warm-500 mt-1.5 flex-shrink-0 w-2 h-2 rounded-full bg-warm-500 inline-block"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-8 inline-flex items-baseline gap-4 border-t-2 border-ink-900 pt-4">
+              <span class="num-display text-3xl md:text-4xl text-ink-900">{s.metric.num}<span class="text-base text-ink-500 ml-1">{s.metric.unit}</span></span>
+              <span class="text-[10px] tracking-[0.25em] text-ink-500 uppercase font-bold md:max-w-[20ch]">{s.metric.label}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <!-- ============ 導入メリット：損失 vs 利益保全 ============ -->
+  <section class="bg-white py-24 md:py-32 border-t border-ink-100">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-ink-700">Effect / 介在の効果</p>
+          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[20ch]">
+            管理不在の<span class="text-warm-500">損失</span>を、<br />
+            利益保全に変える。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+          コスト削減・納期短縮・品質維持・二度手間防止。“あいだ”に立つ効果を、1億円案件のモデルで可視化します。
+        </p>
+      </div>
+      <div class="mt-14">
+        <LossSavingsInfographic />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 料金の考え方 ============ -->
+  <section class="bg-ink-50 py-24 md:py-32">
+    <div class="wrap-content grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-20 items-start">
+      <div class="observe">
+        <p class="swiss-eyebrow text-ink-700">Pricing / 料金の考え方</p>
+        <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[18ch]">
+          削減した分から、<br />いただく。
+        </h2>
+        <p class="mt-6 text-base md:text-lg text-ink-700 leading-[1.85] max-w-[46ch]">
+          ディレクション費は、案件規模と関与範囲に応じて事前にお見積りします。手戻り・遅延・二度手間を防いで生まれた原価削減の範囲から充当する設計のため、費用の根拠を明示します。「なぜその金額なのか」を曖昧にしません。
+        </p>
+      </div>
+      <div class="observe">
+        <!-- 匿名化した参考事例。実名・画像の掲載可否は要確認のため抽象表現で記載 -->
+        <div class="bg-white border border-ink-100 rounded-sm p-8 md:p-10">
+          <p class="text-[10px] tracking-[0.3em] text-ink-500">CASE / 参考事例</p>
+          <h3 class="mt-2 font-serif text-lg md:text-xl font-bold text-ink-900">首都圏・大規模別荘の高圧受電計画</h3>
+          <p class="mt-4 text-sm md:text-base text-ink-700 leading-[1.85]">
+            設計事務所と施工会社の間に電気の判断ができる担当が不在。受電容量の制約という設計上の課題に対し、建築・施工双方の打ち合わせに入って調整し、申請の通る計画にまとめました。
+          </p>
+          <dl class="mt-8 border-t-2 border-ink-900">
+            <div class="spec-row"><dt>関与</dt><dd>設計〜施工の“あいだ”で電気の全体調整</dd></div>
+            <div class="spec-row"><dt>論点</dt><dd>受電容量の制約・高圧受電設備の計画</dd></div>
+            <div class="spec-row"><dt>成果</dt><dd>手戻りなく計画確定／ディレクション費として受託</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Section tone="dark" eyebrow="NEXT" title="この案件、あいだに入れますか？">
+    <p class="text-ink-100 max-w-[60ch] leading-[1.85]">
+      定例代行だけ、施工図監修だけといった部分受託も可能です。案件の概要をお送りいただければ、関与範囲とお見積りの考え方をご提案します。
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/contact" class="btn-warm">
+        案件を相談する <span aria-hidden="true">→</span>
+      </a>
+      <a href="/service/maintenance" class="btn-ghost text-white">もう一つの軸：メンテナンス →</a>
+    </div>
+  </Section>
+</BaseLayout>

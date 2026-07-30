@@ -19,7 +19,7 @@ export const site = {
   ],
   nav: [
     { href: "/why",      label: "なぜ「あいだ」か" },
-    { href: "/service",  label: "サービス" },
+    { href: "/service",  label: "事業内容" },
     { href: "/value",    label: "介在価値" },
     { href: "/works",    label: "実績" },
     { href: "/partners", label: "協力会社募集" },
