@@ -29,10 +29,10 @@ export const site = {
   nav: [
     { href: "/about",    label: "私たちについて" },
     { href: "/service",  label: "事業内容" },
-    { href: "/works",    label: "事例紹介" },
     { href: "/#flow",    label: "相談の流れ" },
-    { href: "/partners", label: LABELS.partners },
+    { href: "/works",    label: "事例紹介" },
     { href: "/company",  label: "会社概要" },
+    { href: "/partners", label: LABELS.partners },
     { href: "/contact",  label: "お問い合わせ" },
   ],
   labels: LABELS,

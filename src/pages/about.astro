@@ -36,6 +36,14 @@ const management = [
   { n: "03", t: "工程管理", d: "週休2日制・労働時間規制を踏まえた現実的な工程設計とウォッチ。遅延を未然に防止。" },
   { n: "04", t: "材料・原価管理", d: "メーカー直取引で材料を一括調達。スケールメリットを管理費の原資に充当。" },
 ];
+
+// 会社の強み（写真付き）。※現場写真は現行サイトから回収した実写真。
+const strengths = [
+  { no: "01", ja: "現場力", en: "Field Expertise", img: "/img/site/photo-04.webp", desc: "20年の電気工事の現場経験。だからこそ、上流の意図を施工の言葉に翻訳できます。" },
+  { no: "02", ja: "翻訳力", en: "Translation",     img: "/img/site/photo-05.webp", desc: "元請と施工会社の「あいだ」に立ち、認識のズレを合わせ、レスポンスを速くします。" },
+  { no: "03", ja: "編成力", en: "Orchestration",   img: "/img/site/photo-02.webp", desc: "全国50社以上のパートナーから、案件の規模・地域に応じた専任チームを編成します。" },
+  { no: "04", ja: "継続力", en: "Continuity",      img: "/img/site/photo-06.webp", desc: "資材に頼らないメンテナンスで、建設現場が停滞する時期でも動き続けます。" },
+];
 ---
 <BaseLayout
   title="私たちについて"
@@ -51,10 +59,49 @@ const management = [
   <!-- ページ内ナビ -->
   <nav class="bg-white border-b border-ink-100 sticky top-16 md:top-20 z-30" aria-label="ページ内ナビ">
     <div class="wrap-content flex gap-6 py-4 text-sm font-bold overflow-x-auto">
+      <a href="#strength" class="whitespace-nowrap text-ink-700 hover:text-warm-700 transition">会社の強み</a>
       <a href="#why" class="whitespace-nowrap text-ink-700 hover:text-warm-700 transition">なぜ「あいだ」か</a>
       <a href="#value" class="whitespace-nowrap text-ink-700 hover:text-warm-700 transition">介在価値</a>
     </div>
   </nav>
+
+  <!-- ============ SECTION 0：会社の強み（写真付き・青地／INOUE参考） ============ -->
+  <section id="strength" class="relative isolate overflow-hidden text-white py-24 md:py-32 scroll-mt-24"
+           style="background-image: linear-gradient(160deg, #1e5ad9 0%, #123a9e 60%, #0f2b74 100%);">
+    <div class="wrap-content">
+      <p class="font-serif font-black leading-[0.9] tracking-[-0.03em]">
+        <span class="block text-5xl md:text-6xl lg:text-7xl text-white/40">Our</span>
+        <span class="block text-5xl md:text-6xl lg:text-7xl text-white">Strength</span>
+      </p>
+      <p class="mt-6 text-lg md:text-xl font-bold">会社の強み</p>
+      <p class="mt-6 max-w-[52ch] text-sm md:text-base text-white/85 leading-[1.9]">
+        20年の電気工事の現場経験を土台に、上流と現場の「あいだ」に立つ。モモヤシステムが選ばれる4つの力です。
+      </p>
+
+      <div class="mt-16 md:mt-20 space-y-14 md:space-y-16">
+        {strengths.map((s) => (
+          <article class="group grid grid-cols-12 gap-x-6 gap-y-6 items-center border-t border-white/20 pt-10 md:pt-12">
+            <div class="col-span-12 md:col-span-4">
+              <div class="flex items-baseline gap-4">
+                <span class="num-display text-3xl md:text-4xl text-white/55">{s.no}</span>
+                <span class="text-sm font-bold text-white/85">{s.ja}</span>
+              </div>
+              <p class="mt-3 font-serif font-black text-3xl md:text-4xl lg:text-5xl tracking-tight">{s.en}</p>
+            </div>
+            <div class="col-span-12 md:col-span-4">
+              <div class="aspect-[4/3] overflow-hidden rounded-lg shadow-2xl rotate-[-1.5deg]">
+                <img src={s.img} alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" />
+              </div>
+            </div>
+            <div class="col-span-12 md:col-span-4 md:pl-4 flex items-center gap-4">
+              <p class="text-sm md:text-base text-white/90 leading-[1.9]">{s.desc}</p>
+              <span class="hidden md:grid place-items-center w-10 h-10 rounded-full border border-white/40 flex-shrink-0" aria-hidden="true">→</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- ============ SECTION 1：なぜ「あいだ」か ============ -->
   <section id="why" class="bg-white py-24 md:py-32 scroll-mt-32">

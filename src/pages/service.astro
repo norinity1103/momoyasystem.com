@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
 import PageHero from "../components/PageHero.astro";
+import EditorialHeading from "../components/EditorialHeading.astro";
 
 // ── 二軸ハブ：テクニカルディレクション（軸A）／ メンテナンス（軸B） ──
 const axes = [
@@ -36,8 +37,20 @@ const axes = [
     lead="上流と現場の「あいだ」に立つテクニカルディレクション（軸A）と、資材に左右されず全国で動くメンテナンス（軸B）。この二軸が、モモヤシステムの現在の形です。"
   />
 
+  <!-- ============ 冒頭：編集的見出し（事例紹介UIに合わせる） ============ -->
+  <section class="bg-white pt-20 md:pt-28">
+    <div class="wrap-content">
+      <EditorialHeading
+        enTop="Direction &"
+        enBottom="Maintenance"
+        jp="事業内容"
+        intro="上流と現場の「あいだ」に立つテクニカルディレクションと、資材に左右されず全国で動くメンテナンス。この二軸が、モモヤシステムの現在の形です。"
+      />
+    </div>
+  </section>
+
   <!-- ============ 二軸カード ============ -->
-  <section class="bg-white py-20 md:py-28">
+  <section class="bg-white pt-12 md:pt-16 pb-20 md:pb-28">
     <div class="wrap-content grid md:grid-cols-2 gap-6 lg:gap-8 observe-stagger">
       {axes.map((a) => (
         <a href={a.href} class="group relative flex flex-col bg-white border border-ink-100 hover:border-brand-500 transition-colors rounded-sm p-8 md:p-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500">

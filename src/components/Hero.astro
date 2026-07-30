@@ -9,7 +9,7 @@ const topic = topics[0];
 const fmt = (d: Date) =>
   `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
 ---
-<section class="relative isolate overflow-hidden bg-ink-900 text-white min-h-[100dvh] flex flex-col">
+<section class="relative isolate overflow-hidden bg-ink-900 text-white min-h-[80dvh] flex flex-col">
   <!--
     MV：全画面動画を背景に、左下へ大判ゴシックのキャッチを置く構成。
     動画 mp4 があれば自動でポスター画像から切替。無い環境では静止で成立。
@@ -37,12 +37,12 @@ const fmt = (d: Date) =>
     />
   </div>
 
-  <!-- 暗幕は控えめに（帯あしらいでキャッチは可読）。下側だけ軽く締める -->
-  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900/60 via-ink-900/20 to-ink-900/5"></div>
-  <div id="hero-overlay" class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900/48 via-ink-900/12 to-transparent" hidden></div>
+  <!-- 暗幕はほぼ無し（明るく）。最下部のティッカー可読のため下端だけ僅かに -->
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900/30 via-transparent to-transparent"></div>
+  <div id="hero-overlay" class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900/20 via-transparent to-transparent" hidden></div>
 
   <div class="wrap-wide relative flex-1 flex flex-col">
-    <!-- 下寄せスペーサー -->
+    <!-- 上下スペーサーでキャッチをやや上寄せ（下端に貼り付けない） -->
     <div class="flex-1"></div>
 
     <!-- Bottom-left：大判キャッチ（ファーストビュー ≈100dvh に収める） -->
@@ -71,6 +71,9 @@ const fmt = (d: Date) =>
         </a>
       </div>
     </div>
+
+    <!-- 下スペーサー（キャッチを下端に貼り付けずやや上へ） -->
+    <div class="flex-[0.5]"></div>
   </div>
 
   <!-- Topics ティッカー（全幅・最下部） -->
