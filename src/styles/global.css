@@ -149,6 +149,25 @@ h1, h2, h3, h4 {
 .num { font-family: var(--font-num); font-feature-settings: "tnum"; }
 .num-display { font-family: var(--font-num); font-feature-settings: "tnum"; font-weight: 900; line-height: 0.95; letter-spacing: -0.04em; }
 
+/* MV キャッチの「あしらい」：テキスト背景にベタのスクエア（塗りの帯）を敷く（参考準拠）。
+   大キャッチ＝白帯×青文字、サブ＝青帯×白文字。box-decoration-break で行ごとに帯が付く。 */
+.hero-catch {
+  display: inline;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background: #ffffff;
+  color: #1a53c8;
+  padding: 0.02em 0.26em;
+}
+.hero-catch-sub {
+  display: inline;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background: #1a53c8;
+  color: #ffffff;
+  padding: 0.06em 0.32em;
+}
+
 /* Tabular data row — Swiss spec sheet style */
 .spec-row {
   display: grid;

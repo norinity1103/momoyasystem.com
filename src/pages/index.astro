@@ -39,6 +39,68 @@ const axes = [
   <!-- ============ HERO（dark / Swiss poster field） ============ -->
   <Hero />
 
+  <!-- ============ 私たちの強み（blue field / photo collage） ============ -->
+  <section class="relative isolate overflow-hidden bg-brand-700 text-white py-24 md:py-32 lg:py-40"
+           style="background-image: linear-gradient(158deg, #1e5ad9 0%, #123a9e 55%, #0f2b74 100%);">
+    <!-- 青い炎のグロー（参考のあしらい） -->
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[42vw] max-w-[520px] h-[60%] -z-0 pointer-events-none"
+         style="background: radial-gradient(ellipse at bottom, rgba(140,190,255,.55), rgba(140,190,255,0) 70%);" aria-hidden="true"></div>
+    <!-- 左下の白いダイアゴナル・ウェッジ -->
+    <div class="absolute bottom-0 left-0 w-40 h-24 md:w-56 md:h-32 bg-white -z-0" style="clip-path: polygon(0 0, 0 100%, 100% 100%);" aria-hidden="true"></div>
+
+    <!-- 写真コラージュ（lg以上・非対称配置。※現場写真は受領後に差替え） -->
+    <div class="hidden lg:block" aria-hidden="true">
+      <img src="/img/ev-charger-installed-1280.webp" alt="" class="absolute top-16 left-[4%] w-56 xl:w-64 aspect-[4/5] object-cover rounded-sm shadow-2xl rotate-[-2deg]" loading="lazy" decoding="async" />
+      <img src="/img/cityscape-1280.webp" alt="" class="absolute top-24 right-[4%] w-60 xl:w-72 aspect-[4/5] object-cover rounded-sm shadow-2xl rotate-[2deg]" loading="lazy" decoding="async" />
+      <img src="/img/scaffold-960.webp" alt="" class="absolute bottom-16 left-[7%] w-56 xl:w-64 aspect-[16/10] object-cover rounded-sm shadow-2xl" loading="lazy" decoding="async" />
+      <img src="/img/ev-charger-home-1280.webp" alt="" class="absolute bottom-14 right-[7%] w-52 xl:w-60 aspect-[4/3] object-cover rounded-sm shadow-2xl" loading="lazy" decoding="async" />
+    </div>
+
+    <!-- 中央：見出し → 強調コピー → 3つの円 → ミッション → VIEW MORE -->
+    <div class="wrap-content relative z-10 text-center observe">
+      <p class="swiss-eyebrow !text-white/80 justify-center">Our Strength / 私たちの強み</p>
+
+      <p class="mt-8 font-serif font-black text-2xl md:text-4xl lg:text-5xl leading-[1.35] tracking-[-0.02em] text-white">
+        「あいだ」に立ち、<br />電気の現場を最適化する。
+      </p>
+
+      <!-- 迅速・気配り・提案力（金の三円。参考画像をインライン SVG で再現） -->
+      <svg class="mt-12 md:mt-16 mx-auto w-full max-w-[560px] h-auto" viewBox="0 0 1200 430" role="img" aria-label="私たちの強み：迅速・気配り・提案力">
+        <defs>
+          <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fbeaa6" />
+            <stop offset="0.45" stop-color="#e7c45f" />
+            <stop offset="0.75" stop-color="#c99a2e" />
+            <stop offset="1" stop-color="#f2d982" />
+          </linearGradient>
+        </defs>
+        <g fill="none" stroke="url(#gold)" stroke-width="5">
+          <circle cx="280" cy="215" r="196" />
+          <circle cx="600" cy="215" r="196" />
+          <circle cx="920" cy="215" r="196" />
+        </g>
+        <g fill="url(#gold)" font-family="'Noto Sans JP','Hiragino Sans',sans-serif" font-weight="700" font-size="96" text-anchor="middle" dominant-baseline="central">
+          <text x="280" y="222">迅速</text>
+          <text x="600" y="222">気配り</text>
+          <text x="920" y="222">提案力</text>
+        </g>
+      </svg>
+
+      <div class="mt-14 md:mt-16 space-y-4 md:space-y-5 text-base md:text-lg lg:text-xl font-bold leading-[1.7] text-white/95">
+        <p>20年、電気の現場で段取りを磨いてきた。</p>
+        <p>全国50社と結び、適材適所で束ねてきた。</p>
+        <p>資材に頼らず動く、止まらない現場がある。</p>
+      </div>
+
+      <div class="mt-12 md:mt-14 flex justify-center">
+        <a href="/why" class="group inline-flex items-center gap-4 text-sm tracking-[0.2em] font-bold text-white">
+          <span>VIEW MORE</span>
+          <span class="grid place-items-center w-12 h-12 rounded-full bg-ink-900 group-hover:bg-warm-500 transition-colors" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ N°01 — ポジショニング（white / editorial split） ============ -->
   <section class="bg-white pt-24 md:pt-32 pb-20 md:pb-24">
     <div class="wrap-content">

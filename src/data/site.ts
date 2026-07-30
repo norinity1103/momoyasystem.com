@@ -3,6 +3,8 @@
 const LABELS = {
   partners: "業務パートナー募集",       // グローバルナビ・フッター・partners ページ見出し
   partnersEntry: "業務パートナーエントリー", // 応募フォームの CTA / topic 値
+  ctaReserve: "相談を予約する",         // 主 CTA（ヘッダー・各 CTA エリア）
+  ctaDocs: "資料請求する",              // 副 CTA（ヘッダー・各 CTA エリア）
 } as const;
 
 export const site = {
