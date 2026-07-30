@@ -4,20 +4,20 @@
  * 事例紹介「Our / Works」、事業内容「Direction & / Maintenance」等で共有。
  */
 interface Props {
-  enTop: string;
+  enTop?: string;       // 省略で1段見出し（enBottom のみ）
   enBottom: string;
   jp: string;
   intro?: string;
-  topColor?: string;    // 上段英字の色クラス
-  bottomColor?: string; // 下段英字の色クラス
+  topColor?: string;    // 上段英字の色クラス（未指定時は dark に応じて自動）
+  bottomColor?: string; // 下段英字の色クラス（未指定時は dark に応じて自動）
   size?: "md" | "lg";
+  dark?: boolean;       // 暗い背景用（白系テキスト）
 }
-const {
-  enTop, enBottom, jp, intro,
-  topColor = "text-ink-300",
-  bottomColor = "text-brand-600",
-  size = "lg",
-} = Astro.props;
+const { enTop, enBottom, jp, intro, topColor, bottomColor, size = "lg", dark = false } = Astro.props;
+const topC = topColor ?? (dark ? "text-white/40" : "text-ink-300");
+const bottomC = bottomColor ?? (dark ? "text-white" : "text-brand-600");
+const jpC = dark ? "text-white" : "text-ink-900";
+const introC = dark ? "text-ink-100/85" : "text-ink-700";
 const enSize = size === "lg"
   ? "text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
   : "text-3xl sm:text-4xl md:text-5xl";
@@ -25,12 +25,12 @@ const enSize = size === "lg"
 <div class="grid grid-cols-12 gap-x-6 gap-y-8 items-end">
   <div class="col-span-12 md:col-span-7">
     <p class="font-serif font-black leading-[0.92] tracking-[-0.03em]">
-      <span class:list={["block", enSize, topColor]}>{enTop}</span>
-      <span class:list={["block", enSize, bottomColor]}>{enBottom}</span>
+      {enTop && <span class:list={["block", enSize, topC]}>{enTop}</span>}
+      <span class:list={["block", enSize, bottomC]}>{enBottom}</span>
     </p>
-    <p class="mt-6 text-lg md:text-xl font-bold text-ink-900">{jp}</p>
+    <p class:list={["mt-6 text-lg md:text-xl font-bold", jpC]}>{jp}</p>
   </div>
   {intro && (
-    <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.9] max-w-[42ch]">{intro}</p>
+    <p class:list={["col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base leading-[1.9] max-w-[42ch]", introC]}>{intro}</p>
   )}
 </div>

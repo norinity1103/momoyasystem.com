@@ -6,6 +6,7 @@ import BridgeMethod from "../components/BridgeMethod.astro";
 import SegmentEntries from "../components/SegmentEntries.astro";
 import ViewMore from "../components/ViewMore.astro";
 import WorksShowcase from "../components/WorksShowcase.astro";
+import EditorialHeading from "../components/EditorialHeading.astro";
 import { getCollection } from "astro:content";
 
 const latest = (await getCollection("news", ({ data }) => !data.draft))
@@ -103,20 +104,12 @@ const axes = [
   <!-- ============ N°01 — ポジショニング（white / editorial split） ============ -->
   <section class="bg-white pt-24 md:pt-32 pb-20 md:pb-24">
     <div class="wrap-content">
-      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
-        <div class="col-span-12 md:col-span-6">
-          <p class="swiss-eyebrow text-ink-700">N°01 / Two Axes</p>
-          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[20ch]">
-            施工会社ではなく、<br />
-            電気工事の<span class="text-warm-500">テクニカル・ディレクター</span>。
-          </h2>
-        </div>
-        <p class="col-span-12 md:col-span-5 md:col-start-8 md:pl-6 md:border-l border-ink-100 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[36ch]">
-          20期目に経営方針を転換しました。20年磨いた現場ノウハウを、上流に立つ
-          <strong>テクニカルディレクション</strong>と、全国で動く<strong>メンテナンス</strong>の
-          二軸で、貴社に提供します。
-        </p>
-      </div>
+      <EditorialHeading
+        enTop="Our"
+        enBottom="Business"
+        jp="施工会社ではなく、電気工事のテクニカル・ディレクター。"
+        intro="20期目に経営方針を転換。20年磨いた現場ノウハウを、上流に立つテクニカルディレクションと、全国で動くメンテナンスの二軸で、貴社に提供します。"
+      />
 
       <!-- 事業の二軸：ディレクション（軸A）／ メンテナンス（軸B） -->
       <div class="mt-16 md:mt-20 grid md:grid-cols-2 gap-6 lg:gap-8 observe-stagger">
@@ -157,19 +150,12 @@ const axes = [
   <!-- ============ N°04 — Why ============ -->
   <section class="bg-ink-50 py-24 md:py-32">
     <div class="wrap-content">
-      <div class="grid grid-cols-12 gap-x-6 gap-y-10 items-end pb-5 border-b-2 border-ink-900">
-        <div class="col-span-12 md:col-span-7">
-          <p class="swiss-eyebrow text-ink-700">N°04 / Why</p>
-          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[20ch]">
-            業界構造の変化が、<br />
-            翻訳者を必要としている。
-          </h2>
-        </div>
-        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
-          建設業法改正（2025年12月完全施行）、2024年問題、現場の外国人化、上流の電気知識ギャップ。
-          翻訳者・調整役のポジションは、ここから10年で需要が拡大します。
-        </p>
-      </div>
+      <EditorialHeading
+        enTop="Our"
+        enBottom="Why"
+        jp="業界構造の変化が、翻訳者を必要としている。"
+        intro="建設業法改正（2025年12月完全施行）、2024年問題、現場の外国人化、上流の電気知識ギャップ。翻訳者・調整役のポジションは、ここから10年で需要が拡大します。"
+      />
       <a href="/about#why" class="mt-12 inline-flex items-center gap-3 text-ink-900 font-bold border-b-2 border-ink-900 pb-1 hover:text-warm-700 hover:border-warm-500 transition">
         業界課題と私たちの役割を読む（5分） <span class="num" aria-hidden="true">→</span>
       </a>
@@ -179,17 +165,13 @@ const axes = [
   <!-- ============ N°05 — Value（data slab） ============ -->
   <section class="bg-ink-900 text-white py-24 md:py-32">
     <div class="wrap-content">
-      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-white">
-        <div class="col-span-12 md:col-span-7">
-          <p class="swiss-eyebrow text-warm-300">N°05 / Value</p>
-          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em]">
-            数字で見る、<br />介在価値。
-          </h2>
-        </div>
-        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-100/85 leading-[1.85] max-w-[34ch]">
-          1億円規模の電気工事案件モデルで、損失と介在費用を並べた比較。商談で1時間説明している内容を、3分で。
-        </p>
-      </div>
+      <EditorialHeading
+        dark
+        enTop="Our"
+        enBottom="Value"
+        jp="数字で見る、介在価値。"
+        intro="1億円規模の電気工事案件モデルで、損失と介在費用を並べた比較。商談で1時間説明している内容を、3分で。"
+      />
 
       <div class="mt-16 grid grid-cols-3 gap-0 border-t-2 border-warm-500 observe-stagger">
         {[
@@ -224,20 +206,14 @@ const axes = [
          style="background-image: linear-gradient(rgba(124,66,32,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(124,66,32,.06) 1px, transparent 1px); background-size: 48px 48px;"></div>
 
     <div class="wrap-content relative">
-      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-warm-700">
-        <div class="col-span-12 md:col-span-7">
-          <p class="swiss-eyebrow text-warm-700">N°07 / Partners</p>
-          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] text-warm-900 md:max-w-[20ch]">
-            一緒に、<br />
-            現場を回す方を募集しています。
-          </h2>
-        </div>
-        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
-          電気工事業、内装、空調、軽天、塗装ほか。<br />
-          <strong class="text-warm-700">月末締・翌月末払い</strong>（応相談）。
-          打合せ・図面・工程はモモヤが調整、施工に集中いただける環境です。
-        </p>
-      </div>
+      <EditorialHeading
+        enTop="Our"
+        enBottom="Partners"
+        jp="一緒に、現場を回す方を募集しています。"
+        intro="電気工事業、内装、空調、軽天、塗装ほか。月末締・翌月末払い（応相談）。打合せ・図面・工程はモモヤが調整、施工に集中いただける環境です。"
+        topColor="text-warm-300"
+        bottomColor="text-warm-700"
+      />
       <div class="mt-12 flex flex-wrap gap-3">
         <a href="/partners" class="btn-warm">
           募集要項を読む（3分） <span aria-hidden="true">→</span>
@@ -251,15 +227,12 @@ const axes = [
   {latest.length > 0 && (
     <section class="bg-white py-24 md:py-32">
       <div class="wrap-content">
-        <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
-          <div class="col-span-12 md:col-span-7">
-            <p class="swiss-eyebrow text-ink-700">N°08 / News</p>
-            <h2 class="mt-5 font-serif font-black text-3xl md:text-4xl leading-[1.1] tracking-[-0.02em]">最新のお知らせ・業界レポート</h2>
-          </div>
-          <a href="/news" class="col-span-12 md:col-span-3 md:col-start-10 md:text-right text-sm font-bold text-ink-700 hover:text-warm-700 transition">
-            一覧へ <span class="num" aria-hidden="true">→</span>
-          </a>
-        </div>
+        <EditorialHeading
+          enTop="Our"
+          enBottom="News"
+          jp="お知らせ・業界レポート"
+          intro="20期目の方針転換、EV充電インフラ、2024年問題など。最新の動きをお届けします。"
+        />
         <ul class="mt-12 observe-stagger">
           {latest.map((entry) => (
             <li class="border-b border-ink-100">
@@ -271,6 +244,9 @@ const axes = [
             </li>
           ))}
         </ul>
+        <div class="mt-10">
+          <ViewMore href="/news" label="お知らせ一覧を見る" />
+        </div>
       </div>
     </section>
   )}
@@ -285,17 +261,14 @@ const axes = [
     />
     <div class="absolute inset-0 -z-10 bg-ink-900/88"></div>
     <div class="wrap-content py-24 md:py-32">
-      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-white">
-        <div class="col-span-12 md:col-span-7">
-          <p class="swiss-eyebrow text-warm-300">N°09 / Contact</p>
-          <h2 class="mt-5 font-serif font-black text-2xl md:text-3xl lg:text-4xl leading-[1.1] tracking-[-0.025em]">
-            まずは、5分の現場ヒアリングから。
-          </h2>
-        </div>
-        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-100/85 leading-[1.85] max-w-[34ch]">
-          案件の規模・段階を問わず、見積依頼の段階からお声がけいただけます。東京・大阪二拠点で全国対応。営業日中は最短で当日中にご返信します。
-        </p>
-      </div>
+      <EditorialHeading
+        dark
+        enTop="Our"
+        enBottom="Contact"
+        jp="まずは、ご相談から。"
+        intro="案件の規模・段階を問わず、見積依頼の段階からお声がけいただけます。東京・大阪二拠点で全国対応。営業日中は最短で当日中にご返信します。"
+        topColor="text-warm-300"
+      />
       <div class="mt-12 flex flex-wrap gap-3">
         <a href="/contact" data-track="cta_click:home_contact" class="btn-warm">
           5分の現場ヒアリングを依頼する <span aria-hidden="true">→</span>
