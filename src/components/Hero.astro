@@ -45,24 +45,24 @@ const fmt = (d: Date) =>
     <!-- 下寄せスペーサー -->
     <div class="flex-1"></div>
 
-    <!-- Bottom-left：大判キャッチ -->
-    <div class="pb-8 md:pb-10">
+    <!-- Bottom-left：大判キャッチ（ファーストビュー ≈100dvh に収める） -->
+    <div class="pb-6 md:pb-8">
       <p class="text-[10px] md:text-xs tracking-[0.3em] text-warm-300 font-bold uppercase">Momoya System</p>
 
-      <h1 class="mt-5 font-serif font-black text-[2.75rem] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-0.03em]" style="line-height:1.34;">
+      <h1 class="mt-4 font-serif font-black text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl tracking-[-0.03em]" style="line-height:1.3;">
         <span class="hero-catch">電気工事の、<br />打ち合わせ屋.</span>
       </h1>
 
-      <!-- キャッチは活かしつつ、「位置合わせ屋」の点を記載（青帯×白文字） -->
-      <p class="mt-8 text-sm md:text-xl font-bold" style="line-height:2.2;">
+      <!-- キャッチは活かしつつ、位置づけを記載（青帯×白文字） -->
+      <p class="mt-6 text-sm md:text-lg font-bold" style="line-height:2.0;">
         <span class="hero-catch-sub">「あいだ」に立ち、認識のズレを合わせる。</span><br />
         <span class="hero-catch-sub">電気工事のテクニカルディレクター。</span>
       </p>
-      <p class="mt-5 text-[11px] md:text-sm tracking-[0.32em] text-ink-100/80 font-bold uppercase">
+      <p class="mt-4 text-[10px] md:text-xs tracking-[0.32em] text-ink-100/80 font-bold uppercase">
         Momoya aligns every site.
       </p>
 
-      <div class="mt-9 flex flex-wrap gap-3">
+      <div class="mt-7 flex flex-wrap gap-3">
         <a href="/contact?topic=reserve" data-track="cta_click:hero_primary" class="btn-warm">
           {site.labels.ctaReserve} <span aria-hidden="true">→</span>
         </a>

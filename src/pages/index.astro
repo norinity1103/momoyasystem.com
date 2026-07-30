@@ -5,6 +5,7 @@ import FieldResponsePanel from "../components/FieldResponsePanel.astro";
 import BridgeMethod from "../components/BridgeMethod.astro";
 import SegmentEntries from "../components/SegmentEntries.astro";
 import ViewMore from "../components/ViewMore.astro";
+import WorksShowcase from "../components/WorksShowcase.astro";
 import { getCollection } from "astro:content";
 
 const latest = (await getCollection("news", ({ data }) => !data.draft))
@@ -94,7 +95,7 @@ const axes = [
       </div>
 
       <div class="mt-12 md:mt-14 flex justify-center">
-        <ViewMore href="/why" tone="dark" />
+        <ViewMore href="/about#why" tone="dark" />
       </div>
     </div>
   </section>
@@ -149,8 +150,11 @@ const axes = [
   <!-- ============ N°02 — Method（The Bridge Method） ============ -->
   <BridgeMethod />
 
-  <!-- ============ N°03 — 現場対応力（process rail） ============ -->
+  <!-- ============ N°03 — 相談の流れ（process rail） ============ -->
   <FieldResponsePanel />
+
+  <!-- ============ 事例紹介（抜粋カルーセル） ============ -->
+  <WorksShowcase variant="carousel" />
 
   <!-- ============ N°04 — Why ============ -->
   <section class="bg-ink-50 py-24 md:py-32">
@@ -168,7 +172,7 @@ const axes = [
           翻訳者・調整役のポジションは、ここから10年で需要が拡大します。
         </p>
       </div>
-      <a href="/why" class="mt-12 inline-flex items-center gap-3 text-ink-900 font-bold border-b-2 border-ink-900 pb-1 hover:text-warm-700 hover:border-warm-500 transition">
+      <a href="/about#why" class="mt-12 inline-flex items-center gap-3 text-ink-900 font-bold border-b-2 border-ink-900 pb-1 hover:text-warm-700 hover:border-warm-500 transition">
         業界課題と私たちの役割を読む（5分） <span class="num" aria-hidden="true">→</span>
       </a>
     </div>
@@ -204,7 +208,7 @@ const axes = [
       </div>
 
       <div class="mt-14 flex flex-wrap gap-3">
-        <a href="/value" data-track="cta_click:home_value" class="btn-warm">
+        <a href="/about#value" data-track="cta_click:home_value" class="btn-warm">
           1億円案件モデルを商談用に印刷する <span aria-hidden="true">→</span>
         </a>
         <a href="/works" class="btn-ghost text-white">事例紹介を見る</a>

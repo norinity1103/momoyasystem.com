@@ -1,0 +1,49 @@
+---
+/**
+ * 事例紹介ショーケース：「Our Works」編集見出し ＋ 事例カード。
+ * variant="grid"     … 事例紹介ページ用（全件・3カラムグリッド）
+ * variant="carousel" … トップ用（横スクロールのカルーセル抜粋）
+ */
+import { cases, worksIntro } from "../data/works";
+import WorkCard from "./WorkCard.astro";
+import ViewMore from "./ViewMore.astro";
+
+interface Props { variant?: "grid" | "carousel"; limit?: number; }
+const { variant = "grid", limit } = Astro.props;
+const items = limit ? cases.slice(0, limit) : cases;
+---
+<section class="bg-white py-20 md:py-28">
+  <div class="wrap-content">
+    <!-- Our Works 見出し（共通あしらい） -->
+    <div class="grid grid-cols-12 gap-x-6 gap-y-8 items-end">
+      <div class="col-span-12 md:col-span-6">
+        <p class="font-serif font-black leading-[0.9] tracking-[-0.03em]">
+          <span class="block text-5xl md:text-6xl lg:text-7xl text-ink-300">Our</span>
+          <span class="block text-5xl md:text-6xl lg:text-7xl text-brand-600">Works</span>
+        </p>
+        <p class="mt-6 text-lg md:text-xl font-bold text-ink-900">事例・実績一覧</p>
+      </div>
+      <p class="col-span-12 md:col-span-5 md:col-start-8 text-sm md:text-base text-ink-700 leading-[1.9] max-w-[42ch]">{worksIntro}</p>
+    </div>
+
+    {variant === "carousel" ? (
+      <div class="mt-14 md:mt-16 -mx-6 px-6 overflow-x-auto snap-x snap-mandatory">
+        <div class="flex gap-6 md:gap-8 pb-4">
+          {items.map((c) => <WorkCard c={c} class="snap-start shrink-0 w-[80%] sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)]" />)}
+        </div>
+      </div>
+    ) : (
+      <div class="mt-14 md:mt-20 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14 observe-stagger">
+        {items.map((c) => <WorkCard c={c} />)}
+      </div>
+    )}
+
+    {variant === "carousel" ? (
+      <div class="mt-10">
+        <ViewMore href="/works" label="事例をすべて見る" />
+      </div>
+    ) : (
+      <p class="mt-14 text-sm text-ink-500 max-w-[62ch]">※ 守秘義務の都合上、お客様名・所在地は抽象化して掲載しています。具体的な事例の開示は、NDA前提でご相談を承ります。</p>
+    )}
+  </div>
+</section>

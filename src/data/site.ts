@@ -27,10 +27,10 @@ export const site = {
     { num: "▲ 5–15", unit: "%", label: "手戻り損失の抑制レンジ" },
   ],
   nav: [
-    { href: "/why",      label: "なぜ「あいだ」か" },
+    { href: "/about",    label: "私たちについて" },
     { href: "/service",  label: "事業内容" },
-    { href: "/value",    label: "介在価値" },
     { href: "/works",    label: "事例紹介" },
+    { href: "/#flow",    label: "相談の流れ" },
     { href: "/partners", label: LABELS.partners },
     { href: "/company",  label: "会社概要" },
     { href: "/contact",  label: "お問い合わせ" },
