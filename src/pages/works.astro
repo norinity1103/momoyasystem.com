@@ -1,204 +1,54 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
-
-const heroCase = {
-  no: "001",
-  year: "2024 – 2025",
-  sector: "EV / PHV インフラ",
-  scale: "複数拠点 ／ 全国",
-  title: "急速充電器設置工事（複数案件）",
-  body: "全国展開する急速充電インフラの設計補助・施工管理・パートナー選定・材料調達を一括で担当。設置場所の電源計画から、申請、施工パートナー選定、現場打合せまでを上流から下流まで翻訳・調整しました。",
-  role: ["設計補助", "施工管理", "パートナー選定", "材料調達"],
-  img: "/img/ev-charger-home-1280.webp",
-};
-
-const otherCases = [
-  {
-    no: "002",
-    year: "2023",
-    sector: "公共・行政視察",
-    scale: "東京 ／ 中規模",
-    title: "都知事による視察対象案件",
-    body: "東京都内の電気・付帯工事案件において、行政関係者の視察対象となる規模・品質で施工。ゼネコン・設計会社との上流での折衝にモモヤが介在。",
-    role: ["上流折衝", "工程管理", "品質管理"],
-    img: "/img/cityscape-1280.webp",
-  },
-  {
-    no: "003",
-    year: "継続",
-    sector: "メーカー直",
-    scale: "中〜大規模",
-    title: "電気メーカーからの直接受注",
-    body: "電気機器メーカーとの長年の取引により、製造側の事情を理解した提案・施工が可能。図面作成・現場調整・パートナー手配を一貫で対応。",
-    role: ["図面作成", "施工管理", "材料調達"],
-    img: "/img/ev-charger-installed-1280.webp",
-  },
-];
+import WorksShowcase from "../components/WorksShowcase.astro";
 
 const stats = [
   { num: "20", unit: "年", label: "現場実績" },
   { num: "50", unit: "社+", label: "パートナー網" },
-  { num: "2", unit: "拠点", label: "東京 ・ 大阪" },
+  { num: "2", unit: "拠点", label: "東京・大阪" },
 ];
-
-const dataRows = [...[heroCase], ...otherCases];
 ---
 <BaseLayout
-  title="実績"
-  description="モモヤシステムの実績紹介。EV/PHV急速充電器、都知事視察対象案件、電気メーカー直受注など、20年で積み上げた電気工事ディレクションの代表的なケース。"
-  breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "実績", href: "/works" }]}
+  title="事例紹介"
+  description="モモヤシステムの事例紹介。EV/PHV急速充電器、行政視察対象案件、電気メーカー直受注、全国チェーンの設備メンテナンスまで。ディレクションとメンテナンスの二軸で積み上げた代表的なケース。"
+  breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "事例紹介", href: "/works" }]}
 >
   <PageHero
     eyebrow="WORKS"
-    title="実績"
-    lead="20年で積み上げた電気工事の現場経験は、いまディレクション側に立つことの説得力に変わりました。"
+    title="事例紹介"
+    lead="上流と現場のあいだに立つディレクションと、資材に頼らず全国で動くメンテナンス。二軸で積み上げてきた代表的なケースをご紹介します。"
     bg="/img/scaffold-1920.webp"
   />
 
-  <!-- N°01 — Stats slab（pinned metric strip） -->
-  <section class="bg-white py-12 md:py-16 border-b-2 border-ink-900">
+  <WorksShowcase variant="grid" />
+
+  <!-- 実績サマリ（slim stats） -->
+  <section class="bg-ink-50 py-14 md:py-16 border-y border-ink-100">
     <div class="wrap-content">
       <dl class="grid grid-cols-3 gap-0">
         {stats.map((s, i) => (
-          <div class:list={["py-6 md:py-8 px-1 md:px-4", i !== 0 && "border-l border-ink-100"]}>
+          <div class:list={["px-1 md:px-4", i !== 0 && "border-l border-ink-200"]}>
             <dt class="text-[10px] tracking-[0.28em] text-warm-700 font-bold uppercase">{s.label}</dt>
-            <dd class="mt-4 num-display text-3xl md:text-4xl lg:text-5xl text-ink-900">{s.num}<span class="text-sm text-ink-500 ml-1">{s.unit}</span></dd>
+            <dd class="mt-3 num-display text-3xl md:text-4xl lg:text-5xl text-ink-900">{s.num}<span class="text-sm text-ink-500 ml-1">{s.unit}</span></dd>
           </div>
         ))}
       </dl>
     </div>
   </section>
 
-  <!-- N°02 — Hero case ledger（asymmetric image-led） -->
-  <section class="bg-white py-24 md:py-32">
-    <div class="wrap-content">
-      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
-        <div class="col-span-12 md:col-span-7">
-          <p class="swiss-eyebrow text-ink-700">N°02 / Lead Project</p>
-          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[18ch]">代表案件、ひとつ目。</h2>
-        </div>
-        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm text-ink-500 leading-relaxed">案件詳細はお問い合わせください（守秘義務遵守）</p>
-      </div>
-
-      <article class="mt-12 md:mt-16 grid grid-cols-12 gap-x-6 gap-y-8 items-start">
-        <!-- Large image plate（asymmetric, image-led） -->
-        <div class="col-span-12 md:col-span-7 -order-1 md:order-none">
-          <div class="relative aspect-[4/3] md:aspect-[5/4] bg-ink-100 overflow-hidden">
-            <img src={heroCase.img} alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
-            <span class="absolute top-4 left-4 num text-[10px] tracking-[0.28em] text-white bg-ink-900/85 backdrop-blur px-2.5 py-1">CASE N°{heroCase.no}</span>
-          </div>
-        </div>
-
-        <!-- Right rail: caption（technical notes） -->
-        <div class="col-span-12 md:col-span-5 md:pl-3">
-          <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold">{heroCase.year}</p>
-          <h3 class="mt-3 font-serif text-lg md:text-xl lg:text-2xl font-black leading-[1.15] tracking-tight text-ink-900">{heroCase.title}</h3>
-          <p class="mt-5 text-base text-ink-700 leading-[1.9] max-w-[40ch]">{heroCase.body}</p>
-
-          <dl class="mt-8 space-y-3 text-sm">
-            <div class="grid grid-cols-12 gap-x-4 border-t border-ink-200/70 pt-3">
-              <dt class="col-span-4 text-[10px] tracking-[0.2em] text-ink-500 font-bold uppercase">Sector</dt>
-              <dd class="col-span-8 text-ink-900">{heroCase.sector}</dd>
-            </div>
-            <div class="grid grid-cols-12 gap-x-4 border-t border-ink-200/70 pt-3">
-              <dt class="col-span-4 text-[10px] tracking-[0.2em] text-ink-500 font-bold uppercase">Scale</dt>
-              <dd class="col-span-8 text-ink-900">{heroCase.scale}</dd>
-            </div>
-            <div class="grid grid-cols-12 gap-x-4 border-t border-ink-200/70 pt-3">
-              <dt class="col-span-4 text-[10px] tracking-[0.2em] text-ink-500 font-bold uppercase">Role</dt>
-              <dd class="col-span-8 text-ink-900 flex flex-wrap gap-x-3 gap-y-1">
-                {heroCase.role.map((r) => <span class="text-sm">{r}</span>)}
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- N°03 — Other cases（horizontal split, not equal cards） -->
-  <section class="bg-ink-50 py-24 md:py-32">
-    <div class="wrap-content">
-      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
-        <div class="col-span-12 md:col-span-7">
-          <p class="swiss-eyebrow text-ink-700">N°03 / Other Cases</p>
-          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em]">その他の実績。</h2>
-        </div>
-      </div>
-
-      <div class="mt-16 space-y-16 md:space-y-20">
-        {otherCases.map((c, i) => (
-          <article class="grid grid-cols-12 gap-x-6 gap-y-6 items-start">
-            <!-- 交互レイアウト（i=0は image右、i=1は image左） -->
-            <div class:list={["col-span-12 md:col-span-5 relative aspect-[16/10] bg-ink-100 overflow-hidden", i % 2 === 1 ? "md:order-1" : "md:order-2"]}>
-              <img src={c.img} alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
-              <span class="absolute top-3 left-3 num text-[10px] tracking-[0.28em] text-white bg-ink-900/85 backdrop-blur px-2.5 py-1">CASE N°{c.no}</span>
-            </div>
-            <div class:list={["col-span-12 md:col-span-6", i % 2 === 1 ? "md:order-2 md:col-start-7" : "md:order-1"]}>
-              <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold">{c.year}</p>
-              <h3 class="mt-2 font-serif text-xl md:text-3xl font-black leading-[1.15] tracking-tight text-ink-900">{c.title}</h3>
-              <p class="mt-4 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[40ch]">{c.body}</p>
-              <p class="mt-5 text-xs text-ink-500"><span class="text-warm-700 font-bold tracking-wider">SECTOR</span>　{c.sector}　／　<span class="text-warm-700 font-bold tracking-wider">SCALE</span>　{c.scale}</p>
-              <p class="mt-2 text-xs text-ink-500"><span class="text-warm-700 font-bold tracking-wider">ROLE</span>　{c.role.join(" ／ ")}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- N°04 — Data table（compact tabular index） -->
-  <section class="bg-white py-24 md:py-32">
-    <div class="wrap-content">
-      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
-        <div class="col-span-12 md:col-span-7">
-          <p class="swiss-eyebrow text-ink-700">N°04 / Index</p>
-          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em]">案件インデックス。</h2>
-        </div>
-      </div>
-
-      <div class="mt-12 overflow-x-auto">
-        <table class="w-full text-left min-w-[640px]">
-          <thead>
-            <tr class="border-b border-ink-300 text-[10px] tracking-[0.25em] text-ink-500 font-bold uppercase">
-              <th class="py-4 pr-4 num w-16">N°</th>
-              <th class="py-4 pr-4 num w-32">Year</th>
-              <th class="py-4 pr-4 w-40">Sector</th>
-              <th class="py-4 pr-4 w-32">Scale</th>
-              <th class="py-4 pr-4">Role</th>
-            </tr>
-          </thead>
-          <tbody>
-            {dataRows.map((c) => (
-              <tr class="border-b border-ink-100 hover:bg-warm-50/60 transition-colors">
-                <td class="py-5 pr-4 num text-sm text-warm-700 font-bold">{c.no}</td>
-                <td class="py-5 pr-4 num text-sm text-ink-700">{c.year}</td>
-                <td class="py-5 pr-4 text-sm text-ink-900 font-bold">{c.sector}</td>
-                <td class="py-5 pr-4 text-sm text-ink-700">{c.scale}</td>
-                <td class="py-5 pr-4 text-xs text-ink-500 leading-relaxed">{(c.role || []).join(" ／ ")}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <p class="mt-12 text-sm text-ink-500 max-w-[60ch]">※ 守秘義務の都合上、お客様名・所在地は抽象化して掲載しています。具体的な実績の開示はNDA前提でご相談を承ります。</p>
-    </div>
-  </section>
-
-  <!-- N°05 — CTA -->
+  <!-- CTA -->
   <section class="bg-ink-900 text-white py-24 md:py-32">
     <div class="wrap-content">
       <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-white">
         <div class="col-span-12 md:col-span-8">
-          <p class="swiss-eyebrow text-warm-300">N°05 / Next</p>
-          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.025em]">案件のご相談はこちら。</h2>
+          <p class="swiss-eyebrow text-warm-300">Next</p>
+          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.025em]">貴社の案件も、事例にしませんか。</h2>
         </div>
       </div>
       <div class="mt-12 flex flex-wrap gap-3">
-        <a href="/contact" class="btn-warm">NDA前提で詳細実績を共有する <span aria-hidden="true">→</span></a>
-        <a href="tel:0643927136" class="btn-ghost text-white"><span class="num">06-4392-7136</span></a>
+        <a href="/contact?topic=reserve" class="btn-warm">相談を予約する <span aria-hidden="true">→</span></a>
+        <a href="/contact?topic=docs" class="btn-ghost text-white">資料請求する</a>
       </div>
     </div>
   </section>

@@ -1,0 +1,26 @@
+---
+/**
+ * ページ遷移の基本型ボタン：ラベル ＋ 円形アロー。
+ * 一覧・詳細ページへ誘導する「見る」導線の標準コンポーネント（CTA ピルボタンとは別系統）。
+ * tone: light（明背景＝濃色テキスト）／ dark（暗・青背景＝白テキスト）。
+ */
+interface Props {
+  href: string;
+  label?: string;
+  tone?: "light" | "dark";
+  class?: string;
+}
+const { href, label = "VIEW MORE", tone = "light", class: cls = "" } = Astro.props;
+const textColor = tone === "dark" ? "text-white" : "text-ink-900";
+---
+<a
+  href={href}
+  class:list={[
+    "group inline-flex items-center gap-4 text-sm tracking-[0.2em] font-bold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-warm-500",
+    textColor,
+    cls,
+  ]}
+>
+  <span>{label}</span>
+  <span class="grid place-items-center w-12 h-12 rounded-full bg-ink-900 text-white group-hover:bg-warm-500 transition-colors flex-shrink-0" aria-hidden="true">→</span>
+</a>

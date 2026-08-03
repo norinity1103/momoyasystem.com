@@ -4,6 +4,9 @@ import Hero from "../components/Hero.astro";
 import FieldResponsePanel from "../components/FieldResponsePanel.astro";
 import BridgeMethod from "../components/BridgeMethod.astro";
 import SegmentEntries from "../components/SegmentEntries.astro";
+import ViewMore from "../components/ViewMore.astro";
+import WorksShowcase from "../components/WorksShowcase.astro";
+import EditorialHeading from "../components/EditorialHeading.astro";
 import { getCollection } from "astro:content";
 
 const latest = (await getCollection("news", ({ data }) => !data.draft))
@@ -12,22 +15,23 @@ const latest = (await getCollection("news", ({ data }) => !data.draft))
 const fmt = (d: Date) =>
   `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
 
-// N°01 ポジショニング —— 三軸（業界用語化）
-const pillars = [
+// N°01 事業の二軸 —— テクニカルディレクション（軸A）／ メンテナンス（軸B）
+const axes = [
   {
-    no: "I",
-    title: "定例代行・VE提案",
-    body: "電気の知識が薄い元請担当者の代わりに、定例に出席。設計意図を施工言語に翻訳し、VE提案で原価を 3–8% 圧縮します。",
+    key: "A",
+    href: "/service/direction",
+    en: "TECHNICAL DIRECTION",
+    title: "テクニカルディレクション",
+    lead: "元請と施工現場の「あいだ」に立ち、電気の全体最適を設計する。定例・図面・工程・原価を翻訳・調整します。",
+    points: ["定例代行・VE提案", "施工図監修・申請対応", "工程プランニング", "メーカー直材料調達"],
   },
   {
-    no: "II",
-    title: "業者選定・パートナー編成",
-    body: "全国50社+の電気工事パートナーから、案件の規模・地域・仕様に合わせて専任チームを編成。元請の業者選定工数をゼロにします。",
-  },
-  {
-    no: "III",
-    title: "メーカー直ソーシング",
-    body: "工事原価の半分を占める材料を、メーカー直で調達。リードタイム短縮と原価圧縮を、ディレクション費の原資にも充てます。",
+    key: "B",
+    href: "/service/maintenance",
+    en: "MAINTENANCE",
+    title: "メンテナンス",
+    lead: "資材に頼らず、全国で動く。漏電・絶縁調査から設備診断、高圧機器の交換、店舗設備の保守まで。",
+    points: ["漏電・絶縁調査", "設備診断・老朽化調査", "高圧機器の交換", "照明・看板・サイネージ"],
   },
 ];
 ---
@@ -38,47 +42,98 @@ const pillars = [
   <!-- ============ HERO（dark / Swiss poster field） ============ -->
   <Hero />
 
+  <!-- ============ 私たちの強み（blue field / photo collage） ============ -->
+  <section class="relative isolate overflow-hidden bg-brand-700 text-white py-24 md:py-32 lg:py-40"
+           style="background-image: linear-gradient(158deg, #1e5ad9 0%, #123a9e 55%, #0f2b74 100%);">
+    <!-- 青い炎のグロー（参考のあしらい） -->
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[42vw] max-w-[520px] h-[60%] -z-0 pointer-events-none"
+         style="background: radial-gradient(ellipse at bottom, rgba(140,190,255,.55), rgba(140,190,255,0) 70%);" aria-hidden="true"></div>
+    <!-- 左下の白いダイアゴナル・ウェッジ -->
+    <div class="absolute bottom-0 left-0 w-40 h-24 md:w-56 md:h-32 bg-white -z-0" style="clip-path: polygon(0 0, 0 100%, 100% 100%);" aria-hidden="true"></div>
+
+    <!-- 写真コラージュ（lg以上・非対称配置。※現場写真は受領後に差替え） -->
+    <div class="hidden lg:block" aria-hidden="true">
+      <img src="/img/ev-charger-installed-1280.webp" alt="" class="absolute top-16 left-[4%] w-56 xl:w-64 aspect-[4/5] object-cover rounded-sm shadow-2xl rotate-[-2deg]" loading="lazy" decoding="async" />
+      <img src="/img/cityscape-1280.webp" alt="" class="absolute top-24 right-[4%] w-60 xl:w-72 aspect-[4/5] object-cover rounded-sm shadow-2xl rotate-[2deg]" loading="lazy" decoding="async" />
+      <img src="/img/scaffold-960.webp" alt="" class="absolute bottom-16 left-[7%] w-56 xl:w-64 aspect-[16/10] object-cover rounded-sm shadow-2xl" loading="lazy" decoding="async" />
+      <img src="/img/ev-charger-home-1280.webp" alt="" class="absolute bottom-14 right-[7%] w-52 xl:w-60 aspect-[4/3] object-cover rounded-sm shadow-2xl" loading="lazy" decoding="async" />
+    </div>
+
+    <!-- 中央：見出し → 強調コピー → 3つの円 → ミッション → VIEW MORE -->
+    <div class="wrap-content relative z-10 text-center observe">
+      <p class="swiss-eyebrow !text-white/80 justify-center">Our Strength / 私たちの強み</p>
+
+      <p class="mt-8 font-serif font-black text-2xl md:text-4xl lg:text-5xl leading-[1.35] tracking-[-0.02em] text-white">
+        「あいだ」に立ち、<br />電気の現場を最適化する。
+      </p>
+
+      <!-- 迅速・気配り・提案力（金の三円。参考画像をインライン SVG で再現） -->
+      <svg class="mt-12 md:mt-16 mx-auto w-full max-w-[560px] h-auto" viewBox="0 0 1200 430" role="img" aria-label="私たちの強み：迅速・気配り・提案力">
+        <defs>
+          <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fbeaa6" />
+            <stop offset="0.45" stop-color="#e7c45f" />
+            <stop offset="0.75" stop-color="#c99a2e" />
+            <stop offset="1" stop-color="#f2d982" />
+          </linearGradient>
+        </defs>
+        <g fill="none" stroke="url(#gold)" stroke-width="5">
+          <circle cx="280" cy="215" r="196" />
+          <circle cx="600" cy="215" r="196" />
+          <circle cx="920" cy="215" r="196" />
+        </g>
+        <g fill="url(#gold)" font-family="'Noto Sans JP','Hiragino Sans',sans-serif" font-weight="700" font-size="96" text-anchor="middle" dominant-baseline="central">
+          <text x="280" y="222">迅速</text>
+          <text x="600" y="222">気配り</text>
+          <text x="920" y="222">提案力</text>
+        </g>
+      </svg>
+
+      <div class="mt-14 md:mt-16 space-y-4 md:space-y-5 text-base md:text-lg lg:text-xl font-bold leading-[1.7] text-white/95">
+        <p>20年、電気の現場で段取りを磨いてきた。</p>
+        <p>全国50社と結び、適材適所で束ねてきた。</p>
+        <p>資材に頼らず動く、止まらない現場がある。</p>
+      </div>
+
+      <div class="mt-12 md:mt-14 flex justify-center">
+        <ViewMore href="/about#why" tone="dark" />
+      </div>
+    </div>
+  </section>
+
   <!-- ============ N°01 — ポジショニング（white / editorial split） ============ -->
   <section class="bg-white pt-24 md:pt-32 pb-20 md:pb-24">
     <div class="wrap-content">
-      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
-        <div class="col-span-12 md:col-span-6">
-          <p class="swiss-eyebrow text-ink-700">N°01 / Position</p>
-          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[20ch]">
-            施工会社ではなく、<br />
-            電気工事の<span class="text-warm-500">テクニカル・ディレクター</span>。
-          </h2>
-        </div>
-        <p class="col-span-12 md:col-span-5 md:col-start-8 md:pl-6 md:border-l border-ink-100 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[36ch]">
-          20期目に経営方針を転換しました。20年磨いた現場ノウハウを、自社施工リスクを切り離した
-          <strong>「管理・調整・ディレクション」</strong>として、上流の貴社に提供します。
-        </p>
-      </div>
+      <EditorialHeading
+        enTop="Our"
+        enBottom="Business"
+        jp="施工会社ではなく、電気工事のテクニカル・ディレクター。"
+        intro="20期目に経営方針を転換。20年磨いた現場ノウハウを、上流に立つテクニカルディレクションと、全国で動くメンテナンスの二軸で、貴社に提供します。"
+      />
 
-      <!-- 三本柱：均等カードではなく、左右の重みが違う editorial split -->
-      <div class="mt-16 md:mt-20 space-y-12 md:space-y-16">
-        {pillars.map((p, i) => (
-          <article class:list={[
-            "grid grid-cols-12 gap-x-6 gap-y-4 items-start border-t border-ink-100 pt-10",
-            i === 0 && "border-0 pt-0"
-          ]}>
-            <div class="col-span-12 md:col-span-2 md:col-start-1">
-              <p class="num-display text-warm-500 text-4xl md:text-5xl leading-none">{p.no}</p>
-            </div>
-            <h3 class="col-span-12 md:col-span-4 font-serif text-lg md:text-xl lg:text-2xl font-bold leading-[1.15] tracking-tight text-ink-900">
-              {p.title}
-            </h3>
-            <p class="col-span-12 md:col-span-5 md:col-start-8 text-base text-ink-700 leading-[1.85] max-w-[40ch]">
-              {p.body}
-            </p>
-          </article>
+      <!-- 事業の二軸：ディレクション（軸A）／ メンテナンス（軸B） -->
+      <div class="mt-16 md:mt-20 grid md:grid-cols-2 gap-6 lg:gap-8 observe-stagger">
+        {axes.map((a) => (
+          <a href={a.href} class="group relative flex flex-col bg-white border border-ink-100 hover:border-brand-500 transition-colors rounded-sm p-8 md:p-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500">
+            <span class="block w-12 h-[3px] bg-warm-500"></span>
+            <p class="mt-6 text-[10px] tracking-[0.3em] text-ink-500 font-bold">軸{a.key} ／ {a.en}</p>
+            <h3 class="mt-3 font-serif text-xl md:text-2xl font-black text-ink-900 tracking-tight">{a.title}</h3>
+            <p class="mt-5 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[42ch]">{a.lead}</p>
+            <ul class="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
+              {a.points.map((p) => (
+                <li class="flex gap-2.5 text-sm text-ink-700 leading-relaxed">
+                  <span class="text-warm-500 mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-warm-500 inline-block"></span>
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+            <span class="mt-8 pt-6 border-t border-ink-100 text-sm font-bold text-brand-700 group-hover:text-warm-600 transition-colors">詳しく見る <span aria-hidden="true">→</span></span>
+          </a>
         ))}
       </div>
 
-      <div class="mt-16 flex flex-wrap gap-3">
-        <a href="/service" class="btn-warm">
-          4つのサービス領域を見る <span aria-hidden="true">→</span>
-        </a>
+      <div class="mt-14">
+        <ViewMore href="/service" label="事業内容の全体を見る" />
       </div>
     </div>
   </section>
@@ -86,45 +141,40 @@ const pillars = [
   <!-- ============ N°02 — Method（The Bridge Method） ============ -->
   <BridgeMethod />
 
-  <!-- ============ N°03 — 現場対応力（process rail） ============ -->
+  <!-- ============ N°03 — 相談の流れ（process rail） ============ -->
   <FieldResponsePanel />
+
+  <!-- ============ 事例紹介（抜粋カルーセル） ============ -->
+  <WorksShowcase variant="carousel" />
 
   <!-- ============ N°04 — Why ============ -->
   <section class="bg-ink-50 py-24 md:py-32">
     <div class="wrap-content">
-      <div class="grid grid-cols-12 gap-x-6 gap-y-10 items-end pb-5 border-b-2 border-ink-900">
-        <div class="col-span-12 md:col-span-7">
-          <p class="swiss-eyebrow text-ink-700">N°04 / Why</p>
-          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[20ch]">
-            業界構造の変化が、<br />
-            翻訳者を必要としている。
-          </h2>
-        </div>
-        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
-          建設業法改正（2025年12月完全施行）、2024年問題、現場の外国人化、上流の電気知識ギャップ。
-          翻訳者・調整役のポジションは、ここから10年で需要が拡大します。
-        </p>
-      </div>
-      <a href="/why" class="mt-12 inline-flex items-center gap-3 text-ink-900 font-bold border-b-2 border-ink-900 pb-1 hover:text-warm-700 hover:border-warm-500 transition">
+      <EditorialHeading
+        enTop="Our"
+        enBottom="Why"
+        jp="業界構造の変化が、翻訳者を必要としている。"
+        intro="建設業法改正（2025年12月完全施行）、2024年問題、現場の外国人化、上流の電気知識ギャップ。翻訳者・調整役のポジションは、ここから10年で需要が拡大します。"
+      />
+      <a href="/about#why" class="mt-12 inline-flex items-center gap-3 text-ink-900 font-bold border-b-2 border-ink-900 pb-1 hover:text-warm-700 hover:border-warm-500 transition">
         業界課題と私たちの役割を読む（5分） <span class="num" aria-hidden="true">→</span>
       </a>
     </div>
   </section>
 
-  <!-- ============ N°05 — Value（data slab） ============ -->
-  <section class="bg-ink-900 text-white py-24 md:py-32">
-    <div class="wrap-content">
-      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-white">
-        <div class="col-span-12 md:col-span-7">
-          <p class="swiss-eyebrow text-warm-300">N°05 / Value</p>
-          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em]">
-            数字で見る、<br />介在価値。
-          </h2>
-        </div>
-        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-100/85 leading-[1.85] max-w-[34ch]">
-          1億円規模の電気工事案件モデルで、損失と介在費用を並べた比較。商談で1時間説明している内容を、3分で。
-        </p>
-      </div>
+  <!-- ============ N°05 — Value（data slab / チャコールネイビー） ============ -->
+  <section class="relative isolate bg-ink-900 text-white py-24 md:py-32">
+    <!-- 上下の薄いグラデ区切り（前後の明セクションとの橋渡し） -->
+    <div class="pointer-events-none absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-white/8 to-transparent" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white/6 to-transparent" aria-hidden="true"></div>
+    <div class="wrap-content relative">
+      <EditorialHeading
+        dark
+        enTop="Our"
+        enBottom="Value"
+        jp="数字で見る、介在価値。"
+        intro="1億円規模の電気工事案件モデルで、損失と介在費用を並べた比較。商談で1時間説明している内容を、3分で。"
+      />
 
       <div class="mt-16 grid grid-cols-3 gap-0 border-t-2 border-warm-500 observe-stagger">
         {[
@@ -140,11 +190,12 @@ const pillars = [
         ))}
       </div>
 
-      <div class="mt-14 flex flex-wrap gap-3">
-        <a href="/value" data-track="cta_click:home_value" class="btn-warm">
-          1億円案件モデルを商談用に印刷する <span aria-hidden="true">→</span>
+      <div class="mt-14 flex flex-wrap items-center gap-6">
+        <a href="/contact?topic=reserve" data-track="cta_click:home_value" class="btn-warm">
+          相談を予約する <span aria-hidden="true">→</span>
         </a>
-        <a href="/works" class="btn-ghost text-white">施工実績を見る</a>
+        <a href="/contact?topic=docs" class="btn-ghost text-white">資料請求する</a>
+        <ViewMore href="/about#value" tone="dark" label="介在価値を見る" />
       </div>
     </div>
   </section>
@@ -152,26 +203,20 @@ const pillars = [
   <!-- ============ N°06 — For You / Segments ============ -->
   <SegmentEntries />
 
-  <!-- ============ N°07 — 協力会社募集（warm zone） ============ -->
-  <section class="bg-warm-50 py-24 md:py-32 relative isolate overflow-hidden">
-    <div class="absolute inset-0 -z-10 opacity-50"
-         style="background-image: linear-gradient(rgba(124,66,32,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(124,66,32,.06) 1px, transparent 1px); background-size: 48px 48px;"></div>
+  <!-- ============ N°07 — 業務パートナー募集（off-white zone） ============ -->
+  <section class="bg-ink-50 py-24 md:py-32 relative isolate overflow-hidden">
+    <div class="absolute inset-0 -z-10 opacity-40"
+         style="background-image: linear-gradient(rgba(184,118,62,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(184,118,62,.05) 1px, transparent 1px); background-size: 48px 48px;"></div>
 
     <div class="wrap-content relative">
-      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-warm-700">
-        <div class="col-span-12 md:col-span-7">
-          <p class="swiss-eyebrow text-warm-700">N°07 / Partners</p>
-          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] text-warm-900 md:max-w-[20ch]">
-            一緒に、<br />
-            現場を回す方を募集しています。
-          </h2>
-        </div>
-        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
-          電気工事業、内装、空調、軽天、塗装ほか。<br />
-          <strong class="text-warm-700">月末締・翌月末払い</strong>（応相談）。
-          打合せ・図面・工程はモモヤが調整、施工に集中いただける環境です。
-        </p>
-      </div>
+      <EditorialHeading
+        enTop="Our"
+        enBottom="Partners"
+        jp="一緒に、現場を回す方を募集しています。"
+        intro="電気工事業、内装、空調、軽天、塗装ほか。月末締・翌月末払い（応相談）。打合せ・図面・工程はモモヤが調整、施工に集中いただける環境です。"
+        topColor="text-warm-300"
+        bottomColor="text-warm-700"
+      />
       <div class="mt-12 flex flex-wrap gap-3">
         <a href="/partners" class="btn-warm">
           募集要項を読む（3分） <span aria-hidden="true">→</span>
@@ -185,15 +230,12 @@ const pillars = [
   {latest.length > 0 && (
     <section class="bg-white py-24 md:py-32">
       <div class="wrap-content">
-        <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
-          <div class="col-span-12 md:col-span-7">
-            <p class="swiss-eyebrow text-ink-700">N°08 / News</p>
-            <h2 class="mt-5 font-serif font-black text-3xl md:text-4xl leading-[1.1] tracking-[-0.02em]">最新のお知らせ・業界レポート</h2>
-          </div>
-          <a href="/news" class="col-span-12 md:col-span-3 md:col-start-10 md:text-right text-sm font-bold text-ink-700 hover:text-warm-700 transition">
-            一覧へ <span class="num" aria-hidden="true">→</span>
-          </a>
-        </div>
+        <EditorialHeading
+          enTop="Our"
+          enBottom="News"
+          jp="お知らせ・業界レポート"
+          intro="20期目の方針転換、EV充電インフラ、2024年問題など。最新の動きをお届けします。"
+        />
         <ul class="mt-12 observe-stagger">
           {latest.map((entry) => (
             <li class="border-b border-ink-100">
@@ -205,6 +247,9 @@ const pillars = [
             </li>
           ))}
         </ul>
+        <div class="mt-10">
+          <ViewMore href="/news" label="お知らせ一覧を見る" />
+        </div>
       </div>
     </section>
   )}
@@ -219,17 +264,14 @@ const pillars = [
     />
     <div class="absolute inset-0 -z-10 bg-ink-900/88"></div>
     <div class="wrap-content py-24 md:py-32">
-      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-white">
-        <div class="col-span-12 md:col-span-7">
-          <p class="swiss-eyebrow text-warm-300">N°09 / Contact</p>
-          <h2 class="mt-5 font-serif font-black text-2xl md:text-3xl lg:text-4xl leading-[1.1] tracking-[-0.025em]">
-            まずは、5分の現場ヒアリングから。
-          </h2>
-        </div>
-        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-100/85 leading-[1.85] max-w-[34ch]">
-          案件の規模・段階を問わず、見積依頼の段階からお声がけいただけます。東京・大阪二拠点で全国対応。営業日中は最短で当日中にご返信します。
-        </p>
-      </div>
+      <EditorialHeading
+        dark
+        enTop="Our"
+        enBottom="Contact"
+        jp="まずは、ご相談から。"
+        intro="案件の規模・段階を問わず、見積依頼の段階からお声がけいただけます。東京・大阪二拠点で全国対応。営業日中は最短で当日中にご返信します。"
+        topColor="text-warm-300"
+      />
       <div class="mt-12 flex flex-wrap gap-3">
         <a href="/contact" data-track="cta_click:home_contact" class="btn-warm">
           5分の現場ヒアリングを依頼する <span aria-hidden="true">→</span>

@@ -1,0 +1,41 @@
+---
+/**
+ * 事例紹介ショーケース：「Our Works」編集見出し ＋ 事例カード。
+ * variant="grid"     … 事例紹介ページ用（全件・3カラムグリッド）
+ * variant="carousel" … トップ用（横スクロールのカルーセル抜粋）
+ */
+import { cases, worksIntro } from "../data/works";
+import WorkCard from "./WorkCard.astro";
+import ViewMore from "./ViewMore.astro";
+import EditorialHeading from "./EditorialHeading.astro";
+
+interface Props { variant?: "grid" | "carousel"; limit?: number; }
+const { variant = "grid", limit } = Astro.props;
+const items = limit ? cases.slice(0, limit) : cases;
+---
+<section class="bg-white py-20 md:py-28">
+  <div class="wrap-content">
+    <!-- Our Works 見出し（共通あしらい = EditorialHeading） -->
+    <EditorialHeading enTop="Our" enBottom="Works" jp="事例・実績一覧" intro={worksIntro} />
+
+    {variant === "carousel" ? (
+      <div class="mt-14 md:mt-16 -mx-6 px-6 overflow-x-auto snap-x snap-mandatory">
+        <div class="flex gap-6 md:gap-8 pb-4">
+          {items.map((c) => <WorkCard c={c} class="snap-start shrink-0 w-[80%] sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)]" />)}
+        </div>
+      </div>
+    ) : (
+      <div class="mt-14 md:mt-20 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14 observe-stagger">
+        {items.map((c) => <WorkCard c={c} />)}
+      </div>
+    )}
+
+    {variant === "carousel" ? (
+      <div class="mt-10 flex justify-center">
+        <ViewMore href="/works" label="事例をすべて見る" />
+      </div>
+    ) : (
+      <p class="mt-14 text-sm text-ink-500 max-w-[62ch]">※ 守秘義務の都合上、お客様名・所在地は抽象化して掲載しています。具体的な事例の開示は、NDA前提でご相談を承ります。</p>
+    )}
+  </div>
+</section>

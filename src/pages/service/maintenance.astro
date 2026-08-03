@@ -1,0 +1,247 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Section from "../../components/Section.astro";
+import PageHero from "../../components/PageHero.astro";
+import { site } from "../../data/site";
+
+// 事業の二軸のうち「メンテナンス」側（軸B）。
+// 出典: 2026-06-12 クライアント打ち合わせ ＋ 旧サイト /denki-kouji「04 電気設備メンテナンス」。
+// 取引先の実名は掲載許諾が未確認のため、業種表現に留めている（ヒアリングシート参照）。
+
+const menu = [
+  {
+    n: "01",
+    title: "漏電調査・絶縁抵抗測定",
+    subtitle: "材料を待たずに、その日から着手できる調査です。",
+    lead: "絶縁抵抗を測定し、どの回路・どの機器が絶縁不良を起こしているかを特定します。原因の切り分けまで行うため、報告書がそのまま是正の判断材料になります。",
+    items: [
+      "回路別の絶縁抵抗測定と不良箇所の特定",
+      "漏電の発生源（機器／配線／結露等）の切り分け",
+      "是正が必要な範囲と優先順位の提示",
+      "測定値を添えた報告書の発行",
+    ],
+    metric: { num: "0", unit: "点", label: "調査着手に必要な資材" },
+  },
+  {
+    n: "02",
+    title: "電気設備診断・更新提案",
+    subtitle: "設備の現状を把握し、次の一手を数字で示します。",
+    lead: "受変電設備・分電盤・照明・動力設備の状態を点検し、耐用年数と劣化状況から更新の要否を判断します。「まだ使える」「今期中に更新すべき」を根拠つきで切り分けます。",
+    items: [
+      "受変電設備（キュービクル）の外観・機能点検",
+      "経過年数と劣化状況にもとづく更新時期の判定",
+      "改修・交換プランの比較提示（費用と停電時間）",
+      "予算化のための概算見積",
+    ],
+    metric: { num: "20", unit: "年", label: "電気工事の現場経験" },
+  },
+  {
+    n: "03",
+    title: "多拠点の一括調査",
+    subtitle: "全国に散った店舗を、リストごと引き受けます。",
+    lead: "チェーン展開する店舗・施設の一覧をお預かりし、拠点ごとに調査して是正報告書と見積までを揃えます。拠点数が多いほど、窓口をひとつにまとめる効果が出ます。",
+    items: [
+      "対象拠点リストにもとづく巡回調査の計画立案",
+      "拠点別の調査結果・是正提案・見積の一括提出",
+      "エリアをまたぐ協力会社の手配と品質の統一",
+      "調査から施工までの進捗を一元管理",
+    ],
+    metric: { num: "50", unit: "社+", label: "全国パートナー網" },
+  },
+  {
+    n: "04",
+    title: "設備の保守・緊急対応",
+    subtitle: "止まってからではなく、止まる前に。",
+    lead: "建物に設置された機器・設備が常に機能を発揮するための日常点検と、不具合発生時の対応。物件管理者が必要とする情報を、詳細かつ迅速に報告します。",
+    items: [
+      "照明・空調・弱電設備の定期点検",
+      "看板・サイネージ等の屋外設備の保守",
+      "不具合発生時の現地対応と原因報告",
+      "非常用設備（バッテリー・非常照明）の交換",
+    ],
+    metric: { num: "1", unit: "窓口", label: "電気・付帯をまとめて" },
+  },
+];
+
+const flow = [
+  { n: "01", t: "調査のご依頼", d: "対象の拠点・設備・気になる症状をお知らせください。拠点が複数ある場合は一覧のままで構いません。" },
+  { n: "02", t: "現地調査", d: "測定と目視で状態を確認します。電気設備の調査は資材を必要としないため、着工待ちが発生しません。" },
+  { n: "03", t: "是正報告書", d: "測定値・写真・不具合箇所を報告書にまとめ、是正が必要な範囲と優先順位を提示します。" },
+  { n: "04", t: "見積・ご判断", d: "是正工事の見積を提出します。今期やる／来期に回すの判断材料まで揃えた状態でお渡しします。" },
+  { n: "05", t: "施工・報告", d: "ご発注後、パートナーを含むチームで施工。完了後は同じ様式で報告書を提出します。" },
+];
+
+const fields = [
+  { k: "小売・飲食", v: "チェーン店舗の照明・電源増設 ／ 安定器交換 ／ LED一括更新" },
+  { k: "サイネージ", v: "デジタルサイネージの設置・電源工事 ／ 看板照明の保守" },
+  { k: "住宅・管理", v: "マンション共用部の点検 ／ 非常用設備 ／ 管理会社経由の一次対応" },
+  { k: "工場・倉庫", v: "キュービクル入替 ／ 動力設備 ／ 受変電設備の改修" },
+  { k: "公共・医療", v: "病院・学校施設の LED 化更新 ／ 自火報設備更新 ／ 消防設備" },
+  { k: "EV・充電", v: "EV／PHV 充電設備の点検・保守 ／ 設置後の運用サポート" },
+];
+---
+<BaseLayout
+  title="メンテナンス"
+  description="漏電調査・絶縁抵抗測定・電気設備診断から多拠点の一括調査まで。資材を必要としない調査業務を軸に、全国の店舗・施設の電気設備を保守します。"
+  breadcrumbs={[
+    { name: "ホーム", href: "/" },
+    { name: "事業内容", href: "/service" },
+    { name: "メンテナンス", href: "/service/maintenance" },
+  ]}
+  jsonLd={menu.map((m) => ({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: m.title,
+    description: m.lead,
+    provider: { "@type": "Organization", name: site.name, url: site.url },
+    areaServed: "JP",
+  }))}
+>
+  <PageHero
+    eyebrow="SERVICE ─ 軸B ／ MAINTENANCE"
+    title="メンテナンス"
+    lead="調査・診断・保守は、電気だけで完結する仕事です。資材の入荷を待たずに動けるため、現場が停滞している時期でも進みます。"
+    bg="/img/site/photo-04.webp"
+    bgMobile="/img/scaffold-960.webp"
+  />
+
+  <!-- ============ 位置づけ（二軸） ============ -->
+  <section class="bg-white py-24 md:py-32">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-ink-700">Position / 事業の二軸</p>
+          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[20ch]">
+            ディレクションと、<br />
+            <span class="text-warm-500">メンテナンス</span>。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+          大きな建築・内装をともなう案件はディレクションとして。電気だけで完結する調査・保守はメンテナンスとして。二軸で受けています。
+        </p>
+      </div>
+
+      <div class="mt-14 grid md:grid-cols-2 gap-8 lg:gap-12 observe">
+        <div class="border-t-2 border-ink-900 pt-6">
+          <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold">AXIS 軸A</p>
+          <h3 class="mt-3 font-serif text-xl md:text-2xl font-bold text-ink-900 tracking-tight">テクニカルディレクション</h3>
+          <p class="mt-4 text-base text-ink-700 leading-[1.85] max-w-[40ch]">
+            元請と施工会社のあいだに立ち、図面・打ち合わせ・工程・コストを調整する役割。建築や内装が絡む複雑な案件で機能します。
+          </p>
+          <a href="/service/direction" class="mt-6 inline-block text-sm font-bold text-brand-700 border-b-2 border-warm-500 pb-1">ディレクションを見る →</a>
+        </div>
+        <div class="border-t-2 border-ink-900 pt-6">
+          <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold">AXIS 軸B</p>
+          <h3 class="mt-3 font-serif text-xl md:text-2xl font-bold text-ink-900 tracking-tight">メンテナンス</h3>
+          <p class="mt-4 text-base text-ink-700 leading-[1.85] max-w-[40ch]">
+            調査・診断・保守・更新。電気工事だけで完結するため、他業種の工程に左右されません。全国の拠点を対象に、一括でお引き受けします。
+          </p>
+          <p class="mt-6 inline-block text-sm font-bold text-ink-400 border-b-2 border-ink-200 pb-1">いまご覧のページ</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ メニュー ============ -->
+  <div class="bg-white">
+    {menu.map((s, i) => (
+      <section class:list={["py-20 md:py-28 relative", i % 2 === 0 ? "bg-ink-50" : ""]}>
+        <div class="wrap-content grid lg:grid-cols-[220px_1fr] gap-10 lg:gap-16 observe">
+          <div class="relative">
+            <p class="num text-5xl md:text-6xl font-black text-brand-500/15 leading-none select-none" aria-hidden="true">{s.n}</p>
+            <div class="absolute top-0 left-0 flex flex-col">
+              <p class="text-[10px] tracking-[0.3em] text-brand-700 font-bold pt-3">MENU {s.n}</p>
+              <span class="block w-10 h-[2px] bg-warm-500 mt-3"></span>
+            </div>
+          </div>
+          <div>
+            <h2 class="font-serif text-lg md:text-xl lg:text-2xl font-black leading-tight tracking-tight">{s.title}</h2>
+            <p class="mt-4 text-sm md:text-base text-warm-700 font-bold tracking-tight">{s.subtitle}</p>
+            <p class="mt-6 text-base md:text-lg text-ink-700 leading-[1.85] max-w-[60ch]">{s.lead}</p>
+            <ul class="mt-8 grid md:grid-cols-2 gap-x-8 gap-y-3 max-w-[64ch]">
+              {s.items.map((item) => (
+                <li class="flex gap-3 text-sm md:text-base text-ink-700 leading-relaxed">
+                  <span class="text-warm-500 mt-1.5 flex-shrink-0 w-2 h-2 rounded-full bg-warm-500 inline-block"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-8 inline-flex items-baseline gap-4 border-t-2 border-ink-900 pt-4">
+              <span class="num-display text-3xl md:text-4xl text-ink-900">{s.metric.num}<span class="text-base text-ink-500 ml-1">{s.metric.unit}</span></span>
+              <span class="text-[10px] tracking-[0.25em] text-ink-500 uppercase font-bold md:max-w-[20ch]">{s.metric.label}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <!-- ============ 業務の流れ ============ -->
+  <section class="bg-white py-24 md:py-32 border-t border-ink-100">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-ink-700">Flow / 調査から報告まで</p>
+          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[20ch]">
+            調べて、報告して、<br />
+            判断材料をお渡しする。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+          調査だけで終える判断も、そのまま是正まで進める判断も、どちらも選べる形で報告します。
+        </p>
+      </div>
+
+      <ol class="mt-14 border-t-2 border-ink-900">
+        {flow.map((f) => (
+          <li class="grid md:grid-cols-[100px_240px_1fr] gap-2 md:gap-8 py-6 border-b border-ink-200 observe">
+            <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold pt-1">STEP {f.n}</p>
+            <h3 class="font-serif text-lg md:text-xl font-bold text-ink-900 tracking-tight">{f.t}</h3>
+            <p class="text-sm md:text-base text-ink-700 leading-[1.85] max-w-[52ch]">{f.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 対応領域 ============ -->
+  <section class="bg-ink-50 py-24 md:py-32">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-ink-700">Fields / 対応領域</p>
+          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[20ch]">
+            店舗から工場まで、<br />
+            拠点の数を問わず。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+          1拠点の修理から、数百拠点の一括調査まで。同じ様式の報告書で揃えてお渡しします。
+        </p>
+      </div>
+
+      <dl class="mt-14 border-t-2 border-ink-900">
+        {fields.map((row) => (
+          <div class="spec-row">
+            <dt>{row.k}</dt>
+            <dd>{row.v}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <p class="mt-12 text-xs text-ink-500 max-w-[60ch] italic">※ 記載のない設備もご相談ください。電気以外の付帯領域は、50社+のパートナーからチームを編成して対応します。</p>
+    </div>
+  </section>
+
+  <Section tone="dark" eyebrow="NEXT" title="まず1拠点から試せます。">
+    <p class="text-ink-100 max-w-[60ch] leading-[1.85]">
+      調査の範囲・拠点数・気になっている症状をお知らせください。調査だけのご依頼にも対応しています。
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/contact" class="btn-warm">
+        調査について相談する <span aria-hidden="true">→</span>
+      </a>
+      <a href="/service/direction" class="btn-ghost text-white">もう一つの軸：ディレクション →</a>
+    </div>
+  </Section>
+</BaseLayout>

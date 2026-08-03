@@ -25,6 +25,11 @@ export default defineConfig({
   // 静的のみ生成され api/* はビルドから除外される。
   output: 'static',
   adapter,
+  // 旧ページを「私たちについて」に統合したため恒久リダイレクト
+  redirects: {
+    '/why': '/about',
+    '/value': '/about',
+  },
   // [[R007]] Vercel プロキシ配下では Astro 既定の Origin チェックが 403 を返す。
   // /api 側で Origin/Referer 許可リスト検証を自前実装している前提で無効化。
   security: { checkOrigin: false },

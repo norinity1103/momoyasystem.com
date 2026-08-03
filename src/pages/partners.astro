@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
 
 const trades = [
   { ix: "01", name: "電気工事業",          desc: "強電・弱電・通信・高圧まで" },
@@ -29,13 +30,14 @@ const flow = [
 ];
 ---
 <BaseLayout
-  title="協力会社募集"
-  description="モモヤシステムでは、電気工事・内装・空調・設計・土工など、現場を一緒に回せる協力会社様を募集しています。支払サイト 月末締・翌月末払い、全国エリア対応。"
-  breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "協力会社募集", href: "/partners" }]}
+  title={site.labels.partners}
+  description="モモヤシステムでは、電気工事・内装・空調・設計・土工など、現場を一緒に回せる業務パートナー様を募集しています。支払サイト 月末締・翌月末払い、全国エリア対応。"
+  breadcrumbs={[{ name: "ホーム", href: "/" }, { name: site.labels.partners, href: "/partners" }]}
 >
   <PageHero
     eyebrow="PARTNERS"
-    title="協力会社募集"
+    bg="/img/site/photo-02.webp"
+    title={site.labels.partners}
     lead={`一緒に現場を回せる、施工パートナー様を募集しています。<br />図面・打合せ・工程・材料はモモヤが翻訳・調整するので、施工に集中いただける環境です。`}
   />
 
@@ -178,7 +180,7 @@ const flow = [
           class="col-span-12 md:col-span-7 lg:col-span-8 space-y-7 bg-white p-7 md:p-12 border border-warm-100"
         >
           <input type="hidden" name="form-name" value="partners" />
-          <input type="hidden" name="topic" value="協力会社エントリー" />
+          <input type="hidden" name="topic" value={site.labels.partnersEntry} />
           <p class="hidden"><label>Bot field <input name="_gotcha" /></label></p>
 
           <div>

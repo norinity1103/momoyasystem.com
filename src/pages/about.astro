@@ -1,0 +1,199 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import PageHero from "../components/PageHero.astro";
+import LossSavingsInfographic from "../components/LossSavingsInfographic.astro";
+import ViewMore from "../components/ViewMore.astro";
+
+// 旧「なぜ『あいだ』か」＋「介在価値」を統合。各タイトルはセクション化。
+const issues = [
+  {
+    n: "01",
+    title: "上流の電気知識ギャップ。",
+    context: "ゼネコン・設計会社のプロジェクト担当者は建築全体を見るため、電気の細部までは追えません。電気メーカーの担当者ですら、現場の段取りや施工会社との折衝には不慣れなことが多くあります。",
+    before: ["施工会社への指示が曖昧化", "確認のターンが 2〜3 往復", "確認待ちで 工期 +3〜7日", "追加工事費 +2〜4%"],
+    after: ["定例に同席し設計意図を施工言語に翻訳", "1 ターンで決まる図面と仕様", "確認のターンが 24h 以内に収束", "追加工事費はゼロもしくは予見済み"],
+  },
+  {
+    n: "02",
+    title: "レス遅延が、原価を膨らませる。",
+    context: "確認待ちの一日は、施工会社にとって人件費の流出です。上流の担当者は他案件も抱えているため、メールの返信に2〜3日かかることが珍しくありません。この遅延が積み重なって、工期の押し出し、追加費用、関係悪化を生みます。",
+    before: ["上流のレス 平均 2〜3 営業日", "施工会社の人員待機コスト発生", "工程ズレが原価圧迫を誘発", "現場の信頼関係が摩耗"],
+    after: ["一次連絡 24h 以内（営業日中は最短当日）", "意思決定の権限委譲を整理", "週次工程モニタリングで早期是正", "現場と上流の摩擦を中和"],
+  },
+  {
+    n: "03",
+    title: "2024年問題と、現場の外国人化。",
+    context: "時間外労働の上限規制と週休2日工事の原則化は、限られた時間での生産性向上を必須にしました。一方で施工現場の労働力は、確実に外国人比率が高まっていきます。技術通訳・施工通訳の役、つまり「あいだに立つ会社」のニーズは、今後さらに高まります。",
+    before: ["適正工期の見極めが現場任せ", "外国人施工者と元請の認識ズレ", "見積に翻訳工数が含まれず属人化", "建設業法改正への対応が後手"],
+    after: ["適正工期算定書を発行（建設業法改正対応）", "施工言語・設計言語・経営言語の三方向翻訳", "翻訳工数を契約に明示・標準化", "週休2日制を踏まえた工程・工数設計"],
+  },
+];
+
+const management = [
+  { n: "01", t: "打ち合わせ管理", d: "上流と下流のあいだに立ち、専門用語を翻訳。レスを速くし、図面と仕様を一発で確定。" },
+  { n: "02", t: "図面管理", d: "施工図のチェック・修正・展開。CAD作成にも対応し、設計段階から関与可能。" },
+  { n: "03", t: "工程管理", d: "週休2日制・労働時間規制を踏まえた現実的な工程設計とウォッチ。遅延を未然に防止。" },
+  { n: "04", t: "材料・原価管理", d: "メーカー直取引で材料を一括調達。スケールメリットを管理費の原資に充当。" },
+];
+
+// 会社の強み（写真付き）。※現場写真は現行サイトから回収した実写真。
+const strengths = [
+  { no: "01", ja: "現場力", en: "Field Expertise", img: "/img/site/photo-04.webp", desc: "20年の電気工事の現場経験。だからこそ、上流の意図を施工の言葉に翻訳できます。" },
+  { no: "02", ja: "翻訳力", en: "Translation",     img: "/img/site/photo-05.webp", desc: "元請と施工会社の「あいだ」に立ち、認識のズレを合わせ、レスポンスを速くします。" },
+  { no: "03", ja: "編成力", en: "Orchestration",   img: "/img/site/photo-02.webp", desc: "全国50社以上のパートナーから、案件の規模・地域に応じた専任チームを編成します。" },
+  { no: "04", ja: "継続力", en: "Continuity",      img: "/img/site/photo-06.webp", desc: "資材に頼らないメンテナンスで、建設現場が停滞する時期でも動き続けます。" },
+];
+---
+<BaseLayout
+  title="私たちについて"
+  description="なぜモモヤシステムは元請と現場の「あいだ」に立つのか。業界構造の課題と、介在によって守られる利益のロジックを、1億円規模の電気工事案件モデルで示します。"
+  breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "私たちについて", href: "/about" }]}
+>
+  <PageHero
+    eyebrow="ABOUT"
+    bg="/img/site/photo-05.webp"
+    title="私たちについて"
+    lead="なぜ「あいだ」に立つのか。そして、その介在にどれだけの価値があるのか。モモヤシステムの立ち位置を、業界課題と数字の両面からご説明します。"
+  />
+
+  <!-- ページ内ナビ -->
+  <nav class="bg-white border-b border-ink-100 sticky top-16 md:top-20 z-30" aria-label="ページ内ナビ">
+    <div class="wrap-content flex gap-6 py-4 text-sm font-bold overflow-x-auto">
+      <a href="#strength" class="whitespace-nowrap text-ink-700 hover:text-warm-700 transition">会社の強み</a>
+      <a href="#why" class="whitespace-nowrap text-ink-700 hover:text-warm-700 transition">なぜ「あいだ」か</a>
+      <a href="#value" class="whitespace-nowrap text-ink-700 hover:text-warm-700 transition">介在価値</a>
+    </div>
+  </nav>
+
+  <!-- ============ SECTION 0：会社の強み（写真付き・青地／INOUE参考） ============ -->
+  <section id="strength" class="relative isolate overflow-hidden text-white py-24 md:py-32 scroll-mt-24"
+           style="background-image: linear-gradient(160deg, #1e5ad9 0%, #123a9e 60%, #0f2b74 100%);">
+    <div class="wrap-content">
+      <p class="font-serif font-black leading-[0.9] tracking-[-0.03em]">
+        <span class="block text-5xl md:text-6xl lg:text-7xl text-white/40">Our</span>
+        <span class="block text-5xl md:text-6xl lg:text-7xl text-white">Strength</span>
+      </p>
+      <p class="mt-6 text-lg md:text-xl font-bold">会社の強み</p>
+      <p class="mt-6 max-w-[52ch] text-sm md:text-base text-white/85 leading-[1.9]">
+        20年の電気工事の現場経験を土台に、上流と現場の「あいだ」に立つ。モモヤシステムが選ばれる4つの力です。
+      </p>
+
+      <div class="mt-16 md:mt-20 space-y-14 md:space-y-16">
+        {strengths.map((s) => (
+          <article class="group grid grid-cols-12 gap-x-6 gap-y-6 items-center border-t border-white/20 pt-10 md:pt-12">
+            <div class="col-span-12 md:col-span-4">
+              <div class="flex items-baseline gap-4">
+                <span class="num-display text-3xl md:text-4xl text-white/55">{s.no}</span>
+                <span class="text-sm font-bold text-white/85">{s.ja}</span>
+              </div>
+              <p class="mt-3 font-serif font-black text-3xl md:text-4xl lg:text-5xl tracking-tight">{s.en}</p>
+            </div>
+            <div class="col-span-12 md:col-span-4">
+              <div class="aspect-[4/3] overflow-hidden rounded-lg shadow-2xl rotate-[-1.5deg]">
+                <img src={s.img} alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" />
+              </div>
+            </div>
+            <div class="col-span-12 md:col-span-4 md:pl-4 flex items-center gap-4">
+              <p class="text-sm md:text-base text-white/90 leading-[1.9]">{s.desc}</p>
+              <span class="hidden md:grid place-items-center w-10 h-10 rounded-full border border-white/40 flex-shrink-0" aria-hidden="true">→</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 1：なぜ「あいだ」か ============ -->
+  <section id="why" class="bg-white py-24 md:py-32 scroll-mt-32">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-ink-700">01 / Why</p>
+          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[22ch]">
+            なぜ、いま「あいだ」に立つ会社が必要なのか。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+          上流（元請・設計・メーカー）と下流（施工会社）のあいだに、慢性的なコミュニケーション・ロスがあります。原価・工期・品質・人材リスクに跳ね返るこのロスを、3つの課題で分解します。
+        </p>
+      </div>
+
+      <div class="mt-16 space-y-20 md:space-y-24">
+        {issues.map((it) => (
+          <article class="observe">
+            <div class="grid grid-cols-12 gap-x-6 gap-y-6 items-start border-t-2 border-ink-900 pt-8">
+              <div class="col-span-12 md:col-span-3">
+                <p class="num text-[10px] tracking-[0.28em] text-warm-700 font-bold">ISSUE {it.n}</p>
+                <p class="mt-3 num-display text-5xl md:text-6xl text-warm-500 leading-none">{it.n}</p>
+              </div>
+              <div class="col-span-12 md:col-span-9 md:pl-6 md:border-l border-ink-200">
+                <h3 class="font-serif text-lg md:text-xl lg:text-2xl font-black leading-[1.15] tracking-tight text-ink-900 md:max-w-[24ch]">{it.title}</h3>
+                <p class="mt-5 max-w-[64ch] text-ink-700 leading-[1.85]">{it.context}</p>
+              </div>
+            </div>
+            <div class="mt-10 grid md:grid-cols-2 gap-0 border-t border-ink-200">
+              <div class="p-6 md:p-8 bg-ink-50 border-b border-ink-200 md:border-b-0 md:border-r border-ink-200">
+                <p class="text-[10px] tracking-[0.28em] text-ink-500 font-bold uppercase">Before モモヤ介在</p>
+                <ul class="mt-5 space-y-3 text-sm md:text-base text-ink-700">
+                  {it.before.map((p) => <li class="flex gap-3 leading-relaxed"><span class="text-ink-400 mt-1 flex-shrink-0">—</span><span>{p}</span></li>)}
+                </ul>
+              </div>
+              <div class="p-6 md:p-8 bg-warm-50">
+                <p class="text-[10px] tracking-[0.28em] text-warm-700 font-bold uppercase">After モモヤ介在</p>
+                <ul class="mt-5 space-y-3 text-sm md:text-base text-ink-900">
+                  {it.after.map((p) => <li class="flex gap-3 leading-relaxed"><span class="text-warm-500 mt-1 flex-shrink-0">▸</span><span>{p}</span></li>)}
+                </ul>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2：介在価値 ============ -->
+  <section id="value" class="bg-ink-50 py-24 md:py-32 scroll-mt-32">
+    <div class="wrap-content">
+      <div class="grid grid-cols-12 gap-x-6 items-end pb-5 border-b-2 border-ink-900">
+        <div class="col-span-12 md:col-span-7">
+          <p class="swiss-eyebrow text-ink-700">02 / Value</p>
+          <h2 class="mt-5 font-serif font-black text-xl md:text-2xl lg:text-3xl leading-[1.25] tracking-[-0.02em] md:max-w-[18ch]">
+            数字で見る、介在価値。
+          </h2>
+        </div>
+        <p class="col-span-12 md:col-span-4 md:col-start-9 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[34ch]">
+          「翻訳料」と聞くと中抜きに見えるかもしれません。しかし、管理不在で失われる損失と介在の費用を並べれば、答えは明らかです。
+        </p>
+      </div>
+
+      <div class="mt-14">
+        <LossSavingsInfographic />
+      </div>
+
+      <h3 class="mt-20 font-serif font-black text-lg md:text-xl lg:text-2xl tracking-tight text-ink-900">モモヤが担う、4つの管理。</h3>
+      <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {management.map((c) => (
+          <div class="p-6 bg-white border border-ink-100">
+            <p class="num text-xs text-brand-500">{c.n}</p>
+            <h4 class="mt-2 font-serif text-lg font-bold">{c.t}</h4>
+            <p class="mt-3 text-sm text-ink-700 leading-relaxed">{c.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Section tone="dark" eyebrow="NEXT" title="まずは、案件の段階からご相談ください。">
+    <p class="text-ink-100 max-w-[60ch] leading-[1.85]">
+      見積依頼の段階からお声がけいただけます。この図解の印刷用資料（A3一枚）もご用意しています。
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/contact?topic=reserve" class="btn-warm">相談を予約する <span aria-hidden="true">→</span></a>
+      <a href="/contact?topic=docs" class="btn-ghost text-white">資料請求する</a>
+    </div>
+    <div class="mt-8">
+      <ViewMore href="/service" tone="dark" label="事業内容を見る" />
+    </div>
+  </Section>
+</BaseLayout>

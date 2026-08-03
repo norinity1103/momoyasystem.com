@@ -16,36 +16,38 @@
   --color-gold-500:  #b8964a;     /* primary gold */
   --color-gold-700:  #8a6e2f;
 
-  /* — Warm: 人肌の温かさ（Warm Modern 軸） — */
-  --color-warm-50:   #fdf8f2;  /* バニラホワイト */
-  --color-warm-100:  #f5ebdc;  /* オートミール */
-  --color-warm-300:  #e0c8a3;  /* サンド */
-  --color-warm-500:  #c97b3e;  /* テラコッタ */
-  --color-warm-600:  #a35d2c;  /* バーントオレンジ */
-  --color-warm-700:  #7c4220;  /* シエナ */
-  --color-warm-900:  #3d1f0e;  /* ダークウォルナット */
+  /* — Warm＝アクセント: カッパー（燻し銅色）。v3レビュー・代替案A（低彩度・信頼系） — */
+  --color-warm-50:   #f6efe6;  /* 極薄カッパー（旧ベージュ帯の後継） */
+  --color-warm-100:  #ecdcc7;  /* サンド */
+  --color-warm-300:  #d8b184;  /* ライトカッパー */
+  --color-warm-500:  #b8763e;  /* カッパー（primary accent） */
+  --color-warm-600:  #96602e;  /* カッパー・ホバー */
+  --color-warm-700:  #6e4a26;  /* ダークカッパー */
+  --color-warm-900:  #3a2714;  /* 最深カッパー */
 
   /* — Sage: 植物的中間色（信頼と落ち着き） — */
   --color-sage-100: #e8ede4;
   --color-sage-500: #6b8265;
   --color-sage-700: #4a5d44;
 
-  /* — Ink: 文字・グレー階調 — */
-  --color-ink-900: #0d1218;
-  --color-ink-700: #2a3340;
-  --color-ink-500: #5a6473;
-  --color-ink-300: #aeb6c1;
-  --color-ink-100: #e8ecf1;
-  --color-ink-50:  #f5f7fa;
+  /* — Ink: 文字・グレー階調（v3代替案A：暗＝チャコールネイビー／明＝オフホワイト） — */
+  --color-ink-900: #1c2430;  /* チャコールネイビー（暗背景＋最濃テキスト） */
+  --color-ink-700: #2b2b2b;  /* チャコール（本文） */
+  --color-ink-500: #5b6270;
+  --color-ink-300: #a9b0bb;
+  --color-ink-100: #e6e3dd;  /* 罫線・面（オフホワイト寄り） */
+  --color-ink-50:  #f8f6f2;  /* オフホワイト（明背景の基調） */
 
   /* — Accent: 旧 amber/orange、互換のため残す — */
   --color-accent-500: #d97706;
   --color-accent-600: #b45309;
 
-  --font-serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  /* 見出しも本文も Noto Sans JP に統一（明朝＝Noto Serif JP は廃止）。
+     旧 `font-serif` / var(--font-serif) はゴシックの見出しレジスタとして温存。 */
+  --font-serif: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
   --font-sans:  "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
   --font-mono:  "BIZ UDPGothic", monospace;
-  --font-num:   "Montserrat", "Noto Sans JP", sans-serif;
+  --font-num:   "Barlow Condensed", "Oswald", "Montserrat", "Noto Sans JP", sans-serif;
 }
 
 html { scroll-behavior: smooth; }
@@ -147,6 +149,25 @@ h1, h2, h3, h4 {
 .num { font-family: var(--font-num); font-feature-settings: "tnum"; }
 .num-display { font-family: var(--font-num); font-feature-settings: "tnum"; font-weight: 900; line-height: 0.95; letter-spacing: -0.04em; }
 
+/* MV キャッチの「あしらい」：テキスト背景にベタのスクエア（塗りの帯）を敷く（参考準拠）。
+   大キャッチ＝白帯×青文字、サブ＝青帯×白文字。box-decoration-break で行ごとに帯が付く。 */
+.hero-catch {
+  display: inline;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background: #ffffff;
+  color: #1a53c8;
+  padding: 0.02em 0.26em;
+}
+.hero-catch-sub {
+  display: inline;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background: #1a53c8;
+  color: #ffffff;
+  padding: 0.06em 0.32em;
+}
+
 /* Tabular data row — Swiss spec sheet style */
 .spec-row {
   display: grid;
@@ -176,6 +197,7 @@ h1, h2, h3, h4 {
 .btn-warm {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 1rem 1.75rem;
+  border-radius: 0.5rem;
   background: var(--color-warm-500); color: #fff;
   font-weight: 700;
   transition: background .2s ease, transform .2s ease, box-shadow .3s ease;
@@ -189,6 +211,7 @@ h1, h2, h3, h4 {
 .btn-ghost {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 1rem 1.75rem;
+  border-radius: 0.5rem;
   border: var(--rule-thin) solid currentColor;
   transition: background .2s ease;
 }

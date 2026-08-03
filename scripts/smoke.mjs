@@ -27,9 +27,10 @@ const DIST = await pickDist();
 
 const REQUIRED_PAGES = [
   "index.html",
-  "why/index.html",
+  "about/index.html",
   "service/index.html",
-  "value/index.html",
+  "service/direction/index.html",
+  "service/maintenance/index.html",
   "works/index.html",
   "partners/index.html",
   "group/index.html",

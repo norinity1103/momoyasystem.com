@@ -2,128 +2,81 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
 import PageHero from "../components/PageHero.astro";
-import { site } from "../data/site";
+import EditorialHeading from "../components/EditorialHeading.astro";
 
-const services = [
+// ── 二軸ハブ：テクニカルディレクション（軸A）／ メンテナンス（軸B） ──
+const axes = [
   {
-    n: "01",
-    title: "定例代行・VE提案",
-    subtitle: "上流の意思決定を、現場の言葉で巻き取ります。",
-    lead: "元請担当者の代わりに定例に出席し、設計意図を施工言語に翻訳。VE提案（仕様変更による価値工学）で原価を3–8%圧縮しながら、確認のターン数を圧縮します。",
-    items: [
-      "定例会議の代行出席・議事録展開",
-      "施工側からの質疑を24時間以内に上流へエスカレート",
-      "VE提案（代替仕様・代替施工法）で原価圧縮",
-      "決定事項の図面・工程への即時反映",
-    ],
-    metric: { num: "▲ 3–8", unit: "%", label: "VE提案による原価圧縮レンジ" },
+    key: "A",
+    href: "/service/direction",
+    en: "TECHNICAL DIRECTION",
+    title: "テクニカルディレクション",
+    lead: "元請と施工現場の「あいだ」に立ち、電気の全体最適を設計する。定例代行・施工図監修・工程設計・材料ソーシングで、打ち合わせ・図面・お金・工程の“流れ”を管理します。",
+    points: ["定例代行・VE提案", "施工図監修・申請対応", "工程・週休2日プランニング", "メーカー直材料調達"],
+    metric: { num: "▲ 5–15", unit: "%", label: "手戻り損失の抑制レンジ" },
   },
   {
-    n: "02",
-    title: "施工図監修・申請対応",
-    subtitle: "設計図と施工図の整合を、ディレクションが担保します。",
-    lead: "施工図の整合性確認・修正展開、官公庁および電力会社への各種申請を一括対応。1級電気施工管理技士が監修し、設計段階から関与可能です。",
-    items: [
-      "施工図のCADチェック・修正・整合展開",
-      "電気主任技術者選任・電力会社申請の代行",
-      "官公庁届出（消防・保安等）の手配",
-      "設計監理の電気領域だけを切り出して受託",
-    ],
-    metric: { num: "1", unit: "級", label: "電気施工管理技士保有" },
-  },
-  {
-    n: "03",
-    title: "工程・週休2日プランニング",
-    subtitle: "2024年問題に対応した、現実的な工程設計。",
-    lead: "時間外労働の上限規制と週休2日工事の原則化を踏まえた工程設計。適正工期算定書を発行し、工程・原価・人員配置のバランスを設計します。",
-    items: [
-      "週休2日制を前提とした工程の組み直し",
-      "適正工期算定書の発行（建設業法改正対応）",
-      "パートナー稼働状況に基づく現実的なリソース配分",
-      "週次の工程モニタリングと差異報告",
-    ],
-    metric: { num: "95+", unit: "%", label: "工期遵守率（目標）" },
-  },
-  {
-    n: "04",
-    title: "メーカー直材料調達・VEソーシング",
-    subtitle: "原価の半分を占める材料を、上流で握ります。",
-    lead: "電気・照明・通信機材を、長年取引のあるメーカーから直接調達。リードタイム短縮と原価圧縮を実現しながら、ディレクション費の原資にも充当します。",
-    items: [
-      "電気機器・照明・通信機材のメーカー直購入",
-      "VEソーシング（代替品調達による原価圧縮）",
-      "リードタイム短縮（短納期案件への対応）",
-      "材料費・工事費・管理費の分離請求にも対応",
-    ],
-    metric: { num: "1/2", unit: "", label: "工事原価に占める材料費の比率" },
-  },
-  {
-    n: "05",
-    title: "企業サポート（派生サービス）",
-    subtitle: "現場知見を、ヒトと組織の支援に転用します。",
-    lead: "電気工事の現場経験から派生した、人材・補助金・社内DXの支援。コア4サービスと並列ではなく、案件の周辺で発生する経営課題に対する補完的な支援として提供します。",
-    items: [
-      "電気施工者・現場監督の採用と定着支援",
-      "補助金・助成金（事業継続力強化／省エネ／DX）の申請サポート",
-      "現場OJTプログラムの設計・運用",
-      "Mシステム（社内業務管理ツール）の導入・運用支援",
-    ],
-    metric: { num: "20+", unit: "年", label: "業界での組織運営ノウハウ" },
+    key: "B",
+    href: "/service/maintenance",
+    en: "MAINTENANCE",
+    title: "メンテナンス",
+    lead: "材料に頼らず、全国で動く。漏電・絶縁調査、設備診断、老朽化調査から高圧機器の交換、店舗設備の保守まで。調査から報告書・是正提案までを一つの窓口で完結させます。",
+    points: ["漏電・絶縁調査", "設備診断・老朽化調査", "高圧機器の交換・更新", "照明・看板・サイネージ保守"],
+    metric: { num: "2", unit: "拠点", label: "大阪・東京で全国対応" },
   },
 ];
 ---
 <BaseLayout
-  title="サービス"
-  description="定例代行・VE提案／施工図監修／適正工期算定／メーカー直ソーシング。電気工事の上流に立つテクニカル・ディレクターとして、4つのフェーズで案件を翻訳・調整します。"
-  breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "サービス", href: "/service" }]}
-  jsonLd={services.map((s) => ({
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: s.title,
-    description: s.lead,
-    provider: { "@type": "Organization", name: site.name, url: site.url },
-    areaServed: "JP",
-  }))}
+  title="事業内容"
+  description="モモヤシステムの事業は二軸。元請と現場の「あいだ」に立つテクニカルディレクションと、材料に頼らず全国で動くメンテナンス。電気工事と付帯領域を、ひとつの窓口で束ねます。"
+  breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "事業内容", href: "/service" }]}
 >
   <PageHero
-    eyebrow="SERVICE"
-    title="サービス"
-    lead="電気工事の上流に立つ、テクニカル・ディレクター。定例代行・施工図監修・工程設計・材料ソーシングの4領域で介在します。"
+    eyebrow="SERVICE / 事業内容"
+    bg="/img/site/photo-06.webp"
+    title="二つの軸で、電気の現場を支える。"
+    lead="上流と現場の「あいだ」に立つテクニカルディレクション（軸A）と、資材に左右されず全国で動くメンテナンス（軸B）。この二軸が、モモヤシステムの現在の形です。"
   />
 
-  <div class="bg-white">
-    {services.map((s, i) => (
-      <section class:list={["py-20 md:py-28 relative", i % 2 === 1 ? "bg-ink-50" : ""]}>
-        <div class="wrap-content grid lg:grid-cols-[220px_1fr] gap-10 lg:gap-16 observe">
-          <div class="relative">
-            <p class="num text-5xl md:text-6xl font-black text-brand-500/15 leading-none select-none" aria-hidden="true">{s.n}</p>
-            <div class="absolute top-0 left-0 flex flex-col">
-              <p class="text-[10px] tracking-[0.3em] text-brand-700 font-bold pt-3">SERVICE {s.n}</p>
-              <span class="block w-10 h-[2px] bg-warm-500 mt-3"></span>
-            </div>
+  <!-- ============ 冒頭：編集的見出し（事例紹介UIに合わせる） ============ -->
+  <section class="bg-white pt-20 md:pt-28">
+    <div class="wrap-content">
+      <EditorialHeading
+        enTop="Direction &"
+        enBottom="Maintenance"
+        jp="事業内容"
+        intro="上流と現場の「あいだ」に立つテクニカルディレクションと、資材に左右されず全国で動くメンテナンス。この二軸が、モモヤシステムの現在の形です。"
+      />
+    </div>
+  </section>
+
+  <!-- ============ 二軸カード ============ -->
+  <section class="bg-white pt-12 md:pt-16 pb-20 md:pb-28">
+    <div class="wrap-content grid md:grid-cols-2 gap-6 lg:gap-8 observe-stagger">
+      {axes.map((a) => (
+        <a href={a.href} class="group relative flex flex-col bg-white border border-ink-100 hover:border-brand-500 transition-colors rounded-sm p-8 md:p-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500">
+          <span class="block w-12 h-[3px] bg-warm-500"></span>
+          <p class="mt-6 text-[10px] tracking-[0.3em] text-ink-500 font-bold">軸{a.key} ／ {a.en}</p>
+          <h2 class="mt-3 font-serif text-xl md:text-2xl font-black text-ink-900 tracking-tight">{a.title}</h2>
+          <p class="mt-5 text-sm md:text-base text-ink-700 leading-[1.85] max-w-[42ch]">{a.lead}</p>
+          <ul class="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
+            {a.points.map((p) => (
+              <li class="flex gap-2.5 text-sm text-ink-700 leading-relaxed">
+                <span class="text-warm-500 mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-warm-500 inline-block"></span>
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-8 pt-8 flex items-end justify-between gap-4 border-t-2 border-ink-900">
+            <span class="num-display text-2xl md:text-3xl text-ink-900">{a.metric.num}<span class="text-sm text-ink-500 ml-1">{a.metric.unit}</span>
+              <span class="block text-[10px] tracking-[0.2em] text-ink-500 uppercase font-bold mt-1">{a.metric.label}</span>
+            </span>
+            <span class="text-sm font-bold text-brand-700 group-hover:text-warm-600 transition-colors whitespace-nowrap">詳しく見る <span aria-hidden="true">→</span></span>
           </div>
-          <div>
-            <h2 class="font-serif text-lg md:text-xl lg:text-2xl font-black leading-tight tracking-tight">{s.title}</h2>
-            <p class="mt-4 text-sm md:text-base text-warm-700 font-bold tracking-tight">{s.subtitle}</p>
-            <p class="mt-6 text-base md:text-lg text-ink-700 leading-[1.85] max-w-[60ch]">{s.lead}</p>
-            <ul class="mt-8 grid md:grid-cols-2 gap-x-8 gap-y-3 max-w-[64ch]">
-              {s.items.map((item) => (
-                <li class="flex gap-3 text-sm md:text-base text-ink-700 leading-relaxed">
-                  <span class="text-warm-500 mt-1.5 flex-shrink-0 w-2 h-2 rounded-full bg-warm-500 inline-block"></span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <!-- ベンチマーク数字 -->
-            <div class="mt-8 inline-flex items-baseline gap-4 border-t-2 border-ink-900 pt-4">
-              <span class="num-display text-3xl md:text-4xl text-ink-900">{s.metric.num}<span class="text-base text-ink-500 ml-1">{s.metric.unit}</span></span>
-              <span class="text-[10px] tracking-[0.25em] text-ink-500 uppercase font-bold md:max-w-[20ch]">{s.metric.label}</span>
-            </div>
-          </div>
-        </div>
-      </section>
-    ))}
-  </div>
+        </a>
+      ))}
+    </div>
+  </section>
 
   <!-- ============ Coverage / 対応領域 ============ -->
   <section class="bg-white py-24 md:py-32 border-t border-ink-100">
@@ -187,15 +140,14 @@ const services = [
     </div>
   </section>
 
-  <Section tone="dark" eyebrow="NEXT" title="どのサービスから話しますか？">
+  <Section tone="dark" eyebrow="NEXT" title="どちらの軸から話しますか？">
     <p class="text-ink-100 max-w-[60ch] leading-[1.85]">
-      4つすべてを一括でお任せいただくことも、定例代行だけ／施工図監修だけといった部分受託も可能です。
+      案件のディレクション相談も、設備の調査依頼も、まずはお気軽にお問い合わせください。関与範囲とお見積りの考え方をご提案します。
     </p>
     <div class="mt-8 flex flex-wrap gap-3">
-      <a href="/contact" class="btn-warm">
-        見積依頼の3項目チェックを送る <span aria-hidden="true">→</span>
-      </a>
-      <a href="/works" class="btn-ghost text-white">施工実績を見る</a>
+      <a href="/service/direction" class="btn-warm">軸A：テクニカルディレクション <span aria-hidden="true">→</span></a>
+      <a href="/service/maintenance" class="btn-warm">軸B：メンテナンス <span aria-hidden="true">→</span></a>
+      <a href="/contact" class="btn-ghost text-white">お問い合わせ</a>
     </div>
   </Section>
 </BaseLayout>

@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import FloatingCTA from "../components/FloatingCTA.astro";
 import PresentationMode from "../components/PresentationMode.astro";
 import Analytics from "../components/Analytics.astro";
 import RevealObserver from "../components/RevealObserver.astro";
@@ -80,13 +81,13 @@ const allLd = [orgJsonLd, breadcrumbJsonLd, ...extra].filter(Boolean);
   <link
     rel="preload"
     as="style"
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=BIZ+UDPGothic:wght@400;700&family=Montserrat:wght@400;600;700;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Barlow+Condensed:wght@500;600;700&family=BIZ+UDPGothic:wght@400;700&family=Montserrat:wght@400;600;700;900&display=swap"
     onload="this.onload=null;this.rel='stylesheet'"
   />
   <noscript>
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=BIZ+UDPGothic:wght@400;700&family=Montserrat:wght@400;600;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Barlow+Condensed:wght@500;600;700&family=BIZ+UDPGothic:wght@400;700&family=Montserrat:wght@400;600;700;900&display=swap"
     />
   </noscript>
 
@@ -112,6 +113,7 @@ const allLd = [orgJsonLd, breadcrumbJsonLd, ...extra].filter(Boolean);
   <Header />
   <main><slot /></main>
   <Footer />
+  <FloatingCTA />
   <PresentationMode />
   <Analytics />
   <RevealObserver />

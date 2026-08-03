@@ -2,7 +2,7 @@
 import { site } from "../data/site";
 const { pathname } = Astro.url;
 ---
-<header class="sticky top-0 z-40 bg-white/92 backdrop-blur border-b border-ink-100">
+<header class="sticky top-0 z-40 bg-white border-b border-ink-100">
   <div class="wrap-wide flex items-center justify-between h-16 md:h-20">
     <a href="/" class="flex items-center group" aria-label="株式会社モモヤシステム ホームへ">
       <!-- 公式ロゴ。デスクトップではフルロゴ、モバイルではマークのみ -->
@@ -28,9 +28,14 @@ const { pathname } = Astro.url;
           )}
         </a>
       ))}
-      <a href="/contact" class="ml-3 inline-flex items-center gap-2 px-5 py-2.5 bg-warm-500 text-white text-xs font-bold tracking-wider hover:bg-warm-600 transition">
-        お問い合わせ <span aria-hidden="true">→</span>
-      </a>
+      <div class="ml-3 flex items-center gap-2">
+        <a href="/contact?topic=reserve" class="inline-flex items-center gap-1.5 px-4 py-2.5 bg-warm-500 text-white text-xs font-bold tracking-wider hover:bg-warm-600 transition">
+          {site.labels.ctaReserve} <span aria-hidden="true">→</span>
+        </a>
+        <a href="/contact?topic=docs" class="inline-flex items-center gap-1.5 px-4 py-2.5 border border-ink-300 text-ink-900 text-xs font-bold tracking-wider hover:border-warm-500 hover:text-warm-700 transition">
+          {site.labels.ctaDocs}
+        </a>
+      </div>
     </nav>
 
     <!-- Mobile menu toggle -->
