@@ -6,10 +6,32 @@ import { site } from "../data/site";
 // 既定: Cloudflare Pages Functions の自前バックエンド (/api/contact)
 // 環境変数 PUBLIC_FORM_ENDPOINT で Formspree など外部サービスにも切替可能。
 const formEndpoint = import.meta.env.PUBLIC_FORM_ENDPOINT || "/api/contact";
+
+// 9/2ヒアリング確定仕様（§8）:
+//  - 問い合わせは「ディレクション」と「メンテナンス（施設リニューアル）」の2系統に分岐。
+//  - ディレクション側がメイン、メンテ側は控えめな扱い。
+//  - カレンダー予約導線は不採用。フォーム＋電話（06固定）の併記。
+const facilities = [
+  { value: "電気設備", emphasize: true },
+  { value: "空調設備" },
+  { value: "衛生設備" },
+  { value: "防犯カメラ・入退室管理" },
+  { value: "機械警備設備" },
+  { value: "その他（建築系はこちら）" },
+];
+const scales = [
+  "500万円〜",
+  "1,000万円〜",
+  "5,000万円〜",
+  "1億円〜",
+  "わからない・相談して決めたい",
+];
+const inputClass =
+  "mt-2 w-full border border-ink-300 px-4 py-3 focus:border-brand-500 focus:outline-none";
 ---
 <BaseLayout
   title="お問い合わせ"
-  description="モモヤシステムへのお問い合わせ。電気工事のディレクション・図面・打ち合わせ代行・パートナー選定など、案件の段階を問わずご相談を承ります。東京・大阪二拠点で全国対応。"
+  description="モモヤシステムへのお問い合わせ。電気設備のディレクション（分離発注・設備工事の直接発注の段取り代行）と、施設リニューアル・設備更新のご相談を承ります。東京・大阪二拠点で全国対応。"
   breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "お問い合わせ", href: "/contact" }]}
 >
   <PageHero
@@ -23,7 +45,24 @@ const formEndpoint = import.meta.env.PUBLIC_FORM_ENDPOINT || "/api/contact";
   <section class="py-24">
     <div class="wrap-content grid lg:grid-cols-5 gap-12">
       <div class="lg:col-span-3">
-        <h2 class="font-serif text-lg md:text-xl font-bold">お問い合わせフォーム</h2>
+        <h2 class="font-serif text-lg md:text-xl font-bold">ご相談の入口を選んでください</h2>
+
+        {/* 2系統の入口（§8-1）。ディレクションが主・メンテが副。押すと下のフォームの相談区分が切り替わります。 */}
+        <div class="mt-6 grid sm:grid-cols-2 gap-3" role="tablist" aria-label="ご相談区分">
+          <button type="button" data-branch="direction" aria-selected="true"
+            class="branch-tab text-left p-5 border-2 border-brand-700 bg-brand-700 text-white rounded-sm transition">
+            <span class="block text-xs tracking-[0.2em] opacity-80">MAIN</span>
+            <span class="block mt-1 font-bold">ディレクションのご相談</span>
+            <span class="block mt-1 text-xs opacity-80">分離発注・設備工事の直接発注の段取り代行</span>
+          </button>
+          <button type="button" data-branch="maintenance" aria-selected="false"
+            class="branch-tab text-left p-5 border border-ink-300 bg-white text-ink-700 rounded-sm transition hover:border-brand-500">
+            <span class="block text-xs tracking-[0.2em] text-ink-500">MAINTENANCE</span>
+            <span class="block mt-1 font-bold">施設リニューアル・設備更新のご相談</span>
+            <span class="block mt-1 text-xs text-ink-500">商業施設・ビル一棟などの更新工事</span>
+          </button>
+        </div>
+
         <form
           name="contact"
           method="POST"
@@ -33,50 +72,58 @@ const formEndpoint = import.meta.env.PUBLIC_FORM_ENDPOINT || "/api/contact";
           <p class="hidden" aria-hidden="true"><label>Leave this field empty <input name="_gotcha" tabindex="-1" autocomplete="off" /></label></p>
           <input type="hidden" name="_subject" value="モモヤシステム HP からのお問い合わせ" />
           <input type="hidden" name="_format" value="plain" />
+          {/* JS 無効時のフォールバックも兼ねた相談区分（入口ボタンと連動） */}
+          <input type="hidden" id="inquiry_type" name="inquiry_type" value="ディレクションのご相談" />
 
-          <div>
-            <label class="text-xs tracking-[0.2em] text-ink-500" for="company">会社名 <span class="text-accent-500">*</span></label>
-            <input id="company" name="company" required class="mt-2 w-full border border-ink-300 px-4 py-3 focus:border-brand-500 focus:outline-none" />
-          </div>
           <div class="grid md:grid-cols-2 gap-4">
             <div>
-              <label class="text-xs tracking-[0.2em] text-ink-500" for="name">ご担当者名 <span class="text-accent-500">*</span></label>
-              <input id="name" name="name" required class="mt-2 w-full border border-ink-300 px-4 py-3 focus:border-brand-500 focus:outline-none" />
+              <label class="text-xs tracking-[0.2em] text-ink-500" for="name">お名前 <span class="text-accent-500">*</span></label>
+              <input id="name" name="name" required class={inputClass} />
             </div>
+            <div>
+              <label class="text-xs tracking-[0.2em] text-ink-500" for="company">会社名 <span class="text-accent-500">*</span></label>
+              <input id="company" name="company" required class={inputClass} />
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
             <div>
               <label class="text-xs tracking-[0.2em] text-ink-500" for="email">メールアドレス <span class="text-accent-500">*</span></label>
-              <input id="email" name="email" type="email" required class="mt-2 w-full border border-ink-300 px-4 py-3 focus:border-brand-500 focus:outline-none" />
+              <input id="email" name="email" type="email" required class={inputClass} />
             </div>
-          </div>
-          <div class="grid md:grid-cols-2 gap-4">
             <div>
               <label class="text-xs tracking-[0.2em] text-ink-500" for="phone">電話番号</label>
-              <input id="phone" name="phone" class="mt-2 w-full border border-ink-300 px-4 py-3 focus:border-brand-500 focus:outline-none" />
-            </div>
-            <div>
-              <label class="text-xs tracking-[0.2em] text-ink-500" for="region">対応地域</label>
-              <select id="region" name="region" class="mt-2 w-full border border-ink-300 px-4 py-3 focus:border-brand-500 focus:outline-none bg-white">
-                <option>関東（東京中心）</option>
-                <option>関西（大阪中心）</option>
-                <option>その他全国</option>
-                <option>未定</option>
-              </select>
+              <input id="phone" name="phone" class={inputClass} />
             </div>
           </div>
+
+          <fieldset>
+            <legend class="text-xs tracking-[0.2em] text-ink-500">ご相談種別（複数選択可）</legend>
+            <div class="mt-3 grid sm:grid-cols-2 gap-2">
+              {facilities.map((f) => (
+                <label class="flex items-center gap-2 border border-ink-200 px-4 py-3 text-sm hover:border-brand-500 cursor-pointer">
+                  <input type="checkbox" name="facility" value={f.value} class="accent-brand-700" />
+                  <span class={f.emphasize ? "font-bold" : ""}>{f.value}</span>
+                </label>
+              ))}
+            </div>
+            <p class="mt-2 text-xs text-ink-500">設備工事系のみ細分化しています。建築系（足場・塗装ほか）は「その他」でお受けします。</p>
+          </fieldset>
+
+          <fieldset>
+            <legend class="text-xs tracking-[0.2em] text-ink-500">計画規模（複数選択可）</legend>
+            <div class="mt-3 grid sm:grid-cols-2 gap-2">
+              {scales.map((s) => (
+                <label class="flex items-center gap-2 border border-ink-200 px-4 py-3 text-sm hover:border-brand-500 cursor-pointer">
+                  <input type="checkbox" name="scale" value={s} class="accent-brand-700" />
+                  <span>{s}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
           <div>
-            <label class="text-xs tracking-[0.2em] text-ink-500" for="topic">ご相談内容</label>
-            <select id="topic" name="topic" class="mt-2 w-full border border-ink-300 px-4 py-3 focus:border-brand-500 focus:outline-none bg-white">
-              <option>電気工事のディレクション・管理委託</option>
-              <option>業者選定・パートナー紹介</option>
-              <option>図面・施工図の作成・チェック</option>
-              <option>材料調達のみ</option>
-              <option>急速充電器（EV/PHV）案件</option>
-              <option>その他</option>
-            </select>
-          </div>
-          <div>
-            <label class="text-xs tracking-[0.2em] text-ink-500" for="message">案件の概要・ご要望 <span class="text-accent-500">*</span></label>
-            <textarea id="message" name="message" rows="6" required class="mt-2 w-full border border-ink-300 px-4 py-3 focus:border-brand-500 focus:outline-none"></textarea>
+            <label class="text-xs tracking-[0.2em] text-ink-500" for="message">ご相談内容 <span class="text-accent-500">*</span></label>
+            <textarea id="message" name="message" rows="6" required class={inputClass}></textarea>
           </div>
           <button type="submit" class="inline-flex items-center gap-2 px-7 py-4 bg-brand-700 text-white font-bold rounded-sm hover:bg-brand-500 transition">
             送信する <span aria-hidden="true">→</span>
@@ -88,9 +135,10 @@ const formEndpoint = import.meta.env.PUBLIC_FORM_ENDPOINT || "/api/contact";
       <aside class="lg:col-span-2 space-y-8">
         <div class="p-6 bg-ink-50 border-l-4 border-brand-500">
           <p class="text-xs tracking-[0.2em] text-brand-500">DIRECT</p>
-          <p class="mt-3 text-sm text-ink-700">電話・メールでのお問い合わせも歓迎です。</p>
+          <p class="mt-3 text-sm text-ink-700">お急ぎの場合はお電話でも承ります。</p>
           <p class="mt-2 num text-lg font-bold">{site.contact.phone}</p>
-          <p class="num text-sm"><a class="underline" href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
+          <p class="mt-1 text-xs text-ink-500">24時間365日ご対応（代表直通）</p>
+          <p class="mt-2 num text-sm"><a class="underline" href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
         </div>
         <div>
           <p class="text-xs tracking-[0.2em] text-brand-500">OFFICE</p>
@@ -107,3 +155,29 @@ const formEndpoint = import.meta.env.PUBLIC_FORM_ENDPOINT || "/api/contact";
     </div>
   </section>
 </BaseLayout>
+
+<script is:inline>
+  // 入口ボタン（2系統）と hidden の相談区分を連動させる。JS 無効時は既定=ディレクションで送信可能。
+  (function () {
+    var tabs = document.querySelectorAll(".branch-tab");
+    var field = document.getElementById("inquiry_type");
+    var labels = { direction: "ディレクションのご相談", maintenance: "施設リニューアル・設備更新のご相談" };
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        var branch = tab.getAttribute("data-branch");
+        if (field) field.value = labels[branch] || labels.direction;
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute("aria-selected", on ? "true" : "false");
+          t.classList.toggle("border-brand-700", on);
+          t.classList.toggle("bg-brand-700", on);
+          t.classList.toggle("text-white", on);
+          t.classList.toggle("border-2", on);
+          t.classList.toggle("border", !on);
+          t.classList.toggle("bg-white", !on);
+          t.classList.toggle("text-ink-700", !on);
+        });
+      });
+    });
+  })();
+</script>

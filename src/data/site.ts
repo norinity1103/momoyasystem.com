@@ -18,8 +18,9 @@ export const site = {
     { num: "▲ 5–15", unit: "%", label: "手戻り損失の抑制レンジ" },
   ],
   nav: [
-    { href: "/why",      label: "なぜ「あいだ」か" },
-    { href: "/service",  label: "サービス" },
+    { href: "/why",        label: "なぜ「あいだ」か" },
+    { href: "/background", label: "時代背景と実例" },
+    { href: "/service",    label: "サービス" },
     { href: "/value",    label: "介在価値" },
     { href: "/works",    label: "実績" },
     { href: "/partners", label: "協力会社募集" },
