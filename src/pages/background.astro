@@ -1,0 +1,85 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Section from "../components/Section.astro";
+
+// 9/2ヒアリング §5「時代背景ストーリー」＋ §6「実例3ケース」の枠。
+// ページ構成: 時代背景（課題）→ だから必要（役割定義）→ 実例 → 相談導線。
+// ※実例の本文は山下さん原稿で差し替え予定。CASE3 の実名掲載は公開前に社長最終確認。
+const cases = [
+  {
+    no: "CASE 01",
+    title: "大阪の建築会社様が、東京で受注。現地の電気業者が見つからない。",
+    body:
+      "大阪の建築会社様が東京の案件を受注したものの、現地の電気業者が見つからず着手できない状況。東京のパートナー網から2〜3社を紹介し、見積もり対応までを段取り。「大阪で自分の仕事を進めながら、代わりに探してもらえた」とご評価いただきました。",
+    scale: "電気図面150枚規模・19階建レジデンス新築",
+  },
+  {
+    no: "CASE 02",
+    title: "著名設計事務所と地元施工会社の“あいだ”で、設備が止まっていた。",
+    body:
+      "建築設計が専門の設計事務所様と、地元施工会社様との間で設備の話が進まず停滞。あいだに入って現場確認・報告を実施し、プロジェクトを前へ。「間に立つ仕事が成立する」と確信した原点の案件です。",
+    scale: "デザイン別荘・約5億規模",
+  },
+  {
+    no: "CASE 03",
+    title: "照明メーカーグループ企業の顧問として、企業間マッチングを実践中。",
+    body:
+      "大手照明メーカーのグループ企業様の顧問に就任し、同社名義で企業間マッチングを実践中。既存のお取引先に「モモヤさんはこんなこともやっているのか」と再発見いただく形で、静かに実力を提示しています。",
+    scale: "グループ企業顧問（年商約30億規模）",
+  },
+];
+---
+<BaseLayout
+  title="時代背景と実例"
+  description="大手ゼネコン・サブコンが受けきれない繁忙の時代。設備工事は施主が直接発注する“分離発注”へ。発注者に代わって業者選定から契約成立までの段取りを担う、電気のテクニカルディレクターの役割を、時代背景と実例で解説します。"
+  breadcrumbs={[{ name: "ホーム", href: "/" }, { name: "時代背景と実例", href: "/background" }]}
+>
+  <PageHero
+    eyebrow="BACKGROUND"
+    title="いなくなった電気担当者の、<br />代打（ピンチヒッター）。"
+    lead={`分離発注の時代に、発注者に代わって設備工事の段取りを担う。<br />なぜ今、電気のテクニカルディレクターが必要とされているのか。`}
+    bg="/img/cityscape-1280.webp"
+    bgKind="photo"
+  />
+
+  <Section eyebrow="CONTEXT" title="設備は「施主が直接、探す」時代になった。">
+    <div class="max-w-[68ch] space-y-5 text-ink-700 leading-relaxed">
+      <p>建設業界は空前の繁忙が続いています。大手ゼネコン・サブコンは数年先まで仕事が埋まり、案件を受けきれない状況です。</p>
+      <p>その結果、建築会社は「建物側は受けるが、電気・空調・衛生などの設備は、施主が直接業者を探して発注してほしい」と言う時代になりました。いわゆる<strong>分離発注</strong>・設備工事の<strong>直接発注</strong>です。</p>
+      <p>しかし発注者（事業主・不動産会社・投資家）の側に、電気の専門担当者はいません。これまでゼネコンの担当者がやってくれていた「要望のヒアリング → 専門業者への翻訳・指示」を、自分でやらなければならなくなりました。</p>
+    </div>
+  </Section>
+
+  <Section tone="tint" eyebrow="ROLE" title="だから、あいだに立つ人が要る。">
+    <div class="max-w-[68ch] space-y-5 text-ink-700 leading-relaxed">
+      <p>その「いなくなった電気担当者の代打」が、モモヤシステムのテクニカルディレクターです。業者選定から打ち合わせの代行、契約成立までの段取りを担います。</p>
+      <p>価値は「現場が回る」ことではなく、<strong>現場が始まる前</strong>にあります。──契約成立までの翻訳と橋渡し。<em>現場が始まる前に、仕事は終わっている</em>。これが私たちの立ち位置です。</p>
+    </div>
+  </Section>
+
+  <Section eyebrow="CASES" title="間に立つことで、動き出した現場。">
+    <p class="mb-8 max-w-[60ch] text-sm text-ink-500">※ 事例の本文は最終版に差し替え予定です。CASE 01・02 は守秘のため社名・個人名をぼかしています。</p>
+    <div class="grid gap-6 md:grid-cols-3">
+      {cases.map((c) => (
+        <article class="flex flex-col p-6 bg-white border border-ink-100">
+          <p class="num text-xs tracking-[0.2em] text-brand-500">{c.no}</p>
+          <h3 class="mt-3 font-serif text-base font-bold leading-snug">{c.title}</h3>
+          <p class="mt-4 text-sm text-ink-700 leading-relaxed flex-1">{c.body}</p>
+          <p class="mt-5 pt-4 border-t border-ink-100 text-xs text-ink-500">{c.scale}</p>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section tone="dark" eyebrow="NEXT" title="分離発注でお困りの段階から、ご相談ください。">
+    <p class="text-ink-100 max-w-[60ch] leading-relaxed">
+      業者選定・見積もり・打ち合わせの代行から。案件の規模・進捗・地域をお伝えいただければ、最短で当日中に一次回答します。
+    </p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a href="/contact" class="inline-flex items-center gap-2 px-7 py-4 bg-white text-brand-900 font-bold rounded-sm hover:bg-brand-50 transition">
+        お問い合わせ <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </Section>
+</BaseLayout>
