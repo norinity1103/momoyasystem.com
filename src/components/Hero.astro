@@ -11,7 +11,7 @@ import { site } from "../data/site";
   <video
     id="hero-video"
     class="absolute inset-0 -z-10 w-full h-full object-cover"
-    poster="/img/scaffold-1920.webp"
+    poster="/img/hero-poster-1280.webp"
     autoplay muted loop playsinline preload="metadata"
     aria-hidden="true"
     hidden
@@ -21,8 +21,8 @@ import { site } from "../data/site";
 
   <div id="hero-bg" class="absolute inset-0 -z-10">
     <img
-      src="/img/scaffold-1920.webp"
-      srcset="/img/scaffold-960.webp 960w, /img/scaffold-1920.webp 1920w"
+      src="/img/hero-poster-1280.webp"
+      srcset="/img/hero-poster-960.webp 960w, /img/hero-poster-1280.webp 1280w"
       sizes="100vw"
       alt=""
       class="w-full h-full object-cover"
@@ -96,14 +96,22 @@ import { site } from "../data/site";
   <div id="hero-overlay" class="absolute inset-0 -z-10 bg-ink-900/72" hidden></div>
 
   <script is:inline>
-    fetch("/hero.mp4", { method: "HEAD" }).then((r) => {
-      if (!r.ok) return;
-      const v = document.getElementById("hero-video");
-      const bg = document.getElementById("hero-bg");
-      const ov = document.getElementById("hero-overlay");
-      if (v) v.hidden = false;
-      if (bg) bg.hidden = true;
-      if (ov) ov.hidden = false;
-    }).catch(() => {});
+    // 動画背景は「あれば使う」。無い環境ではポスター画像のまま静止で成立させる。
+    // 視差過敏（prefers-reduced-motion）と通信量節約（Save-Data）の指定時は再生しない。
+    (() => {
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const saveData = navigator.connection && navigator.connection.saveData;
+      if (reduced || saveData) return;
+
+      fetch("/hero.mp4", { method: "HEAD" }).then((r) => {
+        if (!r.ok) return;
+        const v = document.getElementById("hero-video");
+        const bg = document.getElementById("hero-bg");
+        const ov = document.getElementById("hero-overlay");
+        if (v) v.hidden = false;
+        if (bg) bg.hidden = true;
+        if (ov) ov.hidden = false;
+      }).catch(() => {});
+    })();
   </script>
 </section>
